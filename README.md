@@ -1,2 +1,2 @@
 # Attendance
-Time attendance system
+Simple Time attendance system
