@@ -12,7 +12,7 @@ uses
   Vcl.Mask, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, JvMaskEdit, JvCheckedMaskEdit,
   JvDatePickerEdit, JvDBDatePickerEdit, JvExMask, JvToolEdit, JvDBControls,
   JvExStdCtrls, JvCombobox, JvDBCombobox, JvComponentBase, JvAppHotKey,
-  SettingsU, System.Actions, Vcl.ActnList;
+  SettingsU, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage;
 
 type
   TMainF = class(TForm)
@@ -106,6 +106,11 @@ type
     qrFileDBDocType: TStringField;
     cbGender: TJvDBComboBox;
     cbn: TJvDBComboBox;
+    lbl1: TLabel;
+    cbShift: TJvDBComboBox;
+    imgLogo: TImage;
+    btPos: TSpeedButton;
+    btn1: TSpeedButton;
     procedure btexitClick(Sender: TObject);
     procedure btProfClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -134,6 +139,10 @@ type
     procedure btAttClick(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure btPaymentClick(Sender: TObject);
+    procedure btPosClick(Sender: TObject);
+    procedure imgLogoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
   private
     spnl: TSQLSPanel;
     spn2: TSQLSPanel;
@@ -153,8 +162,15 @@ implementation
 
 uses
   JclShell, InputMemoU, TypeDefU, System.DateUtils, CourseSetupU, SettingsFU,
-  CommonU, AttendanceU, reportsu, paymentu;
+  CommonU, AttendanceU, reportsu, paymentu, posu, StockInU, aboutu;
 {$R *.dfm}
+
+procedure TMainF.btn1Click(Sender: TObject);
+begin
+  if not (Assigned(StockInF)) then
+    StockInF := TStockInF.Create(self);
+  StockInF.Show;
+end;
 
 procedure TMainF.btnewClick(Sender: TObject);
 begin
@@ -214,6 +230,7 @@ end;
 procedure TMainF.btdelClick(Sender: TObject);
 begin
   if qrP.State = dsBrowse then
+  begin
     if Application.MessageBox('Are you sure?', 'Delete', MB_YESNO + MB_ICONWARNING) = IDYES then
     begin
       datam.qr1.ExecSQL('insert into empmasterbk select *,0 from empmaster where id=' + qrPid.AsString);
@@ -221,6 +238,9 @@ begin
       // qrP.ApplyUpdates();
       edSearchProf.SetFocus;
     end;
+  end
+  else
+    qrP.Cancel;
 end;
 
 procedure TMainF.bt21Click(Sender: TObject);
@@ -333,12 +353,33 @@ begin
   PaymentF.ShowModal()
 end;
 
+procedure TMainF.btPosClick(Sender: TObject);
+begin
+  if Assigned(POSF) = false then
+    posf := tposf.Create(self);
+  posf.Show;
+end;
+
 procedure TMainF.btProfClick(Sender: TObject);
+var
+  qr: TFDQuery;
 begin
   if pnlProfile.Visible then
     exit;
   SlideMe(pnlProfile, 0);
   edSearchProf.SetFocus;
+  //load shift's
+  qr := DataM.SQLExcec('select * from shift group by sname');
+  try
+    while qr.Eof = false do
+    begin
+      cbShift.Items.Add(qr.FieldByName('sname').Value);
+      qr.Next;
+    end;
+  finally
+    qr.Free;
+
+  end;
 end;
 
 procedure TMainF.btSettingsClick(Sender: TObject);
@@ -388,6 +429,7 @@ begin
   btdel.Enabled := (qrP.State = dsBrowse);
   btfdbA.Enabled := (qrP.State = dsBrowse);
   btfdbD.Enabled := (qrP.State = dsBrowse);
+  btdel.Caption := iif(qrP.State = dsBrowse, 'Delete', 'Cancel');
 end;
 
 function TMainF.DuplicateCheck(fld, Val: string): string;
@@ -425,10 +467,18 @@ begin
 
 end;
 
+procedure TMainF.FormActivate(Sender: TObject);
+begin
+  if assigned(POSF) = False then
+    btPosClick(nil);
+end;
+
 procedure TMainF.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   si.Free;
   DocTypes.Free;
+  if Assigned(POSF) then
+    FreeAndNil(posf);
 end;
 
 procedure TMainF.FormCreate(Sender: TObject);
@@ -442,8 +492,11 @@ begin
   datam.TypedefFillCB(cbGender.Values, cbGender.Items, 'G');
   datam.TypedefFillCB(cbn.Values, cbn.Items, 'N');
   DocTypes := datam.GetTypedef(nil, 'DT');
-  img1.Picture.Graphic := datam.img_logo;
+  imgpp.Picture.Graphic := datam.img_logo;
   pnlProfile.Visible := false;
+
+  //imgLogo.Picture.LoadFromFile(APPPath+'res\logo.ico');
+  imgLogo.Stretch := true;
 end;
 
 procedure TMainF.FormShortCut(var Msg: TWMKey; var Handled: Boolean);
@@ -457,9 +510,16 @@ begin
   end;
 end;
 
+procedure TMainF.imgLogoClick(Sender: TObject);
+begin
+  if Assigned(aboutf) = false then
+    aboutf := taboutf.create(self);
+  aboutf.show;
+end;
+
 procedure TMainF.imgppClick(Sender: TObject);
 begin
-  JclShell.ShellOpenAs(img1.Hint);
+  JclShell.ShellOpenAs(imgpp.Hint);
 end;
 
 procedure TMainF.SpeedButton1Click(Sender: TObject);

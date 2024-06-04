@@ -164,7 +164,7 @@ begin
     Parent := Self;
     DataSource := ds;
     BorderStyle := bsNone;
-    Options := [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit];
+    Options := [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit, dgRowSelect];
     ReadOnly := True;
     FixedColor := $00FAFAFA;
     Anchors := [akLeft, akTop, akRight, akBottom];
@@ -239,13 +239,17 @@ begin
     Self.Hide;
     Application.ProcessMessages;
     Result := L_result;
-    if TForm(Owner).ActiveControl <> nil then
-      TForm(Owner).ActiveControl.SetFocus
-    else if Sender is TWinControl then
-      TWinControl(Sender).SetFocus;
+//    if TForm(Owner).ActiveControl <> nil then
+//      TForm(Owner).ActiveControl.SetFocus
+//    else if Sender is TWinControl then
+//      TWinControl(Sender).SetFocus;
   except
-    if DebugHook > 0 then
-      DebugBreak;
+//    on e: exception do
+//    begin
+//      ShowMessage(e.Message);
+//    end;
+//    if DebugHook > 0 then
+//      DebugBreak;
 //silance
   end;
 end;
@@ -370,15 +374,15 @@ begin
       _sum := _sum + arg[i];
   end;
   _dta := _dta + (dbgrid.Columns.Count - (i));
-  _dtW := (Self.Width - 22) / _sum;
+  _dtW := (Self.Width - 40) / _sum;
   if _dta > 0 then // variable width field exist
-    _vW := ((Self.Width - 22) - _sum) div _dta;
+    _vW := ((Self.Width - 40) - _sum) div _dta;
   for i := 0 to High(arg) do
     if (arg[i] > 0) and (_dta = 0) then
       arg[i] := Round(arg[i] * _dtW)
     else if (arg[i] = 0) then
       arg[i] := _vW;
-
+  dbgrid.Columns.RebuildColumns;
   for i := 0 to High(arg) do
   begin
     if arg[i] < 0 then

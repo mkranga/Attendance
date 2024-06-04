@@ -11,30 +11,26 @@ inherited AttendanceF: TAttendanceF
     Width = 109
     Height = 612
     Align = alRight
-    TabOrder = 2
-    ExplicitLeft = 1120
-    ExplicitTop = 41
-    ExplicitHeight = 614
+    TabOrder = 3
     object btn4: TBitBtn
       Left = 1
-      Top = 103
+      Top = 130
       Width = 107
       Height = 27
       Align = alTop
       Caption = 'Shift'
-      TabOrder = 0
-      ExplicitTop = 55
+      TabOrder = 5
+      OnClick = btn4Click
     end
     object btn5: TBitBtn
       Left = 1
-      Top = 76
+      Top = 28
       Width = 107
       Height = 27
       Align = alTop
       Caption = 'Proccess'
       TabOrder = 1
       OnClick = btn5Click
-      ExplicitTop = 28
     end
     object btdownload: TBitBtn
       Left = 1
@@ -43,61 +39,74 @@ inherited AttendanceF: TAttendanceF
       Height = 27
       Align = alTop
       Caption = 'Download'
-      TabOrder = 2
+      TabOrder = 0
       OnClick = btdownloadClick
     end
     object dped: TJvDateEdit
       Left = 1
-      Top = 52
+      Top = 79
       Width = 107
       Height = 24
       Align = alTop
       ShowNullDate = False
       TabOrder = 3
-      ExplicitTop = 49
     end
     object dpSt: TJvDateEdit
       Left = 1
-      Top = 28
+      Top = 55
       Width = 107
       Height = 24
       Align = alTop
       ShowNullDate = False
-      TabOrder = 4
-      ExplicitLeft = 6
-      ExplicitTop = 25
+      TabOrder = 2
     end
     object btLog3: TBitBtn
       Left = 1
-      Top = 130
+      Top = 157
       Width = 107
       Height = 27
       Align = alTop
       Caption = 'Log'
-      TabOrder = 5
+      TabOrder = 6
       OnClick = btLogClick
-      ExplicitTop = 82
+    end
+    object btn6: TBitBtn
+      Left = 1
+      Top = 103
+      Width = 107
+      Height = 27
+      Align = alTop
+      Caption = 'OK'
+      TabOrder = 4
+      OnClick = btn6Click
     end
   end
-  object dgStudents: TDBGrid [2]
+  object dgatt: TJvDBGrid [2]
     Left = 0
     Top = 43
     Width = 1074
     Height = 612
     Align = alClient
     DataSource = ds1
-    TabOrder = 1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -13
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    SelectColumnsDialogStrings.Caption = 'Select columns'
+    SelectColumnsDialogStrings.OK = '&OK'
+    SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+    EditControls = <>
+    RowsHeight = 20
+    TitleRowHeight = 20
     Columns = <
       item
         Expanded = False
         FieldName = 'DID'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 42
         Visible = True
       end
       item
@@ -105,7 +114,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'EMPNo'
         Title.Alignment = taCenter
         Title.Caption = 'EMP No'
-        Width = 70
+        Width = 58
         Visible = True
       end
       item
@@ -113,7 +122,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'WorkingDate'
         Title.Alignment = taCenter
         Title.Caption = 'Work Date'
-        Width = 70
+        Width = 77
         Visible = True
       end
       item
@@ -121,7 +130,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'WrdIn'
         Title.Alignment = taCenter
         Title.Caption = 'In'
-        Width = 70
+        Width = 44
         Visible = True
       end
       item
@@ -129,7 +138,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'WrdOut'
         Title.Alignment = taCenter
         Title.Caption = 'Out'
-        Width = 70
+        Width = 43
         Visible = True
       end
       item
@@ -137,7 +146,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'ShiftDate'
         Title.Alignment = taCenter
         Title.Caption = 'Shift Date'
-        Width = 70
+        Width = 81
         Visible = True
       end
       item
@@ -145,7 +154,7 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'ShiftIn'
         Title.Alignment = taCenter
         Title.Caption = 'In'
-        Width = 70
+        Width = 50
         Visible = True
       end
       item
@@ -153,63 +162,63 @@ inherited AttendanceF: TAttendanceF
         FieldName = 'ShiftOut'
         Title.Alignment = taCenter
         Title.Caption = 'Out'
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'Late'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'OT'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'OTR'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'EarlyOT'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ShortLV'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'TotalHrs'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'TOL'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'HType'
         Title.Alignment = taCenter
-        Width = 70
+        Width = 48
         Visible = True
       end>
   end
@@ -219,7 +228,7 @@ inherited AttendanceF: TAttendanceF
     Width = 1183
     Height = 43
     Align = alTop
-    TabOrder = 4
+    TabOrder = 1
     object lbl1: TLabel
       Left = 8
       Top = 12
@@ -235,12 +244,12 @@ inherited AttendanceF: TAttendanceF
       Caption = 'Out'
     end
     object btEditSave: TBitBtn
-      Left = 1104
-      Top = 8
+      Left = 1103
+      Top = 7
       Width = 71
-      Height = 27
+      Height = 30
       Caption = 'Edit'
-      TabOrder = 0
+      TabOrder = 1
       OnClick = btEditSaveClick
     end
     object dbedtWrdIn: TDBEdit
@@ -250,7 +259,7 @@ inherited AttendanceF: TAttendanceF
       Height = 24
       DataField = 'WrdIn'
       DataSource = ds1
-      TabOrder = 1
+      TabOrder = 2
     end
     object dbedtWrdIn1: TDBEdit
       Left = 328
@@ -259,35 +268,82 @@ inherited AttendanceF: TAttendanceF
       Height = 24
       DataField = 'WrdOut'
       DataSource = ds1
-      TabOrder = 2
+      TabOrder = 3
+    end
+    object btEditCancel: TBitBtn
+      Left = 1032
+      Top = 7
+      Width = 70
+      Height = 30
+      Caption = 'Cancel'
+      TabOrder = 0
+      Visible = False
+      OnClick = btEditCancelClick
     end
   end
   object pnllog: TPanel [4]
-    Left = 570
-    Top = 42
-    Width = 504
-    Height = 612
+    Left = 664
+    Top = 64
+    Width = 410
+    Height = 590
     Anchors = [akTop, akRight, akBottom]
-    TabOrder = 3
-    ExplicitLeft = 616
-    object dgLog: TDBGrid
+    TabOrder = 4
+    Visible = False
+    object dgLog: TJvDBGrid
       Left = 1
       Top = 1
-      Width = 502
-      Height = 610
+      Width = 408
+      Height = 588
       Align = alClient
       DataSource = ds3
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      PopupMenu = DataM.pmExport
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      SelectColumnsDialogStrings.Caption = 'Select columns'
+      SelectColumnsDialogStrings.OK = '&OK'
+      SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+      EditControls = <>
+      RowsHeight = 20
+      TitleRowHeight = 20
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'DID'
+          Title.Alignment = taCenter
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DTime'
+          Title.Alignment = taCenter
+          Width = 154
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VMod'
+          Title.Alignment = taCenter
+          Width = 48
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'InoutMod'
+          Title.Alignment = taCenter
+          Width = 63
+          Visible = True
+        end>
     end
     object btLog1: TBitBtn
-      Left = 474
-      Top = 3
-      Width = 28
+      Left = 362
+      Top = 2
+      Width = 29
       Height = 27
       Caption = 'X'
       TabOrder = 1
@@ -295,9 +351,10 @@ inherited AttendanceF: TAttendanceF
     end
   end
   inherited qrMain: TFDQuery
+    Active = True
     SQL.Strings = (
       'SELECT * FROM attdtl a WHERE a.ShiftDate BETWEEN :st AND :ed')
-    Top = 64
+    Top = 104
     ParamData = <
       item
         Name = 'ST'
@@ -309,7 +366,7 @@ inherited AttendanceF: TAttendanceF
         Name = 'ED'
         DataType = ftDate
         ParamType = ptInput
-        Value = 36892d
+        Value = 48214d
       end>
     object qrMainID: TFDAutoIncField
       FieldName = 'ID'
@@ -333,68 +390,93 @@ inherited AttendanceF: TAttendanceF
       AutoGenerateValue = arDefault
       FieldName = 'WorkingDate'
       Origin = 'WorkingDate'
+      DisplayFormat = 'yyyy-mm-dd'
     end
     object qrMainWrdIn: TDateTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'WrdIn'
       Origin = 'WrdIn'
+      DisplayFormat = 'HH:M'
     end
     object qrMainWrdOut: TDateTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'WrdOut'
       Origin = 'WrdOut'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainShiftDate: TDateField
       AutoGenerateValue = arDefault
       FieldName = 'ShiftDate'
       Origin = 'ShiftDate'
+      DisplayFormat = 'yyyy-mm-dd'
     end
     object qrMainShiftIn: TDateTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShiftIn'
       Origin = 'ShiftIn'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainShiftOut: TDateTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShiftOut'
       Origin = 'ShiftOut'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainLate: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'Late'
       Origin = 'Late'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainOT: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'OT'
       Origin = 'OT'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainOTR: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'OTR'
       Origin = 'OTR'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainEarlyOT: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'EarlyOT'
       Origin = 'EarlyOT'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainShortLV: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShortLV'
       Origin = 'ShortLV'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainTotalHrs: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'TotalHrs'
       Origin = 'TotalHrs'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainTOL: TTimeField
+      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'TOL'
       Origin = 'TOL'
+      DisplayFormat = 'HH:MM'
     end
     object qrMainHType: TStringField
+      Alignment = taCenter
       AutoGenerateValue = arDefault
       FieldName = 'HType'
       Origin = 'HType'
@@ -405,7 +487,7 @@ inherited AttendanceF: TAttendanceF
     AutoEdit = False
     OnStateChange = ds1StateChange
     Left = 928
-    Top = 64
+    Top = 120
   end
   object ds3: TDataSource
     DataSet = qrLog
@@ -432,42 +514,26 @@ inherited AttendanceF: TAttendanceF
         ParamType = ptInput
         Value = 36892d
       end>
-    object FDAutoIncField1: TFDAutoIncField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
+    object qrLogDID: TLongWordField
+      FieldName = 'DID'
+      Origin = 'DID'
+      Required = True
     end
-    object IntegerField1: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pid'
-      Origin = 'pid'
+    object qrLogDTime: TDateTimeField
+      FieldName = 'DTime'
+      Origin = 'DTime'
+      Required = True
+      DisplayFormat = 'yyyy-mm-dd HH:MM'
     end
-    object StringField1: TStringField
+    object qrLogVMod: TShortintField
       AutoGenerateValue = arDefault
-      FieldName = 'cid'
-      Origin = 'cid'
-      Size = 5
+      FieldName = 'VMod'
+      Origin = 'VMod'
     end
-    object IntegerField2: TIntegerField
+    object qrLogInoutMod: TShortintField
       AutoGenerateValue = arDefault
-      FieldName = 'gid'
-      Origin = 'gid'
-    end
-    object IntegerField3: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'sid'
-      Origin = 'sid'
-    end
-    object SQLTimeStampField1: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'st'
-      Origin = 'st'
-    end
-    object SQLTimeStampField2: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'ed'
-      Origin = 'ed'
+      FieldName = 'InoutMod'
+      Origin = 'InoutMod'
     end
   end
   object spProc: TFDStoredProc

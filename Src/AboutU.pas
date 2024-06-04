@@ -1,12 +1,13 @@
-unit About;
+unit AboutU;
 
 interface
 
-uses WinApi.Windows, System.SysUtils, System.Classes, Vcl.Graphics,
-  Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+uses
+  WinApi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Forms,
+  Vcl.Controls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, datau;
 
 type
-  TAboutBox = class(TForm)
+  TAboutF = class(TForm)
     Panel1: TPanel;
     ProgramIcon: TImage;
     ProductName: TLabel;
@@ -21,16 +22,17 @@ type
   end;
 
 var
-  AboutBox: TAboutBox;
+  AboutF: TAboutF;
 
 implementation
 
 {$R *.dfm}
 
-procedure TAboutBox.FormCreate(Sender: TObject);
+procedure TAboutF.FormCreate(Sender: TObject);
 begin
-//ProgramIcon.Picture.LoadFromStream(LockResource())
+
+  ProgramIcon.Picture.Assign(datam.img_logo);
 end;
 
 end.
- 
+

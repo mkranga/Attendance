@@ -19,39 +19,54 @@ object LoginF: TLoginF
   GlassFrame.Top = 2
   GlassFrame.Right = 2
   GlassFrame.Bottom = 2
-  OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 18
   object Image1: TImage
     Left = 0
-    Top = 0
+    Top = 22
     Width = 125
-    Height = 145
+    Height = 123
     Align = alLeft
     Center = True
     Stretch = True
     Transparent = True
+    ExplicitTop = 0
     ExplicitHeight = 125
   end
   object Label1: TLabel
     Left = 133
-    Top = 60
+    Top = 66
     Width = 61
     Height = 18
     Caption = 'Password'
   end
   object Label2: TLabel
     Left = 133
-    Top = 14
+    Top = 30
     Width = 39
     Height = 18
     Caption = 'Name'
   end
+  object Label3: TLabel
+    Left = 0
+    Top = 0
+    Width = 362
+    Height = 22
+    Align = alTop
+    Alignment = taCenter
+    Caption = 'Company Name'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 146
+  end
   object edPassword: TEdit
     Left = 206
-    Top = 56
+    Top = 62
     Width = 148
     Height = 26
     PasswordChar = '*'
@@ -81,7 +96,7 @@ object LoginF: TLoginF
   end
   object EdUsername: TEdit
     Left = 206
-    Top = 10
+    Top = 26
     Width = 148
     Height = 26
     CharCase = ecUpperCase

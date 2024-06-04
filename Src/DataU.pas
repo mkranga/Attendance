@@ -8,7 +8,9 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.pngimage, CommonU;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.pngimage, CommonU,
+  Vcl.DBGrids, JvDBGridExport, JvComponentBase, Vcl.Menus, System.ImageList,
+  Vcl.ImgList, JvImageList, vcl.Dialogs;
 
 type
   TDataM = class(TDataModule)
@@ -20,10 +22,18 @@ type
     qrTypeDefDes: TStringField;
     qrTypeDefTypeA: TStringField;
     dsTypeDef: TDataSource;
-    procedure MySQLerr(ASender, AInitiator: TObject; var AException: Exception);
+    pmExport: TPopupMenu;
+    Export1: TMenuItem;
+    ExportCSV1: TMenuItem;
+    CSVExport1: TJvDBGridCSVExport;
+    ExcelExport1: TJvDBGridExcelExport;
+    imglst1: TJvImageList;
     procedure Con1BeforeConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
     procedure Con1AfterConnect(Sender: TObject);
+    procedure Export1Click(Sender: TObject);
+    procedure ExportCSV1Click(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,28 +113,56 @@ begin
 end;
 
 procedure TDataM.DataModuleCreate(Sender: TObject);
+var
+  s: string;
 begin
-  apppath := ExtractFilePath(ParamStr(0));
-  if DebugHook > 0 then
-    JclShell.ShellOpenAs('D:\MYDOC\doc\Data\Server\start.exe')
-  else
-    JclShell.ShellOpenAs(APPPath + 'data\server\start.exe');
-
+  FormatSettings.DateSeparator := '-';
   FormatSettings.ShortDateFormat := 'yyyy-mm-dd';
+  apppath := ExtractFilePath(ParamStr(0));
+  s := 'D:\MYDOC\doc\Data\Server\start.exe';
+  if FileExists(s) = false then
+    s := APPPath + 'data\server\start.exe';
+
+  JclShell.ShellExec(0, '', 'D:\MYDOC\doc\Data\Server\start.exe', '', ExtractFilePath(s), 1);
+  FormatSettings.ShortDateFormat := 'yyyy-mm-dd';
+
   FormatSettings.ShortTimeFormat := 'hh:nn';
 
   FormatSettings.CurrencyString := 'Rs ';
   FormatSettings.CurrencyDecimals := 0;
-  Con1.Open;
 
   img_logo := TPngImage.Create;
   img_logo.LoadFromResourceName(HInstance, 'logo');
+//  try
+  Con1.Open;
+//  finally
+//    if con1.Connected = false then
+//    begin
+//      ShowMessage('Database connection Failed');
+//      MessageBox(Handle, 'Database connection Failed', 'SSERP', MB_OK + MB_ICONSTOP);
+//      halt;
+//    end;
+//  end;
 end;
 
-procedure TDataM.MySQLerr(ASender, AInitiator: TObject; var AException: Exception);
+procedure TDataM.DataModuleDestroy(Sender: TObject);
 begin
-  raise AException;
-//re start dbserver
+  stt.Free;
+img_logo.Free;
+end;
+
+procedure TDataM.Export1Click(Sender: TObject);
+begin
+  ExcelExport1.Grid := (pmExport.PopupComponent as tdbgrid);
+  ExcelExport1.ExportGrid;
+
+end;
+
+procedure TDataM.ExportCSV1Click(Sender: TObject);
+begin
+  CSVExport1.Grid := (pmExport.PopupComponent as tdbgrid);
+  CSVExport1.ExportGrid;
+
 end;
 
 procedure TDataM.Refresh(q: TFDQuery);

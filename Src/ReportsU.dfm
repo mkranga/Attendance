@@ -3,22 +3,34 @@ inherited ReportsF: TReportsF
   ClientHeight = 728
   ClientWidth = 1153
   OnCreate = FormCreate
-  ExplicitWidth = 1169
-  ExplicitHeight = 767
-  PixelsPerInch = 96
+  ExplicitWidth = 1171
+  ExplicitHeight = 765
   TextHeight = 16
   inherited btClose: TBitBtn
     TabOrder = 1
   end
-  object pgc: TPageControl [1]
+  object bt1: TButton [1]
+    Left = 1070
+    Top = -4
+    Width = 75
+    Height = 25
+    Caption = 'Export'
+    DropDownMenu = pm1
+    PopupMenu = pm1
+    Style = bsSplitButton
+    TabOrder = 0
+  end
+  object pgc: TPageControl [2]
     Left = 0
     Top = 0
     Width = 1153
     Height = 728
-    ActivePage = tsProfile
+    ActivePage = ts1
     Align = alClient
     TabOrder = 2
     OnChange = pgcChange
+    ExplicitWidth = 1145
+    ExplicitHeight = 716
     object tsProfile: TTabSheet
       Caption = 'Profiles'
       object pnl1: TPanel
@@ -71,16 +83,17 @@ inherited ReportsF: TReportsF
           Top = 183
           Width = 159
           Height = 97
-          OnClickCheck = clbGClickCheck
           Align = alTop
           DoubleBuffered = False
+          ItemHeight = 17
           Items.Strings = (
             'test'
             'test2'
             'test3')
           ParentDoubleBuffered = False
-          ScrollWidth = 47
+          ScrollWidth = 57
           TabOrder = 2
+          OnClickCheck = clbGClickCheck
         end
         object clbCat: TJvCheckListBox
           Left = 5
@@ -89,12 +102,13 @@ inherited ReportsF: TReportsF
           Height = 97
           Align = alTop
           DoubleBuffered = False
+          ItemHeight = 17
           Items.Strings = (
             'test'
             'test2'
             'test3')
           ParentDoubleBuffered = False
-          ScrollWidth = 47
+          ScrollWidth = 57
           TabOrder = 1
         end
         object chk1: TCheckBox
@@ -404,7 +418,7 @@ inherited ReportsF: TReportsF
           Height = 25
           Align = alTop
           Caption = 'OK'
-          TabOrder = 3
+          TabOrder = 4
           OnClick = btAttokClick
         end
         object edGid: TEdit
@@ -415,7 +429,7 @@ inherited ReportsF: TReportsF
           Height = 24
           Align = alTop
           ReadOnly = True
-          TabOrder = 1
+          TabOrder = 2
           TextHint = 'Group ID'
           OnEnter = edGidEnter
         end
@@ -427,7 +441,7 @@ inherited ReportsF: TReportsF
           Height = 24
           Align = alTop
           ReadOnly = True
-          TabOrder = 2
+          TabOrder = 3
           TextHint = 'Session ID'
           OnEnter = edSidEnter
         end
@@ -439,7 +453,7 @@ inherited ReportsF: TReportsF
           Height = 24
           Align = alTop
           Style = csDropDownList
-          TabOrder = 4
+          TabOrder = 1
         end
       end
     end
@@ -558,10 +572,10 @@ inherited ReportsF: TReportsF
           Height = 25
           Align = alTop
           Caption = 'OK'
-          TabOrder = 1
+          TabOrder = 3
           OnClick = btPayokClick
         end
-        object dbcbpcat2: TComboBox
+        object cbbdbcbpcat2: TComboBox
           AlignWithMargins = True
           Left = 8
           Top = 78
@@ -573,7 +587,7 @@ inherited ReportsF: TReportsF
           Style = csDropDownList
           TabOrder = 2
         end
-        object dbcbpcat1: TComboBox
+        object cbbdbcbpcat1: TComboBox
           AlignWithMargins = True
           Left = 8
           Top = 44
@@ -584,21 +598,14 @@ inherited ReportsF: TReportsF
           Align = alTop
           AutoDropDown = True
           Style = csDropDownList
-          TabOrder = 3
+          TabOrder = 1
         end
       end
     end
-  end
-  object bt1: TButton [2]
-    Left = 1070
-    Top = -4
-    Width = 75
-    Height = 25
-    Caption = 'Export'
-    DropDownMenu = pm1
-    PopupMenu = pm1
-    Style = bsSplitButton
-    TabOrder = 0
+    object ts1: TTabSheet
+      Caption = 'ts1'
+      ImageIndex = 3
+    end
   end
   inherited qrMain: TFDQuery
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvLockMode]
@@ -724,7 +731,6 @@ inherited ReportsF: TReportsF
   end
   object ExpExcel: TJvDBGridExcelExport
     Caption = 'Exporting to MS Excel...'
-    Grid = dgProfile
     FileName = 'Report'
     AutoFit = True
     Left = 1092
@@ -732,13 +738,11 @@ inherited ReportsF: TReportsF
   end
   object ExpCSV: TJvDBGridCSVExport
     Caption = 'Exporting to CSV/Text...'
-    Grid = dgProfile
     FileName = 'Report'
     Left = 1092
     Top = 43
   end
   object expXML: TJvDBGridXMLExport
-    Grid = dgProfile
     FileName = 'Report'
     Left = 1092
     Top = 91

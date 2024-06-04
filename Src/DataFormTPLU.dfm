@@ -12,9 +12,7 @@ object DataFormTPL: TDataFormTPL
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsStayOnTop
-  OldCreateOrder = False
   Position = poMainFormCenter
-  PixelsPerInch = 96
   TextHeight = 16
   object btClose: TBitBtn
     Left = -10

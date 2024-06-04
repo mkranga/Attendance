@@ -16,7 +16,17 @@ procedure SlideMe(ctrl: TWinControl; dir: Integer = 0; hide_: Boolean = false);
 
 function GetToken(s: string; st: string = '{'; ed: string = '}'): string;
 
+function IIF(exp: Boolean; ifTrue: string; ifFalse: string = ''): string;
+
 implementation
+
+function IIF(exp: Boolean; ifTrue: string; ifFalse: string = ''): string;
+begin
+  if exp then
+    exit(ifTrue)
+  else
+    exit(ifFalse);
+end;
 
 procedure LM(s: string; lvl: Byte);
 begin

@@ -16,6 +16,7 @@ type
     Label2: TLabel;
     EdUsername: TEdit;
     Image1: TImage;
+    Label3: TLabel;
     procedure OKBtnClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

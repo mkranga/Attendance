@@ -67,3 +67,15 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+_/
+DOC/
+Res/CM.7z
+Res/RepMain.pdf
+Res/RepMain.rpf
+Res/SDK-20240216T061437Z-001.zip
+*.7z
+cmd.exe.lnk
+invoice
+SSERP2.dpr
+SSERP2.dproj
+CM.res

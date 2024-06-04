@@ -15,10 +15,6 @@ uses
 
 type
   TReportsF = class(TDataFormTPL)
-    pgc: TPageControl;
-    tsProfile: TTabSheet;
-    pnl1: TPanel;
-    dgProfile: TJvDBGrid;
     ExpExcel: TJvDBGridExcelExport;
     ExpCSV: TJvDBGridCSVExport;
     expXML: TJvDBGridXMLExport;
@@ -28,14 +24,6 @@ type
     mniExportCSV: TMenuItem;
     bt1: TButton;
     mniExportClipbord: TMenuItem;
-    clbG: TJvCheckListBox;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    clbCat: TJvCheckListBox;
-    lbl3: TLabel;
-    chk1: TCheckBox;
-    lbl4: TLabel;
-    bt2: TButton;
     qrMainid: TFDAutoIncField;
     qrMaincode: TStringField;
     qrMainname: TStringField;
@@ -53,13 +41,8 @@ type
     qrMainSponsor: TStringField;
     qrMaincdate: TSQLTimeStampField;
     qrMaintelegram: TStringField;
-    tsAtt: TTabSheet;
-    dgAtt: TJvDBGrid;
     qrAtt: TFDQuery;
     ds2: TDataSource;
-    pnl2: TPanel;
-    edPid: TEdit;
-    btAttok: TButton;
     qrAttid: TFDAutoIncField;
     qrAttpid: TIntegerField;
     qrAttsid: TIntegerField;
@@ -72,14 +55,6 @@ type
     qrAtttypeA: TStringField;
     qrAttnote: TMemoField;
     qrAttcdate: TSQLTimeStampField;
-    edGid: TEdit;
-    edSid: TEdit;
-    cbbCID: TComboBox;
-    tsPayment: TTabSheet;
-    dgPay: TJvDBGrid;
-    pnl3: TPanel;
-    edPid1: TEdit;
-    btPayok: TButton;
     ds3: TDataSource;
     qrPay: TFDQuery;
     qrAttgid: TIntegerField;
@@ -92,8 +67,34 @@ type
     qrPaycat1: TStringField;
     qrPaycat2: TStringField;
     qrPaycdate: TSQLTimeStampField;
-    dbcbpcat2: TComboBox;
-    dbcbpcat1: TComboBox;
+    pgc: TPageControl;
+    tsProfile: TTabSheet;
+    pnl1: TPanel;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    clbG: TJvCheckListBox;
+    clbCat: TJvCheckListBox;
+    chk1: TCheckBox;
+    bt2: TButton;
+    dgProfile: TJvDBGrid;
+    tsAtt: TTabSheet;
+    dgAtt: TJvDBGrid;
+    pnl2: TPanel;
+    edPid: TEdit;
+    btAttok: TButton;
+    edGid: TEdit;
+    edSid: TEdit;
+    cbbCID: TComboBox;
+    tsPayment: TTabSheet;
+    dgPay: TJvDBGrid;
+    pnl3: TPanel;
+    edPid1: TEdit;
+    btPayok: TButton;
+    cbbdbcbpcat2: TComboBox;
+    cbbdbcbpcat1: TComboBox;
+    ts1: TTabSheet;
     procedure mniExportClipbordClick(Sender: TObject);
     procedure mniExportCSVClick(Sender: TObject);
     procedure mniExportXMLClick(Sender: TObject);
@@ -159,10 +160,10 @@ begin
   //gen where
   if edPid1.Text <> '' then
     s := s + ' and pid=' + edPid1.Hint;
-  if dbcbpcat1.Text <> '' then
-    s := s + ' and cat1="' + pcat1vals[dbcbpcat1.ItemIndex] + '"';
-  if dbcbpcat2.Text <> '' then
-    s := s + ' and cat2="' + pcat2vals[dbcbpcat2.ItemIndex] + '"';
+//  if dbcbpcat1.Text <> '' then
+//    s := s + ' and cat1="' + pcat1vals[dbcbpcat1.ItemIndex] + '"';
+//  if dbcbpcat2.Text <> '' then
+//    s := s + ' and cat2="' + pcat2vals[dbcbpcat2.ItemIndex] + '"';
 
   if s <> '' then
   begin
@@ -374,8 +375,8 @@ begin
   begin
     pcat1vals := TStringList.Create;
     pcat2vals := TStringList.Create;
-    datam.TypedefFillCB(pcat1vals, dbcbpcat1.Items, 'PC');
-    datam.TypedefFillCB(pcat2vals, dbcbpcat2.Items, 'PT');
+//    datam.TypedefFillCB(pcat1vals, dbcbpcat1.Items, 'PC');
+//    datam.TypedefFillCB(pcat2vals, dbcbpcat2.Items, 'PT');
   end;
 end;
 

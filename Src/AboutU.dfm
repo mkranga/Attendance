@@ -1,4 +1,4 @@
-object AboutBox: TAboutBox
+object AboutF: TAboutF
   Left = 200
   Top = 108
   BorderStyle = bsNone
@@ -12,10 +12,8 @@ object AboutBox: TAboutBox
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
@@ -27,14 +25,10 @@ object AboutBox: TAboutBox
     BevelOuter = bvLowered
     ParentColor = True
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 281
-    ExplicitHeight = 161
     object ProgramIcon: TImage
       Left = 24
       Top = 16
-      Width = 433
+      Width = 121
       Height = 101
       Picture.Data = {
         07544269746D617076020000424D760200000000000076000000280000002000
@@ -59,6 +53,7 @@ object AboutBox: TAboutBox
         EEE00EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE00000000000000000000000000000
         0000}
       Stretch = True
+      Transparent = True
       IsControl = True
     end
     object ProductName: TLabel
