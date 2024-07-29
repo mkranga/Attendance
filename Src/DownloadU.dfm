@@ -10,10 +10,8 @@ object DownloadF: TDownloadF
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object pb1: TProgressBar
     Left = 0
@@ -22,6 +20,7 @@ object DownloadF: TDownloadF
     Height = 17
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 468
   end
   object bt1: TButton
     Left = 8
@@ -41,6 +40,8 @@ object DownloadF: TDownloadF
     Lines.Strings = (
       'Log')
     TabOrder = 4
+    ExplicitTop = 53
+    ExplicitWidth = 468
   end
   object btSettings: TButton
     Left = 389

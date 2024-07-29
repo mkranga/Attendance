@@ -95,6 +95,10 @@ begin
   try
     st.Text := s;
     mt := StrToIntDef(st.Values['Type'], 0);
+    //ident type
+    //load module
+    //connect
+
   finally
     st.Free;
   end;

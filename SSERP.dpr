@@ -1,4 +1,4 @@
-// JCL_DEBUG_EXPERT_GENERATEJDBG ON
+// JCL_DEBUG_EXPERT_GENERATEJDBG OFF
 program SSERP;
 
 {$R *.dres}
@@ -32,9 +32,9 @@ uses
   PaymentU in 'Src\PaymentU.pas' {PaymentF},
   DownloadU in 'Src\DownloadU.pas' {DownloadF},
   ShiftU in 'Src\ShiftU.pas' {ShiftF},
-  FPDLU in 'Src\FPDLU.pas',
   POSU in 'Src\POSU.pas' {POSF},
-  StockInU in 'Src\StockInU.pas' {StockInF};
+  StockInU in 'Src\StockInU.pas' {StockInF},
+  DelphiZXIngQRCode in 'Src\DelphiZXIngQRCode.pas';
 
 {$R *.res}
 

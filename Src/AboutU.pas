@@ -14,7 +14,9 @@ type
     Version: TLabel;
     Copyright: TLabel;
     Comments: TLabel;
+    bt1: TBitBtn;
     procedure FormCreate(Sender: TObject);
+    procedure bt1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +29,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TAboutF.bt1Click(Sender: TObject);
+begin
+close;
+end;
 
 procedure TAboutF.FormCreate(Sender: TObject);
 begin

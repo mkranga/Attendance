@@ -89,5 +89,20 @@ object AboutF: TAboutF
       WordWrap = True
       IsControl = True
     end
+    object bt1: TBitBtn
+      Left = 448
+      Top = 0
+      Width = 29
+      Height = 25
+      Caption = 'X'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = bt1Click
+    end
   end
 end

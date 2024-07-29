@@ -3,12 +3,20 @@ unit FPDLU;
 interface
 
 uses
-  System.Classes;
-
+  System.Classes, System.SysUtils;
+ type
+ TProtocall =(ptFkAtt,pt);
 type
   TFPDownloader = class(TThread)
   private
+    fOnC: TProc;
+    fOnlm: TProc<string>;
+    fConStr: string;
+
     { Private declarations }
+    constructor Create(ConStr: string; onComplete: tproc; onlm: tproc<string>); override;
+    function connect(constr:string):string;
+    function LoadLib():Integer
   protected
     procedure Execute; override;
   end;
@@ -48,9 +56,31 @@ implementation
 
 { TFPDownloader }
 
+function TFPDownloader.connect(constr: string): string;
+  var st:TStrings;
+begin
+st:=TStringList.Create;
+try
+ st.Values[Protocall];
+
+finally
+st.Free;
+end;
+end;
+
+constructor TFPDownloader.Create(ConStr: string; onComplete: tproc; onlm: tproc<string>);
+begin
+  inherited Create(True);
+  fConStr := ConStr;
+  fOnC := onComplete;
+  fOnlm := onlm;
+  Resume;
+end;
+
 procedure TFPDownloader.Execute;
 begin
   { Place thread code here }
+  Synchronize(fOnC);
 end;
 
 end.

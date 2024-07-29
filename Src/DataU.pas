@@ -132,7 +132,7 @@ begin
   FormatSettings.CurrencyDecimals := 0;
 
   img_logo := TPngImage.Create;
-  img_logo.LoadFromResourceName(HInstance, 'logo');
+  img_logo.LoadFromResourceName(HInstance, 'logoLTS');
 //  try
   Con1.Open;
 //  finally

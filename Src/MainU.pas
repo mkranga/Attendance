@@ -12,7 +12,8 @@ uses
   Vcl.Mask, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, JvMaskEdit, JvCheckedMaskEdit,
   JvDatePickerEdit, JvDBDatePickerEdit, JvExMask, JvToolEdit, JvDBControls,
   JvExStdCtrls, JvCombobox, JvDBCombobox, JvComponentBase, JvAppHotKey,
-  SettingsU, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage;
+  SettingsU, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, JvExExtCtrls,
+  JvImage;
 
 type
   TMainF = class(TForm)
@@ -111,6 +112,7 @@ type
     imgLogo: TImage;
     btPos: TSpeedButton;
     btn1: TSpeedButton;
+    imgWP: TJvImage;
     procedure btexitClick(Sender: TObject);
     procedure btProfClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -493,10 +495,9 @@ begin
   datam.TypedefFillCB(cbn.Values, cbn.Items, 'N');
   DocTypes := datam.GetTypedef(nil, 'DT');
   imgpp.Picture.Graphic := datam.img_logo;
+  imgWP.Picture.Graphic := datam.img_logo;
+  imgLogo.Picture.Graphic := datam.img_logo;
   pnlProfile.Visible := false;
-
-  //imgLogo.Picture.LoadFromFile(APPPath+'res\logo.ico');
-  imgLogo.Stretch := true;
 end;
 
 procedure TMainF.FormShortCut(var Msg: TWMKey; var Handled: Boolean);

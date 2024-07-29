@@ -11,14 +11,12 @@ object DownloadF: TDownloadF
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
-  PixelsPerInch = 96
   TextHeight = 19
   object mmo1: TMemo
     Left = 0
-    Top = 111
+    Top = 80
     Width = 465
-    Height = 169
+    Height = 200
     Align = alBottom
     Lines.Strings = (
       'MType=2'
@@ -31,21 +29,20 @@ object DownloadF: TDownloadF
       'License=1263'
       'MType:1=FKAttend,2=SBXPC,3=')
     TabOrder = 2
-    ExplicitTop = 88
   end
   object bt1: TButton
     Left = 8
     Top = 8
-    Width = 177
-    Height = 73
+    Width = 209
+    Height = 57
     Caption = 'Download'
     TabOrder = 0
   end
   object bt2: TButton
-    Left = 272
+    Left = 232
     Top = 8
-    Width = 185
-    Height = 73
+    Width = 225
+    Height = 57
     Caption = 'Close'
     TabOrder = 1
   end
@@ -56,5 +53,7 @@ object DownloadF: TDownloadF
     Height = 294
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 268
+    ExplicitWidth = 457
   end
 end

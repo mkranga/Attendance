@@ -6,7 +6,7 @@ uses
   System.Classes, db, FireDAC.Comp.Client;
 
 type
-  TSettingKey = (skTheme, skConfirmMsgPath);
+  TSettingKey = (skTheme, skConfirmMsgPath,skPOSPrinter);
 
 type
   TSettings = class(Tobject)
@@ -36,7 +36,7 @@ var
 implementation
 
 const
-  _KeyNames: array[TSettingKey] of string = ('Theme', 'ConfirmMsgPath');
+  _KeyNames: array[TSettingKey] of string = ('Theme', 'ConfirmMsgPath','POSPrinter');
 { TSettings }
 
 constructor TSettings.Create(dbCon: tfdconnection);

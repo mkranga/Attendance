@@ -95,6 +95,12 @@ type
     cbbdbcbpcat2: TComboBox;
     cbbdbcbpcat1: TComboBox;
     ts1: TTabSheet;
+    dgPos: TJvDBGrid;
+    pnl4: TPanel;
+    btPayok1: TButton;
+    qrPOS: TFDQuery;
+    ds4: TDataSource;
+    mmoPOSSQL: TMemo;
     procedure mniExportClipbordClick(Sender: TObject);
     procedure mniExportCSVClick(Sender: TObject);
     procedure mniExportXMLClick(Sender: TObject);
@@ -111,6 +117,7 @@ type
     procedure edSidEnter(Sender: TObject);
     procedure btPayokClick(Sender: TObject);
     procedure tsPaymentEnter(Sender: TObject);
+    procedure btPayok1Click(Sender: TObject);
   private
     clbgVals, clbCatVals, cbbCidVals, pcat1vals, pcat2vals: TStrings;
     spnl1: TSQLSPanel;
@@ -150,6 +157,14 @@ begin
   qrMain.MacroByName('macro1').AsRaw := s + s2;
   qrMain.Open();
   qrMain.EnableControls;
+end;
+
+procedure TReportsF.btPayok1Click(Sender: TObject);
+begin
+  inherited;
+  qrPOS.Active := not (qrPOS.Active);
+  dgPos.AutoSizeColumns := True;
+
 end;
 
 procedure TReportsF.btPayokClick(Sender: TObject);
@@ -303,6 +318,7 @@ begin
   DataM.TypedefFillCB(cbbCidVals, cbbcid.Items, 'CR');
    //ts select 1
   pgc.ActivePageIndex := 0;
+  mmoPOSSQL.Lines.Assign(qrPOS.SQL);
 end;
 
 function TReportsF.GetChecked(cl: TJvCheckListBox; vl: TStrings): string;
@@ -356,7 +372,9 @@ begin
       SetGridExport(dgProfile);
     1:
       SetGridExport(dgAtt);
-
+//    2:
+    3:
+      SetGridExport(dgpos);
   end;
 end;
 

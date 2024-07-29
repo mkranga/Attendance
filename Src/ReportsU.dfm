@@ -29,8 +29,6 @@ inherited ReportsF: TReportsF
     Align = alClient
     TabOrder = 2
     OnChange = pgcChange
-    ExplicitWidth = 1145
-    ExplicitHeight = 716
     object tsProfile: TTabSheet
       Caption = 'Profiles'
       object pnl1: TPanel
@@ -603,8 +601,63 @@ inherited ReportsF: TReportsF
       end
     end
     object ts1: TTabSheet
-      Caption = 'ts1'
+      Caption = 'POS'
       ImageIndex = 3
+      object dgPos: TJvDBGrid
+        Left = 0
+        Top = 89
+        Width = 1145
+        Height = 608
+        Align = alClient
+        DataSource = ds4
+        PopupMenu = pm1
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        SelectColumnsDialogStrings.Caption = 'Select columns'
+        SelectColumnsDialogStrings.OK = '&OK'
+        SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+        EditControls = <>
+        RowsHeight = 20
+        TitleRowHeight = 20
+      end
+      object pnl4: TPanel
+        Left = 0
+        Top = 0
+        Width = 1145
+        Height = 89
+        Align = alTop
+        Padding.Left = 4
+        Padding.Top = 4
+        Padding.Right = 4
+        Padding.Bottom = 4
+        TabOrder = 0
+        object btPayok1: TButton
+          AlignWithMargins = True
+          Left = 1066
+          Top = 8
+          Width = 71
+          Height = 73
+          Align = alRight
+          Caption = 'OK'
+          TabOrder = 1
+          OnClick = btPayok1Click
+        end
+        object mmoPOSSQL: TMemo
+          Left = 5
+          Top = 5
+          Width = 1058
+          Height = 79
+          Align = alClient
+          Lines.Strings = (
+            'mmoPOSSQL')
+          TabOrder = 0
+          ExplicitWidth = 1004
+        end
+      end
     end
   end
   inherited qrMain: TFDQuery
@@ -952,5 +1005,26 @@ inherited ReportsF: TReportsF
       FieldName = 'cdate'
       Origin = 'cdate'
     end
+  end
+  object qrPOS: TFDQuery
+    CachedUpdates = True
+    Connection = DataM.Con1
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvLockMode]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.LockMode = lmOptimistic
+    SQL.Strings = (
+      
+        'SELECT d.`NAME`,SUM(d.price),i.cancel  FROM invitems d left join' +
+        ' invoice i ON d.invid=i.id  GROUP BY `NAME`,i.cancel')
+    Left = 256
+    Top = 224
+  end
+  object ds4: TDataSource
+    AutoEdit = False
+    DataSet = qrPOS
+    Left = 304
+    Top = 224
   end
 end

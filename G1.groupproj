@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B3EC3C9D-6152-44EF-AC22-B98738EDAE73}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SSERP.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Downloader\FPDataDownloader.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SSERP">
+        <MSBuild Projects="SSERP.dproj"/>
+    </Target>
+    <Target Name="SSERP:Clean">
+        <MSBuild Projects="SSERP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SSERP:Make">
+        <MSBuild Projects="SSERP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FPDataDownloader">
+        <MSBuild Projects="Downloader\FPDataDownloader.dproj"/>
+    </Target>
+    <Target Name="FPDataDownloader:Clean">
+        <MSBuild Projects="Downloader\FPDataDownloader.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FPDataDownloader:Make">
+        <MSBuild Projects="Downloader\FPDataDownloader.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SSERP;FPDataDownloader"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SSERP:Clean;FPDataDownloader:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SSERP:Make;FPDataDownloader:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

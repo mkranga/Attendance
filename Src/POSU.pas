@@ -18,7 +18,7 @@ uses
   Vcl.Mask, JvComponentBase, JvPrint, JvExControls, JvPrvwDoc, JvgReport,
   SQLSPanelU, datau, JvExStdCtrls, JvCombobox, JvDBCombobox, RLPreviewForm,
   RLFilters, RLPDFFilter, RLPreview, RLReport, System.Actions, Vcl.ActnList,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, JvEnterTab, RLSpoolFilter;
 
 type
   TPOSF = class(TDataFormTPL)
@@ -44,7 +44,6 @@ type
     Label6: TLabel;
     DBEdit3: TDBEdit;
     Label7: TLabel;
-    DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
     Label9: TLabel;
     DBEdit6: TDBEdit;
@@ -82,20 +81,6 @@ type
     btPrint1: TButton;
     bt1: TButton;
     btPrint2: TButton;
-    rpShippingLbl: TRLReport;
-    RLBand6: TRLBand;
-    codName: TRLLabel;
-    codval: TRLDBText;
-    RLDBText11: TRLDBText;
-    RLDBText13: TRLDBText;
-    RLDBText14: TRLDBText;
-    RLLabel14: TRLLabel;
-    RLLabel15: TRLLabel;
-    RLLabel16: TRLLabel;
-    RLLabel17: TRLLabel;
-    RLLabel18: TRLLabel;
-    RLLabel19: TRLLabel;
-    RLDBMemo2: TRLDBMemo;
     rpPrintInv: TRLReport;
     RLBand1: TRLBand;
     RLLabel1: TRLLabel;
@@ -160,6 +145,22 @@ type
     RLDBText23: TRLDBText;
     RLDraw15: TRLDraw;
     RLPDFFilter2: TRLPDFFilter;
+    rpShippingLbl: TRLReport;
+    codval: TRLDBText;
+    RLDBText11: TRLDBText;
+    RLDBText13: TRLDBText;
+    RLDBText14: TRLDBText;
+    RLLabel14: TRLLabel;
+    RLLabel15: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel19: TRLLabel;
+    RLDBMemo2: TRLDBMemo;
+    dbmmoaddr1: TDBMemo;
+    RLDBText28: TRLDBText;
+    JvEnterAsTab1: TJvEnterAsTab;
+    rlmg1: TRLImage;
     procedure FormCreate(Sender: TObject);
     procedure EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure EdItemSearchDblClick(Sender: TObject);
@@ -184,17 +185,21 @@ type
     procedure cbb1Change(Sender: TObject);
     procedure btPrintInvClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure OnEnterSelectAll(Sender: TObject);
-    procedure btslClick(Sender: TObject);
+    procedure onPrintSL(Sender: TObject);
     procedure actCloneExecute(Sender: TObject);
     procedure qrMaincnameSetText(Sender: TField; const Text: string);
     procedure btPrint4Click(Sender: TObject);
     procedure dgitemsExit(Sender: TObject);
+    procedure SelectOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure qrMainBeforePost(DataSet: TDataSet);
   private
     var
       spis: TSQLSPanel;
     { Private declarations }
     function SearchItem(): Boolean;
+  protected
+    var
+      filler: TRLSpoolFilter;
   public
     { Public declarations }
   end;
@@ -205,7 +210,7 @@ var
 implementation
 
 uses
-  Vcl.Printers, JclStrings;
+  Vcl.Printers, JclStrings, SettingsU,DelphiZXIngQRCode;
 {$R *.dfm}
 
 procedure TPOSF.actCloneExecute(Sender: TObject);
@@ -218,6 +223,7 @@ begin
 
   Application.ProcessMessages;
   qrMain.Refresh;
+  qrMain.First;
 //refresh
 end;
 
@@ -254,6 +260,7 @@ begin
   else
     rlTitle.Caption := 'INVOICE';
   rpPrintInv.NextReport := rpShippingLbl;
+codval.Visible:= SameText(qrMainpaytype.Value,'0');
   rpPrintInv.Preview(RLPreview1);
   RLPreview1.ZoomMultiplePages;
   SlideMe(pnlPrint, 2);
@@ -367,7 +374,7 @@ begin
 //  Printer.PrinterIndex := cbb1.ItemIndex;
 end;
 
-procedure TPOSF.OnEnterSelectAll(Sender: TObject);
+procedure TPOSF.SelectOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   inherited;
   TDBEdit(Sender).SelectAll;
@@ -389,13 +396,19 @@ begin
   qrItem.CancelUpdates;
 end;
 
-procedure TPOSF.btslClick(Sender: TObject);
+procedure TPOSF.onPrintSL(Sender: TObject);
+var
+  i: Integer;
 begin
   inherited;
+  i := printer.PrinterIndex;
+  Printer.PrinterIndex := TSettings.GetValue(skPOSPrinter, '0').AsInteger;
+  rpPrintInv.NextReport := nil;
   rpShippingLbl.Prepare;
   Application.ProcessMessages;
-  rpShippingLbl.PreviewModal;
-//  rpShippingLbl.Print;
+  rpShippingLbl.PrintDialog := False;
+  rpShippingLbl.Print;
+  Printer.PrinterIndex := i;
 end;
 
 procedure TPOSF.btPrint4Click(Sender: TObject);
@@ -405,7 +418,7 @@ begin
   rpCombo.Prepare;
   rpCombo.Print;
 //  rpCombo.Print;
-//  rpCombo.NextReport := rpShippingLbl;
+  rpCombo.NextReport := rpShippingLbl;
 
 end;
 
@@ -415,7 +428,7 @@ begin
   rpPrintInv.NextReport := nil;
   rpPrintInv.Prepare;
   rpPrintInv.Print;
-  rpPrintInv.NextReport := rpShippingLbl;
+//  rpPrintInv.NextReport := rpShippingLbl;
 end;
 
 procedure TPOSF.dgInvKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -457,6 +470,8 @@ end;
 procedure TPOSF.FormCreate(Sender: TObject);
 begin
   inherited;
+  filler := TRLSpoolFilter.Create(nil);
+  rpShippingLbl.DefaultFilter := filler;
 //  pnlPrint.Left := 0;
   pnlBill.Left := 0;
   pnlBill.BringToFront;
@@ -472,13 +487,13 @@ begin
   spis.Setup([0, 80], 'SELECT ii.name,ii.price from invitems ii where ii.name like :empno group by ii.name,ii.price', Point(600, 400), datam.Con1);
   cbb1.Items := Printer.Printers;
   cbb1.ItemIndex := Printer.PrinterIndex;
-
 end;
 
 procedure TPOSF.FormDestroy(Sender: TObject);
 begin
   inherited;
   spis.Free;
+  filler.Free;
 end;
 
 procedure TPOSF.FormKeyPress(Sender: TObject; var Key: Char);
@@ -523,7 +538,6 @@ procedure TPOSF.qrItemBeforePost(DataSet: TDataSet);
 begin
   inherited;
   qrItemtotalval.Value := (qrItemprice.Value * qrItemqty.Value) - qrItemdiscount.Value;
-
 end;
 
 procedure TPOSF.qrMainAfterInsert(DataSet: TDataSet);
@@ -532,6 +546,13 @@ begin
   qrMaincname.Value := 'CASH';
   qrMaindate.Value := now;
 
+end;
+
+procedure TPOSF.qrMainBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if qrMainguid.Value = '' then
+    qrMainguid.Value := GUIDToString(TGUID.NewGuid);
 end;
 
 procedure TPOSF.qrMaincnameSetText(Sender: TField; const Text: string);
