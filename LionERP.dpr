@@ -1,5 +1,7 @@
 // JCL_DEBUG_EXPERT_GENERATEJDBG OFF
-program SSERP;
+program LionERP;
+
+
 
 {$R *.dres}
 
@@ -34,7 +36,9 @@ uses
   ShiftU in 'Src\ShiftU.pas' {ShiftF},
   POSU in 'Src\POSU.pas' {POSF},
   StockInU in 'Src\StockInU.pas' {StockInF},
-  DelphiZXIngQRCode in 'Src\DelphiZXIngQRCode.pas';
+  DelphiZXIngQRCode in 'Src\DelphiZXIngQRCode.pas',
+  ChequeU in 'Src\ChequeU.pas' {ChequeF},
+  NumberToWordsU in 'Src\NumberToWordsU.pas';
 
 {$R *.res}
 
@@ -44,8 +48,9 @@ begin
   if DebugHook < 1 then
     Application.OnException := TLog.onException;
   Application.MainFormOnTaskbar := True;
-  Application.Title := 'SSERP';
+  Application.Title := 'Lion ERP';
   Application.CreateForm(TDataM, DataM);
+  Application.CreateForm(TChequeF, ChequeF);
   try
     if TStyleManager.TrySetStyle(TSettings.GetString(skTheme, 'Ruby Graphite'), False) = False then
     begin
@@ -68,4 +73,6 @@ begin
   end;
 
 end.
+
+Application.CreateForm(TDataM, DataM);
 
