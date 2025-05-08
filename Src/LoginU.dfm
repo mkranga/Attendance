@@ -29,6 +29,7 @@ object LoginF: TLoginF
     Height = 123
     Align = alLeft
     Center = True
+    Proportional = True
     Stretch = True
     Transparent = True
     ExplicitTop = 0
@@ -48,7 +49,7 @@ object LoginF: TLoginF
     Height = 18
     Caption = 'Name'
   end
-  object Label3: TLabel
+  object lbCompanyN: TLabel
     Left = 0
     Top = 0
     Width = 362
@@ -102,5 +103,51 @@ object LoginF: TLoginF
     CharCase = ecUpperCase
     TabOrder = 0
     TextHint = 'UserName'
+  end
+  object qrMain: TFDQuery
+    CachedUpdates = True
+    Connection = DataM.Con1
+    UpdateOptions.AssignedValues = [uvLockMode]
+    UpdateOptions.LockMode = lmOptimistic
+    SQL.Strings = (
+      'select * from users where user_name=:un')
+    Left = 136
+    Top = 61
+    ParamData = <
+      item
+        Name = 'UN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = 'Admin'
+      end>
+    object qrMainID: TFDAutoIncField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object qrMainuser_name: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_name'
+      Origin = 'user_name'
+      Size = 255
+    end
+    object qrMainuser_password: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_password'
+      Origin = 'user_password'
+      Size = 255
+    end
+    object qrMainEMPNo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPNo'
+      Origin = 'EMPNo'
+      Size = 15
+    end
+    object qrMainULvl: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ULvl'
+      Origin = 'ULvl'
+    end
   end
 end

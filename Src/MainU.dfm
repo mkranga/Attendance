@@ -1,14 +1,14 @@
 object MainF: TMainF
   Left = 0
   Top = 0
-  Caption = 'SSERP - 2.0'
+  Caption = 'LionERP - 2.0'
   ClientHeight = 788
   ClientWidth = 1604
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
-  Font.Name = 'Tahoma'
+  Font.Name = 'Arial'
   Font.Style = []
   Position = poMainFormCenter
   WindowState = wsMaximized
@@ -16,7 +16,7 @@ object MainF: TMainF
   OnClose = FormClose
   OnCreate = FormCreate
   OnShortCut = FormShortCut
-  TextHeight = 19
+  TextHeight = 18
   object imgWP: TJvImage
     Left = 99
     Top = 0
@@ -40,141 +40,212 @@ object MainF: TMainF
     BevelKind = bkFlat
     BevelOuter = bvNone
     BorderWidth = 3
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 787
     object btProf: TSpeedButton
-      Left = 3
-      Top = 92
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 103
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = '&Profile'
       OnClick = btProfClick
-      ExplicitLeft = 0
-      ExplicitTop = -5
-      ExplicitWidth = 87
+      ExplicitLeft = 2
+      ExplicitTop = 86
+      ExplicitWidth = 89
     end
     object btexit: TSpeedButton
-      Left = 3
-      Top = 741
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 711
+      Width = 87
+      Height = 69
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alBottom
       Caption = 'Exit'
       OnClick = btexitClick
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 87
+      ExplicitLeft = 3
+      ExplicitTop = 712
+      ExplicitWidth = 89
     end
     object btSettings: TSpeedButton
-      Left = 3
-      Top = 682
-      Width = 89
+      AlignWithMargins = True
+      Left = 4
+      Top = 667
+      Width = 87
       Height = 40
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alBottom
       Caption = 'Settings'
       OnClick = btSettingsClick
       ExplicitLeft = 1
       ExplicitTop = 1
-      ExplicitWidth = 87
     end
     object SpeedButton3: TSpeedButton
-      Left = 3
-      Top = 311
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 487
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = 'Report'
       OnClick = SpeedButton3Click
       ExplicitLeft = 2
-      ExplicitTop = 223
+      ExplicitTop = 477
+      ExplicitWidth = 89
     end
     object btTypeDef: TSpeedButton
-      Left = 3
-      Top = 642
-      Width = 89
+      AlignWithMargins = True
+      Left = 4
+      Top = 623
+      Width = 87
       Height = 40
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alBottom
       Caption = 'Types'
       OnClick = btTypeDefClick
       ExplicitLeft = 1
       ExplicitTop = 1
-      ExplicitWidth = 87
-    end
-    object lbl3: TLabel
-      Left = 3
-      Top = 722
-      Width = 89
-      Height = 19
-      Align = alBottom
-      ExplicitWidth = 5
-    end
-    object lbl4: TLabel
-      Left = 3
-      Top = 212
-      Width = 89
-      Height = 19
-      Align = alTop
-      ExplicitWidth = 5
     end
     object btPayment: TSpeedButton
-      Left = 3
-      Top = 172
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 231
+      Width = 87
+      Height = 60
       Hint = 'Attendance & homework'
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = 'Payroll'
       OnClick = btPaymentClick
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 87
+      ExplicitLeft = 3
+      ExplicitTop = 212
+      ExplicitWidth = 89
     end
     object btAtt3: TSpeedButton
-      Left = 3
-      Top = 132
-      Width = 89
-      Height = 40
-      Hint = 'Attendance & homework'
+      AlignWithMargins = True
+      Left = 4
+      Top = 167
+      Width = 87
+      Height = 60
+      Hint = 'Attendance'
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = 'Attendance'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = btAttClick
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 87
+      ExplicitLeft = 2
+      ExplicitTop = 146
+      ExplicitWidth = 89
     end
     object imgLogo: TImage
+      AlignWithMargins = True
       Left = 3
       Top = 3
       Width = 89
       Height = 89
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 8
       Align = alTop
       Center = True
       Proportional = True
       Stretch = True
       OnClick = imgLogoClick
+      ExplicitLeft = 2
+      ExplicitTop = 0
     end
     object btPos: TSpeedButton
-      Left = 3
-      Top = 271
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 423
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = 'POS'
       OnClick = btPosClick
-      ExplicitLeft = 2
-      ExplicitTop = 223
+      ExplicitLeft = 3
+      ExplicitTop = 411
+      ExplicitWidth = 89
     end
     object btn1: TSpeedButton
-      Left = 3
-      Top = 231
-      Width = 89
-      Height = 40
+      AlignWithMargins = True
+      Left = 4
+      Top = 359
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
       Align = alTop
       Caption = 'Stock'
       OnClick = btn1Click
+      ExplicitLeft = 3
+      ExplicitTop = 351
+      ExplicitWidth = 89
+    end
+    object btCheque: TSpeedButton
+      AlignWithMargins = True
+      Left = 4
+      Top = 295
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 1
+      Align = alTop
+      Caption = 'Payment'
+      OnClick = btChequeClick
       ExplicitLeft = 2
-      ExplicitTop = 223
+      ExplicitTop = 266
+      ExplicitWidth = 89
+    end
+    object bttest: TSpeedButton
+      AlignWithMargins = True
+      Left = 4
+      Top = 551
+      Width = 87
+      Height = 60
+      Margins.Left = 1
+      Margins.Right = 1
+      Margins.Bottom = 0
+      Align = alTop
+      Caption = 'TEST'
+      OnClick = bttestClick
+      ExplicitLeft = 2
+      ExplicitTop = 567
+      ExplicitWidth = 89
     end
   end
   object pnlProfile: TPanel
@@ -187,123 +258,123 @@ object MainF: TMainF
     object Label1: TLabel
       Left = 24
       Top = 583
-      Width = 17
-      Height = 19
+      Width = 15
+      Height = 18
       Caption = 'ID'
     end
     object Label2: TLabel
       Left = 24
       Top = 79
-      Width = 36
-      Height = 19
-      Caption = 'Code'
+      Width = 62
+      Height = 18
+      Caption = 'EMP NO'
       FocusControl = dbedtcode
     end
     object Label3: TLabel
       Left = 24
       Top = 135
-      Width = 71
-      Height = 19
+      Width = 70
+      Height = 18
       Caption = 'Full Name'
       FocusControl = dbedtfull_name
     end
     object Label4: TLabel
       Left = 24
       Top = 191
-      Width = 84
-      Height = 19
+      Width = 83
+      Height = 18
       Caption = 'Short Name'
       FocusControl = dbedtName_with_Initial
     end
     object Label6: TLabel
       Left = 364
       Top = 302
-      Width = 32
-      Height = 19
+      Width = 35
+      Height = 18
       Caption = 'DOB'
     end
     object Label7: TLabel
       Left = 364
       Top = 583
-      Width = 91
-      Height = 19
+      Width = 95
+      Height = 18
       Caption = 'Created Date'
       FocusControl = dbedtJoin_Date
     end
     object Label8: TLabel
       Left = 24
       Top = 527
-      Width = 57
-      Height = 19
+      Width = 59
+      Height = 18
       Caption = 'Address'
       FocusControl = dbedtAddressId
     end
     object Label9: TLabel
       Left = 24
       Top = 359
-      Width = 63
-      Height = 19
+      Width = 64
+      Height = 18
       Caption = 'Category'
     end
     object Label10: TLabel
       Left = 364
       Top = 358
-      Width = 44
-      Height = 19
+      Width = 43
+      Height = 18
       Caption = 'Group'
     end
     object Label11: TLabel
       Left = 24
       Top = 303
-      Width = 43
-      Height = 19
+      Width = 44
+      Height = 18
       Caption = 'Status'
     end
     object Label12: TLabel
       Left = 364
       Top = 79
-      Width = 61
-      Height = 19
+      Width = 60
+      Height = 18
       Caption = 'NIC / PP'
       FocusControl = dbedtnic_no
     end
     object Label5: TLabel
       Left = 24
       Top = 247
-      Width = 22
-      Height = 19
+      Width = 19
+      Height = 18
       Caption = 'Tel'
       FocusControl = dbedtcontact
     end
     object Label13: TLabel
       Left = 364
       Top = 246
-      Width = 39
-      Height = 19
+      Width = 40
+      Height = 18
       Caption = 'Email'
       FocusControl = dbedtmail
     end
     object Label14: TLabel
       Left = 24
       Top = 415
-      Width = 78
-      Height = 19
+      Width = 74
+      Height = 18
       Caption = 'Form A No'
       FocusControl = dbedtForm_A_Number
     end
     object Label15: TLabel
       Left = 364
       Top = 414
-      Width = 82
-      Height = 19
+      Width = 83
+      Height = 18
       Caption = 'Machine No'
       FocusControl = dbedtMachineNo
     end
     object Label16: TLabel
       Left = 24
       Top = 471
-      Width = 51
-      Height = 19
+      Width = 52
+      Height = 18
       Caption = 'Gender'
     end
     object imgpp: TImage
@@ -313,6 +384,7 @@ object MainF: TMainF
       Height = 257
       Hint = 'd:\MyDoc\Projects\Github\CourseManagement\Res\logo.png'
       Center = True
+      Proportional = True
       Stretch = True
       OnClick = imgppClick
     end
@@ -322,6 +394,7 @@ object MainF: TMainF
       Width = 32
       Height = 28
       Caption = '...'
+      Enabled = False
       OnClick = bt2Click
     end
     object bt21: TSpeedButton
@@ -330,6 +403,7 @@ object MainF: TMainF
       Width = 32
       Height = 28
       Caption = '...'
+      Enabled = False
       OnClick = bt21Click
     end
     object btfdbA: TSpeedButton
@@ -351,22 +425,22 @@ object MainF: TMainF
     object lbl5: TLabel
       Left = 364
       Top = 470
-      Width = 75
-      Height = 19
+      Width = 72
+      Height = 18
       Caption = 'Nationality'
     end
     object lbl1: TLabel
       Left = 688
       Top = 440
-      Width = 32
-      Height = 19
+      Width = 31
+      Height = 18
       Caption = 'Shift'
     end
     object edSearchProf: TEdit
       Left = 16
       Top = 16
       Width = 207
-      Height = 27
+      Height = 26
       TabOrder = 4
       Text = #55357#56590#65038' Search (F3)'
       OnDblClick = edSearchProfDblClick
@@ -376,7 +450,7 @@ object MainF: TMainF
       Left = 128
       Top = 75
       Width = 200
-      Height = 27
+      Height = 26
       CharCase = ecUpperCase
       DataField = 'EMPNo'
       DataSource = ds1
@@ -387,7 +461,7 @@ object MainF: TMainF
       Left = 128
       Top = 131
       Width = 543
-      Height = 27
+      Height = 26
       DataField = 'full_name'
       DataSource = ds1
       TabOrder = 7
@@ -396,7 +470,7 @@ object MainF: TMainF
       Left = 128
       Top = 187
       Width = 543
-      Height = 27
+      Height = 26
       CharCase = ecUpperCase
       DataField = 'Name_with_Initial'
       DataSource = ds1
@@ -406,7 +480,7 @@ object MainF: TMainF
       Left = 469
       Top = 579
       Width = 202
-      Height = 27
+      Height = 26
       DataField = 'enterd_date'
       DataSource = ds1
       Enabled = False
@@ -417,7 +491,7 @@ object MainF: TMainF
       Left = 128
       Top = 523
       Width = 543
-      Height = 27
+      Height = 26
       DataField = 'AddressId'
       DataSource = ds1
       TabOrder = 22
@@ -426,7 +500,7 @@ object MainF: TMainF
       Left = 128
       Top = 579
       Width = 200
-      Height = 27
+      Height = 26
       DataField = 'id'
       DataSource = ds1
       Enabled = False
@@ -437,7 +511,7 @@ object MainF: TMainF
       Left = 469
       Top = 75
       Width = 202
-      Height = 27
+      Height = 26
       CharCase = ecUpperCase
       DataField = 'nic_no'
       DataSource = ds1
@@ -484,7 +558,7 @@ object MainF: TMainF
       Left = 128
       Top = 243
       Width = 200
-      Height = 27
+      Height = 26
       CharCase = ecUpperCase
       DataField = 'contact'
       DataSource = ds1
@@ -495,7 +569,7 @@ object MainF: TMainF
       Left = 469
       Top = 246
       Width = 202
-      Height = 27
+      Height = 26
       DataField = 'mail'
       DataSource = ds1
       TabOrder = 10
@@ -505,7 +579,7 @@ object MainF: TMainF
       Left = 128
       Top = 411
       Width = 200
-      Height = 27
+      Height = 26
       DataField = 'Form_A_Number'
       DataSource = ds1
       TabOrder = 17
@@ -514,7 +588,7 @@ object MainF: TMainF
       Left = 469
       Top = 411
       Width = 202
-      Height = 27
+      Height = 26
       DataField = 'MachineNo'
       DataSource = ds1
       TabOrder = 18
@@ -523,7 +597,7 @@ object MainF: TMainF
       Left = 469
       Top = 299
       Width = 202
-      Height = 27
+      Height = 26
       DataField = 'birth_date'
       DataSource = ds1
       ShowNullDate = False
@@ -533,7 +607,7 @@ object MainF: TMainF
       Left = 128
       Top = 299
       Width = 200
-      Height = 27
+      Height = 26
       DataField = 'Active'
       DataSource = ds1
       Items.Strings = (
@@ -555,7 +629,7 @@ object MainF: TMainF
       Left = 128
       Top = 359
       Width = 171
-      Height = 27
+      Height = 26
       DataField = 'Catagary'
       DataSource = ds1
       Items.Strings = (
@@ -577,7 +651,7 @@ object MainF: TMainF
       Left = 469
       Top = 359
       Width = 171
-      Height = 27
+      Height = 26
       DataField = 'EmGroup'
       DataSource = ds1
       Items.Strings = (
@@ -603,10 +677,10 @@ object MainF: TMainF
       TabStop = False
       DataSource = dsfiledb
       TabOrder = 11
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -16
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Name = 'Arial'
       TitleFont.Style = []
       Columns = <
         item
@@ -614,7 +688,6 @@ object MainF: TMainF
           FieldName = 'DocType'
           Title.Alignment = taCenter
           Title.Caption = 'Doc Type'
-          Width = 100
           Visible = True
         end
         item
@@ -630,7 +703,7 @@ object MainF: TMainF
       Left = 688
       Top = 382
       Width = 211
-      Height = 27
+      Height = 26
       DataField = 'DocType'
       DataSource = dsfiledb
       Items.Strings = (
@@ -653,7 +726,7 @@ object MainF: TMainF
       Left = 128
       Top = 467
       Width = 200
-      Height = 27
+      Height = 26
       DataField = 'gender'
       DataSource = ds1
       Items.Strings = (
@@ -675,7 +748,7 @@ object MainF: TMainF
       Left = 469
       Top = 467
       Width = 202
-      Height = 27
+      Height = 26
       DataField = 'nationality'
       DataSource = ds1
       Items.Strings = (
@@ -697,13 +770,11 @@ object MainF: TMainF
       Left = 768
       Top = 437
       Width = 210
-      Height = 27
+      Height = 26
       DataField = 'Shift'
       DataSource = ds1
       Items.Strings = (
-        'Inactive'
-        'Active'
-        'Suspend')
+        'ROSTER')
       TabOrder = 19
       Values.Strings = (
         '0'
@@ -714,6 +785,15 @@ object MainF: TMainF
       ListSettings.OutfilteredValueFont.Height = -11
       ListSettings.OutfilteredValueFont.Name = 'Tahoma'
       ListSettings.OutfilteredValueFont.Style = []
+    end
+    object BitBtn1: TBitBtn
+      Left = 954
+      Top = 8
+      Width = 31
+      Height = 28
+      Caption = 'X'
+      TabOrder = 25
+      OnClick = BitBtn1Click
     end
   end
   object qrP: TFDQuery
@@ -735,7 +815,6 @@ object MainF: TMainF
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object qrPfull_name: TStringField
       AutoGenerateValue = arDefault
@@ -876,7 +955,7 @@ object MainF: TMainF
     SQL.Strings = (
       'SELECT * FROM profile'
       'where code=:code')
-    Left = 832
+    Left = 824
     Top = 168
     ParamData = <
       item
@@ -891,7 +970,7 @@ object MainF: TMainF
     SQL.Strings = (
       'SELECT * FROM filedb'
       'where linkid=:linkid')
-    Left = 832
+    Left = 824
     Top = 216
     ParamData = <
       item
@@ -904,7 +983,6 @@ object MainF: TMainF
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object qrFileDBDoc: TBlobField
       AutoGenerateValue = arDefault

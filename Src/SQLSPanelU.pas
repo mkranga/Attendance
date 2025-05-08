@@ -87,8 +87,7 @@ procedure Register;
 {---------------------------------------------------------------------------}
 implementation
 
-uses
-  Consts;
+
 
 procedure TSQLSPanel.WndProc(var Msg: TMessage);
 begin

@@ -5,20 +5,19 @@ inherited ShiftF: TShiftF
   Margins.Right = 5
   Margins.Bottom = 5
   Caption = 'Shift'
-  ClientHeight = 538
-  ClientWidth = 491
-  ExplicitWidth = 507
-  ExplicitHeight = 577
-  PixelsPerInch = 96
+  ClientHeight = 526
+  ClientWidth = 581
+  ExplicitWidth = 607
+  ExplicitHeight = 575
   TextHeight = 16
   object dg1: TDBGrid [1]
     Left = 0
-    Top = 52
-    Width = 491
-    Height = 486
-    Align = alBottom
+    Top = 41
+    Width = 581
+    Height = 485
+    Align = alClient
     DataSource = ds1
-    TabOrder = 2
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -13
@@ -46,7 +45,7 @@ inherited ShiftF: TShiftF
         FieldName = 'InTime'
         Title.Alignment = taCenter
         Title.Caption = 'In Time'
-        Width = 104
+        Width = 134
         Visible = True
       end
       item
@@ -54,21 +53,33 @@ inherited ShiftF: TShiftF
         FieldName = 'OutTime'
         Title.Alignment = taCenter
         Title.Caption = 'Out Time'
-        Width = 100
+        Width = 133
         Visible = True
       end>
   end
-  object bt1: TButton [2]
-    Left = 1
-    Top = 2
-    Width = 129
-    Height = 39
-    Margins.Left = 8
-    Margins.Top = 8
-    Margins.Right = 8
-    Margins.Bottom = 8
-    Caption = 'Save'
-    TabOrder = 1
+  object Panel1: TPanel [2]
+    Left = 0
+    Top = 0
+    Width = 581
+    Height = 41
+    Align = alTop
+    TabOrder = 2
+    ExplicitLeft = -3
+    ExplicitTop = -6
+    ExplicitWidth = 483
+    object bt1: TButton
+      AlignWithMargins = True
+      Left = 463
+      Top = 4
+      Width = 114
+      Height = 33
+      Align = alRight
+      Caption = 'Save'
+      TabOrder = 0
+      ExplicitLeft = 360
+      ExplicitTop = 9
+      ExplicitHeight = 23
+    end
   end
   inherited qrMain: TFDQuery
     FetchOptions.AssignedValues = [evItems]

@@ -10,9 +10,10 @@ object DataM: TDataM
   object Con1: TFDConnection
     ConnectionName = 'cmcon'
     Params.Strings = (
-      'Password=systemr'
       'User_Name=root'
       'Database=sserp'
+      'Password=systemr'
+      'Server=localhost'
       'DriverID=MySQL')
     ConnectedStoredUsage = [auDesignTime]
     Connected = True
@@ -66,6 +67,10 @@ object DataM: TDataM
   object pmExport: TPopupMenu
     Left = 141
     Top = 73
+    object CopyAll1: TMenuItem
+      Caption = 'Copy All'
+      OnClick = CopyAll1Click
+    end
     object Export1: TMenuItem
       Caption = 'Export Excel'
       OnClick = Export1Click
@@ -78,12 +83,14 @@ object DataM: TDataM
   object CSVExport1: TJvDBGridCSVExport
     Caption = 'Exporting to CSV/Text...'
     FileName = 'export'
+    OnException = ExcelExport1Exception
     Left = 25
     Top = 73
   end
   object ExcelExport1: TJvDBGridExcelExport
     Caption = 'Exporting to MS Excel...'
     FileName = 'export'
+    OnException = ExcelExport1Exception
     AutoFit = True
     Left = 83
     Top = 73
@@ -8553,5 +8560,27 @@ object DataM: TDataM
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object dlgSave1: TSaveDialog
+    DefaultExt = 'xlsx'
+    FileName = 'DataExport'
+    Filter = 'Excel|*.xls;*.xlsx|CSV Comma tex|*.csv'
+    FilterIndex = 2
+    Options = [ofHideReadOnly, ofPathMustExist, ofEnableSizing]
+    Title = 'Save'
+    Left = 224
+    Top = 106
+  end
+  object FDGUIxAsyncExecuteDialog1: TFDGUIxAsyncExecuteDialog
+    Provider = 'Forms'
+    Caption = 'Working'
+    CancelCaption = '&Cancel'
+    Left = 328
+    Top = 256
+  end
+  object OpenDlg: TOpenDialog
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 240
+    Top = 152
   end
 end

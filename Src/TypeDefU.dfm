@@ -2,18 +2,17 @@ inherited TypeDefF: TTypeDefF
   ActiveControl = edCode
   AutoSize = True
   Caption = 'Type Define'
-  ClientHeight = 443
-  ClientWidth = 270
+  ClientHeight = 431
+  ClientWidth = 262
   OnCreate = FormCreate
-  ExplicitWidth = 286
-  ExplicitHeight = 482
-  PixelsPerInch = 96
+  ExplicitWidth = 288
+  ExplicitHeight = 480
   TextHeight = 16
   object dg1: TDBGrid [0]
     Left = 0
     Top = 97
-    Width = 270
-    Height = 346
+    Width = 262
+    Height = 334
     Align = alClient
     DataSource = DataM.dsTypeDef
     TabOrder = 0
@@ -48,7 +47,7 @@ inherited TypeDefF: TTypeDefF
   object pnl1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 270
+    Width = 262
     Height = 97
     Align = alTop
     TabOrder = 1

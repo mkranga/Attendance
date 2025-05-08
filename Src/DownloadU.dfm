@@ -2,55 +2,35 @@ object DownloadF: TDownloadF
   Left = 0
   Top = 0
   Caption = 'Download'
-  ClientHeight = 548
-  ClientWidth = 472
+  ClientHeight = 547
+  ClientWidth = 468
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 13
   object pb1: TProgressBar
     Left = 0
     Top = 0
-    Width = 472
+    Width = 468
     Height = 17
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 468
-  end
-  object bt1: TButton
-    Left = 8
-    Top = 23
-    Width = 75
-    Height = 25
-    Caption = 'Download'
-    TabOrder = 1
-    OnClick = bt1Click
   end
   object mmo1: TMemo
     Left = 0
-    Top = 54
-    Width = 472
+    Top = 53
+    Width = 468
     Height = 494
     Align = alBottom
     Lines.Strings = (
       'Log')
-    TabOrder = 4
-    ExplicitTop = 53
-    ExplicitWidth = 468
-  end
-  object btSettings: TButton
-    Left = 389
-    Top = 23
-    Width = 75
-    Height = 25
-    Caption = 'Settings'
     TabOrder = 2
-    OnClick = btSettingsClick
   end
   object pnl1: TPanel
     Left = 0
@@ -78,6 +58,47 @@ object DownloadF: TDownloadF
       DataField = 'Config'
       DataSource = ds2
       TabOrder = 1
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 17
+    Width = 468
+    Height = 41
+    Align = alTop
+    TabOrder = 1
+    object bt1: TButton
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 75
+      Height = 33
+      Align = alLeft
+      Caption = 'Download'
+      TabOrder = 0
+      OnClick = bt1Click
+    end
+    object btImport: TButton
+      AlignWithMargins = True
+      Left = 85
+      Top = 4
+      Width = 75
+      Height = 33
+      Align = alLeft
+      Caption = 'Import'
+      TabOrder = 1
+      OnClick = btImportClick
+    end
+    object btSettings: TButton
+      AlignWithMargins = True
+      Left = 389
+      Top = 4
+      Width = 75
+      Height = 33
+      Align = alRight
+      Caption = 'Settings'
+      TabOrder = 2
+      OnClick = btSettingsClick
     end
   end
   object qrLog: TFDQuery

@@ -1,7 +1,10 @@
 inherited ReportsF: TReportsF
-  Caption = 'ReportsF'
-  ClientHeight = 728
-  ClientWidth = 1153
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSizeable
+  Caption = 'Reports'
+  ClientHeight = 716
+  ClientWidth = 1145
+  StyleElements = [seFont, seClient, seBorder]
   OnCreate = FormCreate
   ExplicitWidth = 1171
   ExplicitHeight = 765
@@ -23,19 +26,19 @@ inherited ReportsF: TReportsF
   object pgc: TPageControl [2]
     Left = 0
     Top = 0
-    Width = 1153
-    Height = 728
-    ActivePage = ts1
+    Width = 1145
+    Height = 716
+    ActivePage = tsAtt
     Align = alClient
     TabOrder = 2
     OnChange = pgcChange
     object tsProfile: TTabSheet
       Caption = 'Profiles'
       object pnl1: TPanel
-        Left = 976
+        Left = 968
         Top = 0
         Width = 169
-        Height = 697
+        Height = 685
         Align = alRight
         Padding.Left = 4
         Padding.Top = 4
@@ -44,7 +47,7 @@ inherited ReportsF: TReportsF
         TabOrder = 1
         object lbl1: TLabel
           Left = 5
-          Top = 167
+          Top = 182
           Width = 159
           Height = 16
           Align = alTop
@@ -62,7 +65,7 @@ inherited ReportsF: TReportsF
         end
         object lbl3: TLabel
           Left = 5
-          Top = 151
+          Top = 166
           Width = 159
           Height = 16
           Align = alTop
@@ -77,10 +80,11 @@ inherited ReportsF: TReportsF
           ExplicitWidth = 4
         end
         object clbG: TJvCheckListBox
-          Left = 5
-          Top = 183
-          Width = 159
-          Height = 97
+          AlignWithMargins = True
+          Left = 8
+          Top = 201
+          Width = 153
+          Height = 106
           Align = alTop
           DoubleBuffered = False
           ItemHeight = 17
@@ -94,10 +98,11 @@ inherited ReportsF: TReportsF
           OnClickCheck = clbGClickCheck
         end
         object clbCat: TJvCheckListBox
-          Left = 5
-          Top = 54
-          Width = 159
-          Height = 97
+          AlignWithMargins = True
+          Left = 8
+          Top = 57
+          Width = 153
+          Height = 106
           Align = alTop
           DoubleBuffered = False
           ItemHeight = 17
@@ -121,21 +126,44 @@ inherited ReportsF: TReportsF
           TabOrder = 0
         end
         object bt2: TButton
-          Left = 5
-          Top = 280
-          Width = 159
-          Height = 25
+          AlignWithMargins = True
+          Left = 8
+          Top = 313
+          Width = 153
+          Height = 30
           Align = alTop
           Caption = 'OK'
           TabOrder = 3
           OnClick = bt2Click
         end
+        object Button3: TButton
+          AlignWithMargins = True
+          Left = 8
+          Top = 349
+          Width = 153
+          Height = 30
+          Align = alTop
+          Caption = 'Print'
+          TabOrder = 4
+          OnClick = Button2Click
+        end
+        object Button4: TButton
+          AlignWithMargins = True
+          Left = 8
+          Top = 647
+          Width = 153
+          Height = 30
+          Align = alBottom
+          Caption = 'Close'
+          TabOrder = 5
+          OnClick = Button4Click
+        end
       end
       object dgProfile: TJvDBGrid
         Left = 0
         Top = 0
-        Width = 976
-        Height = 697
+        Width = 968
+        Height = 685
         Align = alClient
         DataSource = ds1
         PopupMenu = pm1
@@ -154,126 +182,107 @@ inherited ReportsF: TReportsF
         Columns = <
           item
             Expanded = False
-            FieldName = 'id'
+            FieldName = 'EMPNo'
             Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Width = 60
+            Width = 74
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'code'
-            Title.Alignment = taCenter
-            Title.Caption = 'CODE'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'name'
+            FieldName = 'Name_with_Initial'
             Title.Alignment = taCenter
             Title.Caption = 'Name'
-            Width = 60
+            Width = 178
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Tel'
+            FieldName = 'gender'
             Title.Alignment = taCenter
-            Width = 60
+            Title.Caption = 'Sex'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Email'
+            FieldName = 'nic_no'
             Title.Alignment = taCenter
-            Width = 60
+            Title.Caption = 'NIC/PP'
+            Width = 74
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'dob'
+            FieldName = 'birth_date'
             Title.Alignment = taCenter
             Title.Caption = 'DOB'
-            Width = 60
+            Width = 74
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NIC'
+            FieldName = 'nationality'
             Title.Alignment = taCenter
-            Width = 60
+            Title.Caption = 'Nationality'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'cat1'
+            FieldName = 'religion'
             Title.Alignment = taCenter
-            Title.Caption = 'Cat'
-            Width = 60
+            Title.Caption = 'Religion'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'cat2'
+            FieldName = 'contact'
+            Title.Alignment = taCenter
+            Title.Caption = 'Contact'
+            Width = 74
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Department'
+            Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Catagary'
+            Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'EmGroup'
             Title.Alignment = taCenter
             Title.Caption = 'Group'
-            Width = 60
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'active'
+            FieldName = 'Join_Date'
             Title.Alignment = taCenter
-            Title.Caption = 'Active'
-            Width = 60
+            Width = 74
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'address'
+            FieldName = 'Active'
             Title.Alignment = taCenter
-            Title.Caption = 'Address'
-            Width = 60
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'payment'
+            FieldName = 'Shift'
             Title.Alignment = taCenter
-            Title.Caption = 'Payment'
-            Width = 60
+            Width = 74
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'epin'
+            FieldName = 'MachineNo'
             Title.Alignment = taCenter
-            Title.Caption = 'E-Pin'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'Sponsor'
-            Title.Alignment = taCenter
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cdate'
-            Title.Alignment = taCenter
-            Title.Caption = 'CDate'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'telegram'
-            Title.Alignment = taCenter
-            Title.Caption = 'Telegram'
-            Width = 60
             Visible = True
           end>
       end
@@ -281,177 +290,448 @@ inherited ReportsF: TReportsF
     object tsAtt: TTabSheet
       Caption = 'Attendance'
       ImageIndex = 1
-      object dgAtt: TJvDBGrid
-        Left = 0
-        Top = 0
-        Width = 976
-        Height = 697
-        Align = alClient
-        DataSource = ds2
-        PopupMenu = pm1
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -13
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        SelectColumnsDialogStrings.Caption = 'Select columns'
-        SelectColumnsDialogStrings.OK = '&OK'
-        SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
-        EditControls = <>
-        RowsHeight = 20
-        TitleRowHeight = 20
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'id'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Width = 50
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'code'
-            Title.Alignment = taCenter
-            Title.Caption = 'CODE'
-            Width = 70
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'name'
-            Title.Alignment = taCenter
-            Title.Caption = 'NAME'
-            Width = 201
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cid'
-            Title.Alignment = taCenter
-            Title.Caption = 'COURSE'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'gid'
-            Title.Alignment = taCenter
-            Title.Caption = 'GROUP'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'sid'
-            Title.Alignment = taCenter
-            Title.Caption = 'SESSION'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'st'
-            Title.Alignment = taCenter
-            Title.Caption = 'START'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ed'
-            Title.Alignment = taCenter
-            Title.Caption = 'END'
-            Width = 123
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'note'
-            Title.Alignment = taCenter
-            Title.Caption = 'Notes'
-            Width = 70
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cdate'
-            Title.Alignment = taCenter
-            Title.Caption = 'CDate'
-            Width = 113
-            Visible = True
-          end>
-      end
-      object pnl2: TPanel
-        Left = 976
+      object Panel1: TPanel
+        Left = 968
         Top = 0
         Width = 169
-        Height = 697
+        Height = 685
         Align = alRight
+        BevelOuter = bvNone
         Padding.Left = 4
         Padding.Top = 4
         Padding.Right = 4
         Padding.Bottom = 4
         TabOrder = 1
-        object edPid: TEdit
+        object Label1: TLabel
           AlignWithMargins = True
-          Left = 8
-          Top = 10
-          Width = 153
-          Height = 24
-          Margins.Top = 5
-          Margins.Bottom = 5
+          Left = 7
+          Top = 165
+          Width = 155
+          Height = 16
+          Margins.Top = 8
+          Margins.Bottom = 0
           Align = alTop
-          ReadOnly = True
-          TabOrder = 0
-          TextHint = 'Profile ID '
-          OnEnter = edPidEnter
+          Caption = 'Group'
+          ExplicitWidth = 34
         end
-        object btAttok: TButton
+        object Label2: TLabel
           AlignWithMargins = True
-          Left = 8
-          Top = 132
-          Width = 153
-          Height = 25
+          Left = 7
+          Top = 29
+          Width = 155
+          Height = 16
+          Margins.Top = 8
+          Margins.Bottom = 0
           Align = alTop
-          Caption = 'OK'
-          TabOrder = 4
-          OnClick = btAttokClick
+          Caption = 'Category'
+          ExplicitWidth = 51
         end
-        object edGid: TEdit
+        object Label5: TLabel
           AlignWithMargins = True
-          Left = 8
-          Top = 72
-          Width = 153
-          Height = 24
+          Left = 7
+          Top = 301
+          Width = 155
+          Height = 16
+          Margins.Top = 8
+          Margins.Bottom = 0
           Align = alTop
-          ReadOnly = True
+          AutoSize = False
+          Caption = 'Range'
+          ExplicitLeft = 6
+          ExplicitTop = 351
+          ExplicitWidth = 159
+        end
+        object clbAttGroup: TJvCheckListBox
+          AlignWithMargins = True
+          Left = 7
+          Top = 184
+          Width = 155
+          Height = 106
+          Align = alTop
+          DoubleBuffered = False
+          ItemHeight = 17
+          Items.Strings = (
+            'test'
+            'test2'
+            'test3')
+          ParentDoubleBuffered = False
+          ScrollWidth = 57
           TabOrder = 2
-          TextHint = 'Group ID'
-          OnEnter = edGidEnter
+          OnClickCheck = clbGClickCheck
         end
-        object edSid: TEdit
+        object clbAttCat: TJvCheckListBox
           AlignWithMargins = True
-          Left = 8
-          Top = 102
-          Width = 153
-          Height = 24
+          Left = 7
+          Top = 48
+          Width = 155
+          Height = 106
           Align = alTop
-          ReadOnly = True
-          TabOrder = 3
-          TextHint = 'Session ID'
-          OnEnter = edSidEnter
-        end
-        object cbbCID: TComboBox
-          AlignWithMargins = True
-          Left = 8
-          Top = 42
-          Width = 153
-          Height = 24
-          Align = alTop
-          Style = csDropDownList
+          DoubleBuffered = False
+          ItemHeight = 17
+          Items.Strings = (
+            'test'
+            'test2'
+            'test3'
+            'test'
+            'test2'
+            'test3'
+            'test'
+            'test2'
+            'test3')
+          ParentDoubleBuffered = False
+          ScrollWidth = 57
           TabOrder = 1
+        end
+        object chk2: TCheckBox
+          Left = 4
+          Top = 4
+          Width = 161
+          Height = 17
+          Align = alTop
+          Caption = 'Active'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+        end
+        object btAttDetails: TButton
+          AlignWithMargins = True
+          Left = 7
+          Top = 380
+          Width = 155
+          Height = 30
+          Align = alTop
+          Caption = 'Details'
+          TabOrder = 5
+          OnClick = btAttDetailsClick
+        end
+        object Button1: TButton
+          AlignWithMargins = True
+          Left = 7
+          Top = 416
+          Width = 155
+          Height = 30
+          Align = alTop
+          Caption = 'Summery'
+          TabOrder = 6
+          OnClick = AttSumClick
+        end
+        object Button2: TButton
+          AlignWithMargins = True
+          Left = 7
+          Top = 452
+          Width = 155
+          Height = 30
+          Align = alTop
+          Caption = 'Print'
+          TabOrder = 7
+          OnClick = Button2Click
+        end
+        object Button5: TButton
+          AlignWithMargins = True
+          Left = 7
+          Top = 632
+          Width = 155
+          Height = 46
+          Align = alBottom
+          Caption = 'Close'
+          TabOrder = 8
+          OnClick = Button4Click
+        end
+        object dpSt: TJvDateEdit
+          AlignWithMargins = True
+          Left = 7
+          Top = 320
+          Width = 155
+          Height = 24
+          Date = 45748.000000000000000000
+          DateFormat = 'YY-MM-DD'
+          Align = alTop
+          ShowNullDate = False
+          TabOrder = 3
+        end
+        object dpEd: TJvDateEdit
+          AlignWithMargins = True
+          Left = 7
+          Top = 350
+          Width = 155
+          Height = 24
+          Date = 45748.000000000000000000
+          DateFormat = 'YY-MM-DD'
+          Align = alTop
+          ShowNullDate = False
+          TabOrder = 4
+        end
+      end
+      object pgcAtt: TPageControl
+        Left = 0
+        Top = 0
+        Width = 968
+        Height = 685
+        ActivePage = tsAttSum
+        Align = alClient
+        TabOrder = 0
+        object tsAttDtl: TTabSheet
+          Caption = 'Details'
+          object dgdtl: TJvDBGrid
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 954
+            Height = 648
+            Align = alClient
+            DataSource = ds5
+            PopupMenu = pm1
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            SelectColumnsDialogStrings.Caption = 'Select columns'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+            EditControls = <>
+            RowsHeight = 20
+            TitleRowHeight = 20
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'EMPNo'
+                Title.Alignment = taCenter
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MachineNo'
+                Title.Alignment = taCenter
+                Title.Caption = 'M No'
+                Width = 47
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Name_with_Initial'
+                Title.Alignment = taCenter
+                Title.Caption = 'Name'
+                Width = 135
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'WorkingDate'
+                Title.Alignment = taCenter
+                Title.Caption = 'Date'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'WrdIn'
+                Title.Alignment = taCenter
+                Title.Caption = 'IN'
+                Width = 74
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'WrdOut'
+                Title.Alignment = taCenter
+                Title.Caption = 'OUT'
+                Width = 74
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ShiftIn'
+                Title.Alignment = taCenter
+                Title.Caption = 'Shift In'
+                Width = 74
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ShiftOut'
+                Title.Alignment = taCenter
+                Title.Caption = 'Shift Out'
+                Width = 74
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Late'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OT'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OTR'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EarlyOT'
+                Title.Alignment = taCenter
+                Title.Caption = 'Early OT'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ShortLV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Short LV'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TotalHrs'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Hrs'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TOL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Loss'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'HType'
+                Title.Alignment = taCenter
+                Title.Caption = 'Holiday'
+                Width = 74
+                Visible = True
+              end>
+          end
+        end
+        object tsAttSum: TTabSheet
+          Caption = 'Summery'
+          ImageIndex = 1
+          object JvDBGrid1: TJvDBGrid
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 954
+            Height = 648
+            Align = alClient
+            DataSource = ds6
+            PopupMenu = pm1
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            SelectColumnsDialogStrings.Caption = 'Select columns'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+            EditControls = <>
+            RowsHeight = 20
+            TitleRowHeight = 20
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'MachineNo'
+                Title.Alignment = taCenter
+                Title.Caption = 'DID'
+                Width = 39
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EMPNo'
+                Title.Alignment = taCenter
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EmpName'
+                Title.Alignment = taCenter
+                Title.Caption = 'Name'
+                Width = 206
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'sftD'
+                Title.Alignment = taCenter
+                Title.Caption = 'ShiftD'
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'wrKD'
+                Title.Alignment = taCenter
+                Title.Caption = 'WorkD'
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'abcnt'
+                Title.Alignment = taCenter
+                Title.Caption = 'Absent'
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EarlyOT'
+                Title.Alignment = taCenter
+                Title.Caption = 'Early OT'
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Late'
+                Title.Alignment = taCenter
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ShortLV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Leave early'
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ot'
+                Title.Alignment = taCenter
+                Title.Caption = 'OT'
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TotalHrs'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Hrs'
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TOL'
+                Title.Alignment = taCenter
+                Title.Caption = 'T LOSS'
+                Width = 75
+                Visible = True
+              end>
+          end
         end
       end
     end
@@ -462,8 +742,8 @@ inherited ReportsF: TReportsF
       object dgPay: TJvDBGrid
         Left = 0
         Top = 0
-        Width = 976
-        Height = 697
+        Width = 968
+        Height = 685
         Align = alClient
         DataSource = ds3
         PopupMenu = pm1
@@ -538,10 +818,10 @@ inherited ReportsF: TReportsF
           end>
       end
       object pnl3: TPanel
-        Left = 976
+        Left = 968
         Top = 0
         Width = 169
-        Height = 697
+        Height = 685
         Align = alRight
         Padding.Left = 4
         Padding.Top = 4
@@ -598,6 +878,17 @@ inherited ReportsF: TReportsF
           Style = csDropDownList
           TabOrder = 1
         end
+        object Button6: TButton
+          AlignWithMargins = True
+          Left = 8
+          Top = 647
+          Width = 153
+          Height = 30
+          Align = alBottom
+          Caption = 'Close'
+          TabOrder = 4
+          OnClick = Button4Click
+        end
       end
     end
     object ts1: TTabSheet
@@ -606,8 +897,8 @@ inherited ReportsF: TReportsF
       object dgPos: TJvDBGrid
         Left = 0
         Top = 89
-        Width = 1145
-        Height = 608
+        Width = 1137
+        Height = 596
         Align = alClient
         DataSource = ds4
         PopupMenu = pm1
@@ -627,7 +918,7 @@ inherited ReportsF: TReportsF
       object pnl4: TPanel
         Left = 0
         Top = 0
-        Width = 1145
+        Width = 1137
         Height = 89
         Align = alTop
         Padding.Left = 4
@@ -637,7 +928,7 @@ inherited ReportsF: TReportsF
         TabOrder = 0
         object btPayok1: TButton
           AlignWithMargins = True
-          Left = 1066
+          Left = 1058
           Top = 8
           Width = 71
           Height = 73
@@ -649,13 +940,12 @@ inherited ReportsF: TReportsF
         object mmoPOSSQL: TMemo
           Left = 5
           Top = 5
-          Width = 1058
+          Width = 1050
           Height = 79
           Align = alClient
           Lines.Strings = (
             'mmoPOSSQL')
           TabOrder = 0
-          ExplicitWidth = 1004
         end
       end
     end
@@ -666,10 +956,10 @@ inherited ReportsF: TReportsF
     UpdateOptions.EnableInsert = False
     UpdateOptions.EnableUpdate = False
     SQL.Strings = (
-      'select * from profile p where p.active=:active'
+      'select * from empmaster p where p.active=:active'
       '!macro1')
-    Left = 88
-    Top = 104
+    Left = 611
+    Top = 317
     ParamData = <
       item
         Name = 'ACTIVE'
@@ -682,127 +972,165 @@ inherited ReportsF: TReportsF
         Value = Null
         Name = 'MACRO1'
       end>
-    object qrMainid: TFDAutoIncField
-      FieldName = 'id'
-      Origin = 'id'
+    object qrMainID: TFDAutoIncField
+      FieldName = 'ID'
+      Origin = 'ID'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
+      ReadOnly = False
     end
-    object qrMaincode: TStringField
+    object qrMainfull_name: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'code'
-      Origin = 'code'
+      FieldName = 'full_name'
+      Origin = 'full_name'
+      Size = 255
     end
-    object qrMainname: TStringField
+    object qrMaingender: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'name'
-      Origin = 'name'
+      FieldName = 'gender'
+      Origin = 'gender'
+      Size = 10
+    end
+    object qrMainnic_no: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nic_no'
+      Origin = 'nic_no'
       Size = 50
     end
-    object qrMainnamef: TStringField
+    object qrMainbirth_date: TDateTimeField
       AutoGenerateValue = arDefault
-      FieldName = 'namef'
-      Origin = 'namef'
+      FieldName = 'birth_date'
+      Origin = 'birth_date'
+    end
+    object qrMainnationality: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nationality'
+      Origin = 'nationality'
+      Size = 10
+    end
+    object qrMainreligion: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'religion'
+      Origin = 'religion'
+      Size = 10
+    end
+    object qrMaincontact: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'contact'
+      Origin = 'contact'
       Size = 50
     end
-    object qrMainTel: TStringField
+    object qrMainAddressId: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'Tel'
-      Origin = 'Tel'
-    end
-    object qrMainEmail: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'Email'
-      Origin = 'Email'
+      FieldName = 'AddressId'
+      Origin = 'AddressId'
       Size = 50
     end
-    object mtrdMaindob: TDateField
+    object qrMainenterd_date: TSQLTimeStampField
       AutoGenerateValue = arDefault
-      FieldName = 'dob'
-      Origin = 'dob'
+      FieldName = 'enterd_date'
+      Origin = 'enterd_date'
     end
-    object qrMainNIC: TStringField
+    object qrMainName_with_Initial: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'NIC'
-      Origin = 'NIC'
+      FieldName = 'Name_with_Initial'
+      Origin = 'Name_with_Initial'
+      Size = 255
     end
-    object qrMaincat1: TStringField
+    object qrMainDepartment: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'cat1'
-      Origin = 'cat1'
+      FieldName = 'Department'
+      Origin = 'Department'
+      Size = 10
+    end
+    object qrMainCatagary: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Catagary'
+      Origin = 'Catagary'
+      Size = 10
+    end
+    object qrMainEmGroup: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EmGroup'
+      Origin = 'EmGroup'
+      Size = 10
+    end
+    object qrMainEMPNo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPNo'
+      Origin = 'EMPNo'
+      Size = 50
+    end
+    object qrMainJoin_Date: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Join_Date'
+      Origin = 'Join_Date'
+    end
+    object qrMainEmployee_type: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Employee_type'
+      Origin = 'Employee_type'
       Size = 5
     end
-    object qrMaincat2: TStringField
+    object qrMainForm_A_Number: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'cat2'
-      Origin = 'cat2'
-      Size = 5
-    end
-    object qrMainactive: TShortintField
-      AutoGenerateValue = arDefault
-      FieldName = 'active'
-      Origin = 'active'
-    end
-    object qrMainaddress: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'address'
-      Origin = 'address'
-      Size = 250
-    end
-    object qrMainpayment: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'payment'
-      Origin = 'payment'
+      FieldName = 'Form_A_Number'
+      Origin = 'Form_A_Number'
       Size = 50
     end
-    object qrMainepin: TStringField
+    object qrMainActive: TShortintField
       AutoGenerateValue = arDefault
-      FieldName = 'epin'
-      Origin = 'epin'
+      FieldName = 'Active'
+      Origin = 'Active'
     end
-    object qrMainSponsor: TStringField
+    object qrMainmail: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'Sponsor'
-      Origin = 'Sponsor'
+      FieldName = 'mail'
+      Origin = 'mail'
+      Size = 255
     end
-    object qrMaincdate: TSQLTimeStampField
+    object qrMainShift: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'cdate'
-      Origin = 'cdate'
-    end
-    object qrMaintelegram: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'telegram'
-      Origin = 'telegram'
+      FieldName = 'Shift'
+      Origin = 'Shift'
       Size = 50
+    end
+    object qrMainImageID: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ImageID'
+      Origin = 'ImageID'
+    end
+    object qrMainMachineNo: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'MachineNo'
+      Origin = 'MachineNo'
     end
   end
   inherited ds1: TDataSource
     AutoEdit = False
-    Left = 152
-    Top = 112
+    Left = 452
+    Top = 264
   end
   object ExpExcel: TJvDBGridExcelExport
     Caption = 'Exporting to MS Excel...'
     FileName = 'Report'
     AutoFit = True
-    Left = 1092
-    Top = 65531
+    Left = 558
+    Top = 370
   end
   object ExpCSV: TJvDBGridCSVExport
     Caption = 'Exporting to CSV/Text...'
     FileName = 'Report'
-    Left = 1092
-    Top = 43
+    Left = 505
+    Top = 370
   end
   object expXML: TJvDBGridXMLExport
     FileName = 'Report'
-    Left = 1092
-    Top = 91
+    Left = 611
+    Top = 370
   end
   object pm1: TPopupMenu
-    Left = 740
-    Top = 163
+    Left = 664
+    Top = 370
     object mniExportClipbord: TMenuItem
       Caption = 'Copy to Clipbord'
       OnClick = mniExportClipbordClick
@@ -820,128 +1148,16 @@ inherited ReportsF: TReportsF
       OnClick = mniExportExcelClick
     end
   end
-  object qrAtt: TFDQuery
-    CachedUpdates = True
-    Connection = DataM.Con1
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvLockMode]
-    UpdateOptions.EnableDelete = False
-    UpdateOptions.EnableInsert = False
-    UpdateOptions.EnableUpdate = False
-    UpdateOptions.LockMode = lmOptimistic
-    SQL.Strings = (
-      'SELECT a.*,p.code,p.name,n.*'
-      'FROM att a'
-      'LEFT JOIN profile p ON a.pid=p.id'
-      'LEFT JOIN notes n ON a.id=n.lid AND n.typeA="ATT" '
-      ' !macro1 '
-      ''
-      '')
-    Left = 256
-    Top = 112
-    MacroData = <
-      item
-        Value = Null
-        Name = 'MACRO1'
-      end>
-    object qrAttid: TFDAutoIncField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object qrAttpid: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pid'
-      Origin = 'pid'
-    end
-    object qrAttsid: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'sid'
-      Origin = 'sid'
-    end
-    object qrAttst: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'st'
-      Origin = 'st'
-    end
-    object qrAtted: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'ed'
-      Origin = 'ed'
-    end
-    object qrAttcode: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'code'
-      Origin = 'code'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qrAttname: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'name'
-      Origin = 'name'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 50
-    end
-    object qrAttid_1: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'id_1'
-      Origin = 'id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qrAttlid: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'lid'
-      Origin = 'lid'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qrAtttypeA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'typeA'
-      Origin = 'typeA'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 3
-    end
-    object qrAttnote: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'note'
-      Origin = 'note'
-      ProviderFlags = []
-      ReadOnly = True
-      BlobType = ftMemo
-    end
-    object qrAttcdate: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'cdate'
-      Origin = 'cdate'
-    end
-    object qrAttgid: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'gid'
-      Origin = 'gid'
-    end
-    object qrAttcid: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cid'
-      Origin = 'cid'
-      Size = 5
-    end
-  end
   object ds2: TDataSource
     AutoEdit = False
-    DataSet = qrAtt
-    Left = 304
-    Top = 112
+    Left = 505
+    Top = 264
   end
   object ds3: TDataSource
     AutoEdit = False
     DataSet = qrPay
-    Left = 304
-    Top = 160
+    Left = 558
+    Top = 264
   end
   object qrPay: TFDQuery
     CachedUpdates = True
@@ -954,8 +1170,8 @@ inherited ReportsF: TReportsF
     SQL.Strings = (
       'select* from payments'
       '!macro1')
-    Left = 256
-    Top = 160
+    Left = 664
+    Top = 317
     MacroData = <
       item
         Value = Null
@@ -965,7 +1181,6 @@ inherited ReportsF: TReportsF
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object mtrdPaypdate: TDateField
       FieldName = 'pdate'
@@ -1018,13 +1233,198 @@ inherited ReportsF: TReportsF
       
         'SELECT d.`NAME`,SUM(d.price),i.cancel  FROM invitems d left join' +
         ' invoice i ON d.invid=i.id  GROUP BY `NAME`,i.cancel')
-    Left = 256
-    Top = 224
+    Left = 452
+    Top = 370
   end
   object ds4: TDataSource
     AutoEdit = False
     DataSet = qrPOS
-    Left = 304
-    Top = 224
+    Left = 611
+    Top = 264
+  end
+  object qrAttDtl: TFDQuery
+    CachedUpdates = True
+    Connection = DataM.Con1
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvLockMode]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.LockMode = lmOptimistic
+    SQL.Strings = (
+      
+        'SELECT e.id,e.Name_with_Initial , a.* FROM attdtl a LEFT JOIN em' +
+        'pmaster e  '
+      
+        'ON a.EMPNo=e.EMPNo WHERE a.ShiftDate BETWEEN :st AND :ed !macro1' +
+        ' order by e.empno,a.ShiftDate')
+    Left = 505
+    Top = 317
+    ParamData = <
+      item
+        Name = 'ST'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = 43831d
+      end
+      item
+        Name = 'ED'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = 46022d
+      end>
+    MacroData = <
+      item
+        Value = Null
+        Name = 'MACRO1'
+      end>
+    object qrAttDtlEMPNo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPNo'
+      Origin = 'EMPNo'
+      Size = 50
+    end
+    object qrAttDtlName_with_Initial: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Name_with_Initial'
+      Origin = 'Name_with_Initial'
+      Size = 255
+    end
+    object qrAttDtlWorkingDate: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'WorkingDate'
+      Origin = 'WorkingDate'
+      DisplayFormat = 'YYYY-MM-DD'
+    end
+    object qrAttDtlWrdIn: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'WrdIn'
+      Origin = 'WrdIn'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlWrdOut: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'WrdOut'
+      Origin = 'WrdOut'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlShiftDate: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ShiftDate'
+      Origin = 'ShiftDate'
+      DisplayFormat = 'YYYY-MM-DD'
+    end
+    object qrAttDtlShiftIn: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ShiftIn'
+      Origin = 'ShiftIn'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlShiftOut: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ShiftOut'
+      Origin = 'ShiftOut'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlLate: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'Late'
+      Origin = 'Late'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlOT: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'OT'
+      Origin = 'OT'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlOTR: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'OTR'
+      Origin = 'OTR'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlEarlyOT: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'EarlyOT'
+      Origin = 'EarlyOT'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlShortLV: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ShortLV'
+      Origin = 'ShortLV'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlTOL: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOL'
+      Origin = 'TOL'
+      DisplayFormat = 'HH:nn'
+    end
+    object qrAttDtlHType: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'HType'
+      Origin = 'HType'
+      Size = 5
+    end
+    object qrAttDtlid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object qrAttDtlID_1: TFDAutoIncField
+      FieldName = 'ID_1'
+      Origin = 'ID'
+      ReadOnly = False
+    end
+    object qrAttDtlTotalHrs: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'TotalHrs'
+      Origin = 'TotalHrs'
+    end
+    object qrAttDtlMachineNo: TIntegerField
+      FieldName = 'MachineNo'
+    end
+  end
+  object ds5: TDataSource
+    AutoEdit = False
+    DataSet = qrAttDtl
+    Left = 664
+    Top = 264
+  end
+  object ds6: TDataSource
+    AutoEdit = False
+    DataSet = spAttSum
+    Left = 452
+    Top = 317
+  end
+  object spAttSum: TFDStoredProc
+    OnCalcFields = spAttSumCalcFields
+    Connection = DataM.Con1
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    StoredProcName = 'sserp.AttSummary'
+    Left = 560
+    Top = 318
+    ParamData = <
+      item
+        Position = 1
+        Name = 'st'
+        DataType = ftDate
+        FDDataType = dtDate
+        ParamType = ptInput
+        Value = 45748d
+      end
+      item
+        Position = 2
+        Name = 'ed'
+        DataType = ftDate
+        FDDataType = dtDate
+        ParamType = ptInput
+        Value = 45757d
+      end>
   end
 end

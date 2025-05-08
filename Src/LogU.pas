@@ -18,7 +18,7 @@ unit LogU;
 interface
 
 uses
-  classes, sysutils, system.Generics.Collections, jcldebug, system.Threading;
+  classes, sysutils, system.Generics.Collections, jcldebug;
 
 function iif(exp: Boolean; t: Integer; f: Integer = 0): Integer; overload;
 

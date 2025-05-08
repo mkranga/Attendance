@@ -3,16 +3,16 @@ object DataFormTPL: TDataFormTPL
   Top = 0
   BorderStyle = bsToolWindow
   BorderWidth = 5
-  ClientHeight = 655
-  ClientWidth = 1045
+  ClientHeight = 643
+  ClientWidth = 1037
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
-  FormStyle = fsStayOnTop
   Position = poMainFormCenter
+  OnCloseQuery = FormCloseQuery
   TextHeight = 16
   object btClose: TBitBtn
     Left = -10

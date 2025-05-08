@@ -2,13 +2,12 @@ inherited CourseSetupF: TCourseSetupF
   AutoSize = True
   BorderWidth = 10
   Caption = 'Course Setup'
-  ClientHeight = 581
-  ClientWidth = 846
+  ClientHeight = 593
+  ClientWidth = 854
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  ExplicitWidth = 872
-  ExplicitHeight = 630
-  PixelsPerInch = 96
+  ExplicitWidth = 882
+  ExplicitHeight = 640
   TextHeight = 16
   object lbl1: TLabel [0]
     Left = 0

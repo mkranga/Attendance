@@ -3,17 +3,12 @@ unit MainU;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, SQLSPanelU,
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
-  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
-  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, DataU,
-  Vcl.Mask, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, JvMaskEdit, JvCheckedMaskEdit,
-  JvDatePickerEdit, JvDBDatePickerEdit, JvExMask, JvToolEdit, JvDBControls,
-  JvExStdCtrls, JvCombobox, JvDBCombobox, JvComponentBase, JvAppHotKey,
-  SettingsU, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, JvExExtCtrls,
-  JvImage;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls, SQLSPanelU, FireDAC.Stan.Param, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, DataU, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, JvMaskEdit, JvCheckedMaskEdit, JvDatePickerEdit, JvDBDatePickerEdit, JvExMask, JvToolEdit, JvDBControls,
+  JvExStdCtrls, JvCombobox, JvDBCombobox, JvComponentBase, JvAppHotKey, SettingsU, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, JvExExtCtrls,
+  JvImage, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt;
 
 type
   TMainF = class(TForm)
@@ -72,8 +67,6 @@ type
     btfdbA: TSpeedButton;
     btfdbD: TSpeedButton;
     cbDocType: TJvDBComboBox;
-    lbl3: TLabel;
-    lbl4: TLabel;
     lbl5: TLabel;
     btPayment: TSpeedButton;
     btAtt3: TSpeedButton;
@@ -113,6 +106,9 @@ type
     btPos: TSpeedButton;
     btn1: TSpeedButton;
     imgWP: TJvImage;
+    btCheque: TSpeedButton;
+    BitBtn1: TBitBtn;
+    bttest: TSpeedButton;
     procedure btexitClick(Sender: TObject);
     procedure btProfClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -145,14 +141,19 @@ type
     procedure imgLogoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure btChequeClick(Sender: TObject);
+    procedure bt1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure bttestClick(Sender: TObject);
   private
     spnl: TSQLSPanel;
     spn2: TSQLSPanel;
-    spn3: TSQLSPanel;
+//    spn3: TSQLSPanel;
     si: TStrings; // import text
     DocTypes: TStrings;
     { Private declarations }
     function DuplicateCheck(fld, Val: string): string;
+    procedure InitProfilePnl;
   public
     { Public declarations }
   end;
@@ -163,12 +164,14 @@ var
 implementation
 
 uses
-  JclShell, InputMemoU, TypeDefU, System.DateUtils, CourseSetupU, SettingsFU,
-  CommonU, AttendanceU, reportsu, paymentu, posu, StockInU, aboutu;
+  JclShell, InputMemoU, TypeDefU, System.DateUtils, CourseSetupU, SettingsFU, ChequeU, CommonU, AttendanceU, reportsu, paymentu, posu, StockInU,
+  aboutu, TestU;
 {$R *.dfm}
 
 procedure TMainF.btn1Click(Sender: TObject);
 begin
+  if TSettings.IsSuperUser = false then
+    exit;
   if not (Assigned(StockInF)) then
     StockInF := TStockInF.Create(self);
   StockInF.Show;
@@ -199,21 +202,21 @@ begin
   if (qrP.State in [dsInsert, dsEdit]) then
     qrP.Post;
   // validate
-  datam.qr1.SQL.Text := 'select p.empno, p.full_name from empmaster p where p.empno=:empno or p.NIC_no=:nic';
-  datam.qr1.ParamByName('empno').Value := qrPEMPNo.Value;
-  datam.qr1.ParamByName('nic').Value := qrPnic_no.Value;
-  datam.qr1.Open;
-  if datam.qr1.RecordCount > 0 then
-  begin
-    s := 'Duplicate empno or NIC/PP';
-  end;
+//  datam.qr1.SQL.Text := 'select p.empno, p.full_name from empmaster p where p.empno=:empno or p.NIC_no=:nic';
+//  datam.qr1.ParamByName('empno').Value := qrPEMPNo.Value;
+//  datam.qr1.ParamByName('nic').Value := qrPnic_no.Value;
+//  datam.qr1.Open;
+//  if datam.qr1.RecordCount > 0 then
+//  begin
+//    s := 'Duplicate empno or NIC/PP';
+//  end;
 
-  if s <> '' then
-  begin
-    Application.MessageBox(PWideChar('Cannot Save !' + sLineBreak + s), 'Save', MB_OK + MB_ICONSTOP);
-    qrP.Edit;
-    exit;
-  end;
+//  if s <> '' then
+//  begin
+//    Application.MessageBox(PWideChar('Cannot Save !' + sLineBreak + s), 'Save', MB_OK + MB_ICONSTOP);
+//    qrP.Edit;
+//    exit;
+//  end;
   // prepair
   if qrP.UpdatesPending then
   begin
@@ -243,6 +246,16 @@ begin
   end
   else
     qrP.Cancel;
+end;
+
+procedure TMainF.BitBtn1Click(Sender: TObject);
+begin
+  SlideMe(pnlProfile, 2, True);
+end;
+
+procedure TMainF.bt1Click(Sender: TObject);
+begin
+  close;
 end;
 
 procedure TMainF.bt21Click(Sender: TObject);
@@ -282,6 +295,15 @@ end;
 procedure TMainF.btcdPnlCloseClick(Sender: TObject);
 begin
   pnlProfile.Visible := false;
+end;
+
+procedure TMainF.btChequeClick(Sender: TObject);
+begin
+  if TSettings.IsSuperUser = false then
+    exit;
+  if Assigned(Chequef) = false then
+    ChequeF := TChequeF.Create(self);
+  ChequeF.Show; //show not working
 end;
 
 procedure TMainF.btCMSGClick(Sender: TObject);
@@ -325,7 +347,8 @@ begin
       s := StringReplace(s, tkn, v, [rfReplaceAll, rfIgnoreCase]);
     end;
 
-    TInputMemoF.ShowA('Cinfirm MSG', 'Supported Format tags' + sLineBreak + '{_date}{_time},id, empno, name, namef, Tel, Email, dob, NIC, cat1, cat2,' + sLineBreak + ' active, address, payment, epin, Sponsor, cdate,_courseName,_groupCode', s, 0, 0, 700, 600);
+    TInputMemoF.ShowA('Cinfirm MSG', 'Supported Format tags' + sLineBreak + '{_date}{_time},id, empno, name, namef, Tel, Email, dob, NIC, cat1, cat2,'
+      + sLineBreak + ' active, address, payment, epin, Sponsor, cdate,_courseName,_groupCode', s, 0, 0, 700, 600);
   finally
     _st.Free;
   end;
@@ -350,6 +373,8 @@ end;
 
 procedure TMainF.btPaymentClick(Sender: TObject);
 begin
+  if TSettings.IsSuperUser = false then
+    exit;
   if Assigned(PaymentF) = false then
     PaymentF := tpaymentf.create(Self);
   PaymentF.ShowModal()
@@ -357,42 +382,41 @@ end;
 
 procedure TMainF.btPosClick(Sender: TObject);
 begin
+  if TSettings.IsSuperUser = false then
+    exit;
   if Assigned(POSF) = false then
     posf := tposf.Create(self);
   posf.Show;
 end;
 
 procedure TMainF.btProfClick(Sender: TObject);
-var
-  qr: TFDQuery;
 begin
   if pnlProfile.Visible then
     exit;
   SlideMe(pnlProfile, 0);
   edSearchProf.SetFocus;
-  //load shift's
-  qr := DataM.SQLExcec('select * from shift group by sname');
-  try
-    while qr.Eof = false do
-    begin
-      cbShift.Items.Add(qr.FieldByName('sname').Value);
-      qr.Next;
-    end;
-  finally
-    qr.Free;
-
-  end;
 end;
 
 procedure TMainF.btSettingsClick(Sender: TObject);
 begin
+  if TSettings.IsSuperUser = false then
+    exit;
   if SettingsF = nil then
     SettingsF := TSettingsF.Create(self);
   SettingsF.ShowModal;
 end;
 
+procedure TMainF.bttestClick(Sender: TObject);
+begin
+  if Assigned(testf) = false then
+    testf := ttestf.Create(self);
+  testf.ShowModal;
+end;
+
 procedure TMainF.btTypeDefClick(Sender: TObject);
 begin
+  if TSettings.IsSuperUser = false then
+    exit;
   TypeDefF.reset;
   TypeDefF.ShowModal;
   if TypeDefF.Tag = 0 then
@@ -471,8 +495,9 @@ end;
 
 procedure TMainF.FormActivate(Sender: TObject);
 begin
-  if assigned(POSF) = False then
-    btPosClick(nil);
+  Application.ProcessMessages;
+//  if assigned(ChequeF) = False then
+//    btChequeClick(nil);
 end;
 
 procedure TMainF.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -485,19 +510,10 @@ end;
 
 procedure TMainF.FormCreate(Sender: TObject);
 begin
-  spnl := TSQLSPanel.Create(self);
-  spnl.Setup([-1, 60, 130, 100, 100], 'SELECT e.ID,e.EMPNo, e.full_name, e.contact,e.nic_no from empmaster e where e.empno like :empno or e.full_name like :namef or e.contact like :tel or  e.nic_no like :nic or id like :id', Point(600, 400), datam.Con1);
-//  qrP.Open;
-  datam.TypedefFillCB(cbcat.Values, cbcat.Items, 'EC');
-  datam.TypedefFillCB(cbG.Values, cbG.Items, 'EG');
-  datam.TypedefFillCB(cbDocType.Values, cbDocType.Items, 'DT');
-  datam.TypedefFillCB(cbGender.Values, cbGender.Items, 'G');
-  datam.TypedefFillCB(cbn.Values, cbn.Items, 'N');
-  DocTypes := datam.GetTypedef(nil, 'DT');
-  imgpp.Picture.Graphic := datam.img_logo;
-  imgWP.Picture.Graphic := datam.img_logo;
-  imgLogo.Picture.Graphic := datam.img_logo;
-  pnlProfile.Visible := false;
+  if TSettings.IsSuperUser then
+    self.Caption := self.Caption + ' [Super User]';
+  bttest.Visible := (DebugHook > 0);
+  InitProfilePnl;
 end;
 
 procedure TMainF.FormShortCut(var Msg: TWMKey; var Handled: Boolean);
@@ -521,6 +537,44 @@ end;
 procedure TMainF.imgppClick(Sender: TObject);
 begin
   JclShell.ShellOpenAs(imgpp.Hint);
+end;
+
+procedure TMainF.InitProfilePnl;
+var
+  qr: TFDQuery;
+begin
+  spnl := TSQLSPanel.Create(self);
+  spnl.Setup([-1, 60, 130, 100, 100],
+    'SELECT e.ID,e.EMPNo, e.full_name, e.contact,e.nic_no from empmaster e where e.empno like :empno or e.full_name like :namef or e.contact like :tel or  e.nic_no like :nic or id like :id',
+    Point(600, 400), datam.Con1);
+//  qrP.Open;
+  datam.TypedefFillCB(cbcat.Values, cbcat.Items, 'EC');
+  datam.TypedefFillCB(cbG.Values, cbG.Items, 'EG');
+  datam.TypedefFillCB(cbDocType.Values, cbDocType.Items, 'DT');
+  datam.TypedefFillCB(cbGender.Values, cbGender.Items, 'G');
+  datam.TypedefFillCB(cbn.Values, cbn.Items, 'N');
+  DocTypes := datam.GetTypedef(nil, 'DT');
+    //load shift's
+  qr := DataM.SQLExcec('select * from shift group by sname');
+  try
+    cbShift.items.Clear;
+    cbShift.Values.Clear;
+    while qr.Eof = false do
+    begin
+      cbShift.Items.Add(qr.FieldByName('sname').Value);
+      cbShift.Values.Add(qr.FieldByName('sname').Value);
+      qr.Next;
+    end;
+    cbShift.Items.Add('ROSTER');
+    cbShift.Values.Add('RST');
+  finally
+    qr.Free;
+  end;
+
+  imgpp.Picture.Graphic := datam.img_logo;
+  imgWP.Picture.Graphic := datam.img_logo;
+  imgLogo.Picture.Graphic := datam.img_logo;
+  pnlProfile.Visible := false;
 end;
 
 procedure TMainF.SpeedButton1Click(Sender: TObject);

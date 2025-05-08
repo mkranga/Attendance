@@ -3,15 +3,11 @@ unit ReportsU;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  DataFormTPLU, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, Vcl.ComCtrls, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.Menus, JvDBGridExport,
-  JvComponentBase, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ExtCtrls,
-  Vcl.CheckLst, JvExCheckLst, JvCheckListBox, SQLSPanelU, JvExStdCtrls,
-  JvCombobox, JvDBCombobox;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DataFormTPLU,
+  FireDAC.Stan.Param, Vcl.ComCtrls, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.Menus, JvDBGridExport,
+  JvComponentBase, JvExDBGrids, JvDBGrid, Vcl.ExtCtrls, Vcl.CheckLst, JvExCheckLst, JvCheckListBox, SQLSPanelU, JvExStdCtrls, JvCombobox, JvDBCombobox,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Vcl.Grids, Vcl.DBGrids, Vcl.Mask, JvExMask, JvToolEdit;
 
 type
   TReportsF = class(TDataFormTPL)
@@ -24,41 +20,9 @@ type
     mniExportCSV: TMenuItem;
     bt1: TButton;
     mniExportClipbord: TMenuItem;
-    qrMainid: TFDAutoIncField;
-    qrMaincode: TStringField;
-    qrMainname: TStringField;
-    qrMainnamef: TStringField;
-    qrMainTel: TStringField;
-    qrMainEmail: TStringField;
-    mtrdMaindob: TDateField;
-    qrMainNIC: TStringField;
-    qrMaincat1: TStringField;
-    qrMaincat2: TStringField;
-    qrMainactive: TShortintField;
-    qrMainaddress: TStringField;
-    qrMainpayment: TStringField;
-    qrMainepin: TStringField;
-    qrMainSponsor: TStringField;
-    qrMaincdate: TSQLTimeStampField;
-    qrMaintelegram: TStringField;
-    qrAtt: TFDQuery;
     ds2: TDataSource;
-    qrAttid: TFDAutoIncField;
-    qrAttpid: TIntegerField;
-    qrAttsid: TIntegerField;
-    qrAttst: TSQLTimeStampField;
-    qrAtted: TSQLTimeStampField;
-    qrAttcode: TStringField;
-    qrAttname: TStringField;
-    qrAttid_1: TIntegerField;
-    qrAttlid: TIntegerField;
-    qrAtttypeA: TStringField;
-    qrAttnote: TMemoField;
-    qrAttcdate: TSQLTimeStampField;
     ds3: TDataSource;
     qrPay: TFDQuery;
-    qrAttgid: TIntegerField;
-    qrAttcid: TStringField;
     qrPayid: TFDAutoIncField;
     mtrdPaypdate: TDateField;
     qrPaypid: TIntegerField;
@@ -80,13 +44,6 @@ type
     bt2: TButton;
     dgProfile: TJvDBGrid;
     tsAtt: TTabSheet;
-    dgAtt: TJvDBGrid;
-    pnl2: TPanel;
-    edPid: TEdit;
-    btAttok: TButton;
-    edGid: TEdit;
-    edSid: TEdit;
-    cbbCID: TComboBox;
     tsPayment: TTabSheet;
     dgPay: TJvDBGrid;
     pnl3: TPanel;
@@ -101,6 +58,73 @@ type
     qrPOS: TFDQuery;
     ds4: TDataSource;
     mmoPOSSQL: TMemo;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    clbAttGroup: TJvCheckListBox;
+    clbAttCat: TJvCheckListBox;
+    chk2: TCheckBox;
+    btAttDetails: TButton;
+    Button1: TButton;
+    Label5: TLabel;
+    pgcAtt: TPageControl;
+    tsAttDtl: TTabSheet;
+    tsAttSum: TTabSheet;
+    dgdtl: TJvDBGrid;
+    qrAttDtl: TFDQuery;
+    ds5: TDataSource;
+    ds6: TDataSource;
+    JvDBGrid1: TJvDBGrid;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    qrMainID: TFDAutoIncField;
+    qrMainfull_name: TStringField;
+    qrMaingender: TStringField;
+    qrMainnic_no: TStringField;
+    qrMainbirth_date: TDateTimeField;
+    qrMainnationality: TStringField;
+    qrMainreligion: TStringField;
+    qrMaincontact: TStringField;
+    qrMainAddressId: TStringField;
+    qrMainenterd_date: TSQLTimeStampField;
+    qrMainName_with_Initial: TStringField;
+    qrMainDepartment: TStringField;
+    qrMainCatagary: TStringField;
+    qrMainEmGroup: TStringField;
+    qrMainEMPNo: TStringField;
+    qrMainJoin_Date: TDateTimeField;
+    qrMainEmployee_type: TStringField;
+    qrMainForm_A_Number: TStringField;
+    qrMainActive: TShortintField;
+    qrMainmail: TStringField;
+    qrMainShift: TStringField;
+    qrMainImageID: TIntegerField;
+    qrAttDtlName_with_Initial: TStringField;
+    qrAttDtlEMPNo: TStringField;
+    qrAttDtlWorkingDate: TDateField;
+    qrAttDtlWrdIn: TDateTimeField;
+    qrAttDtlWrdOut: TDateTimeField;
+    qrAttDtlShiftDate: TDateField;
+    qrAttDtlShiftIn: TDateTimeField;
+    qrAttDtlShiftOut: TDateTimeField;
+    qrAttDtlLate: TTimeField;
+    qrAttDtlOT: TTimeField;
+    qrAttDtlOTR: TTimeField;
+    qrAttDtlEarlyOT: TTimeField;
+    qrAttDtlShortLV: TTimeField;
+    qrAttDtlTOL: TTimeField;
+    qrAttDtlHType: TStringField;
+    qrAttDtlid: TFDAutoIncField;
+    qrAttDtlID_1: TFDAutoIncField;
+    spAttSum: TFDStoredProc;
+    qrAttDtlTotalHrs: TTimeField;
+    dpSt: TJvDateEdit;
+    dpEd: TJvDateEdit;
+    qrAttDtlMachineNo: TIntegerField;
+    qrMainMachineNo: TIntegerField;
     procedure mniExportClipbordClick(Sender: TObject);
     procedure mniExportCSVClick(Sender: TObject);
     procedure mniExportXMLClick(Sender: TObject);
@@ -118,6 +142,11 @@ type
     procedure btPayokClick(Sender: TObject);
     procedure tsPaymentEnter(Sender: TObject);
     procedure btPayok1Click(Sender: TObject);
+    procedure btAttDetailsClick(Sender: TObject);
+    procedure AttSumClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure spAttSumCalcFields(DataSet: TDataSet);
   private
     clbgVals, clbCatVals, cbbCidVals, pcat1vals, pcat2vals: TStrings;
     spnl1: TSQLSPanel;
@@ -149,11 +178,11 @@ begin
   //build where condition
   s := GetChecked(clbCat, clbCatVals);
   if s <> '' then
-    s := ' and p.cat1 in (' + s + ')';
+    s := ' and p.Catagary in (' + s + ')';
 
   s2 := GetChecked(clbG, clbgVals);
   if s2 <> '' then
-    s2 := ' and p.cat2 in (' + s2 + ')';
+    s2 := ' and p.EmGroup in (' + s2 + ')';
   qrMain.MacroByName('macro1').AsRaw := s + s2;
   qrMain.Open();
   qrMain.EnableControls;
@@ -162,6 +191,7 @@ end;
 procedure TReportsF.btPayok1Click(Sender: TObject);
 begin
   inherited;
+  exit;
   qrPOS.Active := not (qrPOS.Active);
   dgPos.AutoSizeColumns := True;
 
@@ -172,6 +202,7 @@ var
   s: string;
 begin
   inherited;
+  exit;
   //gen where
   if edPid1.Text <> '' then
     s := s + ' and pid=' + edPid1.Hint;
@@ -193,32 +224,82 @@ begin
   qrPay.Open();
 end;
 
+procedure TReportsF.AttSumClick(Sender: TObject);
+var
+  s, s2: string;
+begin
+  inherited;
+  if spAttSum.Active then
+    spAttSum.Close;
+  spAttSum.DisableControls;
+  try
+//  spAttSum.ParamByName('active').Value := Ord(chk1.Checked);
+    spAttSum.ParamByName('st').Value := dpst.Date;
+    spAttSum.ParamByName('ed').Value := dpEd.Date;
+  //build where condition
+//  s := GetChecked(clbattCat, clbCatVals);
+//  if s <> '' then
+//    s := ' and p.cat1 in (' + s + ')';
+//
+//  s2 := GetChecked(clbAttGroup, clbgVals);
+//  if s2 <> '' then
+//    s2 := ' and p.cat2 in (' + s2 + ')';
+//  spAttSum.MacroByName('macro1').AsRaw := s + s2;
+    spAttSum.Open();
+  finally
+    spAttSum.EnableControls;
+    pgcAtt.ActivePage := tsAttSum;
+  end;
+end;
+
+procedure TReportsF.Button2Click(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Report not configured');
+end;
+
+procedure TReportsF.Button4Click(Sender: TObject);
+begin
+  inherited;
+  close;
+end;
+
+procedure TReportsF.btAttDetailsClick(Sender: TObject);
+var
+  s, s2: string;
+begin
+  inherited;
+  if qrAttDtl.Active then
+    qrAttDtl.Close;
+  qrAttDtl.DisableControls;
+  try
+    qrAttDtl.ParamByName('st').Value := dpst.Date;
+    qrAttDtl.ParamByName('ed').Value := dpEd.Date;
+  //build where condition
+    if chk1.Checked then
+      s := s + ' and e.Active=1 ';
+
+    s := GetChecked(clbattCat, clbCatVals);
+    if s <> '' then
+      s := ' and p.cat1 in (' + s + ')';
+
+    s2 := GetChecked(clbAttGroup, clbgVals);
+    if s2 <> '' then
+      s2 := ' and p.cat2 in (' + s2 + ')';
+
+    qrAttDtl.MacroByName('macro1').AsRaw := s + s2;
+    qrAttDtl.Open();
+  finally
+    qrAttDtl.EnableControls;
+    pgcAtt.ActivePage := tsAttDtl;
+  end;
+end;
+
 procedure TReportsF.btAttokClick(Sender: TObject);
 var
   s: string;
 begin
   inherited;
-  //gen where
-  if edPid.Text <> '' then
-    s := s + ' and pid=' + edPid.Hint;
-  if cbbCID.Text <> '' then
-    s := s + ' and cid="' + cbbCidVals[cbbCID.ItemIndex] + '"';
-  if edGid.Text <> '' then
-    s := s + ' and gid=' + edgid.Text;
-  if edSid.Text <> '' then
-    s := s + ' and sid=' + edSid.Text;
-
-  if s <> '' then
-  begin
-    Delete(s, 1, 4);
-    s := 'where' + s;
-  end;
-//open qr with macro
-
-  if qrAtt.Active then
-    qrAtt.Close;
-  qrAtt.MacroByName('macro1').Value := s;
-  qrAtt.Open();
 end;
 
 procedure TReportsF.clbGClickCheck(Sender: TObject);
@@ -234,19 +315,17 @@ end;
 procedure TReportsF.edPidEnter(Sender: TObject);
 begin
   inherited;
-  spnl1.Setup([-1, 80, 100, 100], 'select id,code, namef, tel,nic from profile where code like :code or namef like :namef or tel like :tel or  nic like :nic or id like :id', Point(600, 400), DataM.Con1);
-  if spnl1.Exec() <> mrok then
-  begin
-    edpid.Text := '';
-    edpid1.Text := '';
-    edpid1.hint := '';
-    edpid.hint := '';
-    Exit;
-  end;
-  edpid.Text := spnl1.FieldByName('code').AsString;
-  edpid1.Text := spnl1.FieldByName('code').AsString;
-  edpid1.hint := spnl1.FieldByName('id').AsString;
-  edpid.hint := spnl1.FieldByName('id').AsString;
+//  spnl1.Setup([-1, 80, 100, 100], 'select id,code, namef, tel,nic from profile where code like :code or namef like :namef or tel like :tel or  nic like :nic or id like :id', Point(600, 400), DataM.Con1);
+//  if spnl1.Exec() <> mrok then
+//  begin
+//    edpid1.Text := '';
+//    edpid1.hint := '';
+//    Exit;
+//  end;
+//  edpid.Text := spnl1.FieldByName('code').AsString;
+//  edpid1.Text := spnl1.FieldByName('code').AsString;
+//  edpid1.hint := spnl1.FieldByName('id').AsString;
+//  edpid.hint := spnl1.FieldByName('id').AsString;
 
 end;
 
@@ -255,18 +334,18 @@ var
   s: string;
 begin
   inherited;
-  if edGid.Text = '' then
-  begin
-    edGid.SetFocus;
-    Exit;
-  end;
-  s := '';
-//  if edGid.Text <> '' then
-//    s := 'CCode ="' + cbbSidVals[cbbCID.ItemIndex] + '" and ';
-  spnl1.Setup([50, 0], 'SELECT s.id, s.sdt as SDate	FROM `session` s where  s.gid=' + edGid.Text + ' and   CAST(s.id as CHAR) like :sid ', Point(600, 400), DataM.Con1);
-  if spnl1.Exec() <> mrok then
-    Exit;
-  edsid.Text := spnl1.FieldByName('id').AsString;
+//  if edGid.Text = '' then
+//  begin
+//    edGid.SetFocus;
+//    Exit;
+//  end;
+//  s := '';
+////  if edGid.Text <> '' then
+////    s := 'CCode ="' + cbbSidVals[cbbCID.ItemIndex] + '" and ';
+//  spnl1.Setup([50, 0], 'SELECT s.id, s.sdt as SDate	FROM `session` s where  s.gid=' + edGid.Text + ' and   CAST(s.id as CHAR) like :sid ', Point(600, 400), DataM.Con1);
+//  if spnl1.Exec() <> mrok then
+//    Exit;
+//  edsid.Text := spnl1.FieldByName('id').AsString;
 
 end;
 
@@ -294,15 +373,15 @@ var
   s: string;
 begin
   inherited;
-  if cbbCID.ItemIndex < 0 then
-    exit;
-  s := '';
-  if cbbCID.ItemIndex > 1 then
-    s := 'g.CCode ="' + cbbCidVals[cbbCID.ItemIndex] + '" and ';
-  spnl1.Setup([50, 0], 'select g.id, g.Des as "Name" from cgroup g where ' + s + ' g.des like :des ', Point(600, 400), DataM.Con1);
-  if spnl1.Exec() <> mrok then
-    Exit;
-  edGid.Text := spnl1.FieldByName('id').AsString;
+//  if cbbCID.ItemIndex < 0 then
+//    exit;
+//  s := '';
+//  if cbbCID.ItemIndex > 1 then
+//    s := 'g.CCode ="' + cbbCidVals[cbbCID.ItemIndex] + '" and ';
+//  spnl1.Setup([50, 0], 'select g.id, g.Des as "Name" from cgroup g where ' + s + ' g.des like :des ', Point(600, 400), DataM.Con1);
+//  if spnl1.Exec() <> mrok then
+//    Exit;
+//  edGid.Text := spnl1.FieldByName('id').AsString;
 
 end;
 
@@ -311,12 +390,14 @@ begin
   inherited;
   spnl1 := TSQLSPanel.Create(Self);
   clbCatVals := TStringList.Create;
-  DataM.TypedefFillCB(clbCatVals, clbCat.Items, 'C');
+  DataM.TypedefFillCB(clbCatVals, clbCat.Items, 'EC');
   clbgVals := TStringList.Create;
-  DataM.TypedefFillCB(clbgVals, clbg.Items, 'G');
+  DataM.TypedefFillCB(clbgVals, clbg.Items, 'EG');
   cbbCidVals := TStringList.Create;
-  DataM.TypedefFillCB(cbbCidVals, cbbcid.Items, 'CR');
-   //ts select 1
+  //att tab
+  clbAttCat.Items.Assign(clbCat.Items);
+  clbAttGroup.Items.Assign(clbG.Items);
+
   pgc.ActivePageIndex := 0;
   mmoPOSSQL.Lines.Assign(qrPOS.SQL);
 end;
@@ -370,8 +451,8 @@ begin
   case pgc.ActivePageIndex of
     0:
       SetGridExport(dgProfile);
-    1:
-      SetGridExport(dgAtt);
+//    1:
+//      SetGridExport(dgAtt);
 //    2:
     3:
       SetGridExport(dgpos);
@@ -384,6 +465,12 @@ begin
   ExpCSV.Grid := g;
   ExpExcel.Grid := g;
 
+end;
+
+procedure TReportsF.spAttSumCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  spAttSumabsn.Value := spAttSumsftD.Value - spAttSumwrKD.Value;
 end;
 
 procedure TReportsF.tsPaymentEnter(Sender: TObject);

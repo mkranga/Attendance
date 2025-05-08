@@ -8,29 +8,15 @@ unit POSU;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  DataFormTPLU, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.Buttons, CommonU, JvExDBGrids, JvDBGrid, Vcl.DBCtrls, JvDBCheckBox,
-  Vcl.Mask, JvComponentBase, JvPrint, JvExControls, JvPrvwDoc, JvgReport,
-  SQLSPanelU, datau, JvExStdCtrls, JvCombobox, JvDBCombobox, RLPreviewForm,
-  RLFilters, RLPDFFilter, RLPreview, RLReport, System.Actions, Vcl.ActnList,
-  Vcl.Imaging.pngimage, JvEnterTab, RLSpoolFilter;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DataFormTPLU,
+  FireDAC.Stan.Param, Data.DB, Vcl.Grids, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, CommonU, JvExDBGrids,
+  JvDBGrid, Vcl.DBCtrls, JvDBCheckBox, JvComponentBase, JvPrint, JvExControls, JvPrvwDoc, JvgReport, SQLSPanelU, datau, JvExStdCtrls, JvCombobox,
+  JvDBCombobox, RLFilters, RLPDFFilter, RLPreview, RLReport, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, JvEnterTab, RLSpoolFilter,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Vcl.Mask, Vcl.DBGrids, Vcl.ComCtrls;
 
 type
   TPOSF = class(TDataFormTPL)
-    edItSearchinv: TEdit;
-    btnewIn: TButton;
-    dgInv: TJvDBGrid;
-    pnlBill: TPanel;
-    EdItemSearch: TEdit;
-    btQout: TButton;
-    Panel1: TPanel;
-    btSave: TButton;
-    dgitems: TJvDBGrid;
     qrItem: TFDQuery;
     ds3: TDataSource;
     qrMainid: TFDAutoIncField;
@@ -39,22 +25,9 @@ type
     qrMainaddr2: TStringField;
     qrMaindate: TDateTimeField;
     qrMaintotal: TLongWordField;
-    Label5: TLabel;
-    DBEdit2: TDBEdit;
-    Label6: TLabel;
-    DBEdit3: TDBEdit;
-    Label7: TLabel;
-    DBEdit5: TDBEdit;
-    Label9: TLabel;
-    DBEdit6: TDBEdit;
-    Label10: TLabel;
-    DBEdit7: TDBEdit;
-    Label3: TLabel;
     qrMainpayment: TLongWordField;
     qrMainpaytype: TStringField;
     qrMaincancel: TBooleanField;
-    DBEdit8: TDBEdit;
-    Label8: TLabel;
     qrItemid: TFDAutoIncField;
     qrItemname: TStringField;
     qrItemqty: TLongWordField;
@@ -62,29 +35,95 @@ type
     qrItemdiscount: TLongWordField;
     qrItemtotalval: TLongWordField;
     qrIteminvid: TIntegerField;
-    Button4: TButton;
-    JvDBComboBox1: TJvDBComboBox;
-    Label1: TLabel;
-    DBEdit1: TDBEdit;
-    JvDBCheckBox1: TJvDBCheckBox;
-    pnlPrint: TPanel;
+    qrMainstatus: TStringField;
+    qrMainwarrenty: TIntegerField;
+    qrMainguid: TStringField;
+    spClone: TFDStoredProc;
+    qrMaintel: TStringField;
+    RLPDFFilter2: TRLPDFFilter;
+    JvEnterAsTab1: TJvEnterAsTab;
+    pgc1: TPageControl;
+    tsMain: TTabSheet;
+    tsInvoice: TTabSheet;
+    tsPrint: TTabSheet;
     RLPreview1: TRLPreview;
-    bteditInv: TButton;
-    bt6: TButton;
-    alMain: TActionList;
-    actnewIn: TAction;
-    acteditInv: TAction;
-    actSave: TAction;
-    actPrint: TAction;
-    pnl1: TPanel;
-    cbb1: TComboBox;
-    btPrint1: TButton;
-    bt1: TButton;
-    btPrint2: TButton;
-    rpPrintInv: TRLReport;
+    rpCombo: TRLReport;
+    RLBand7: TRLBand;
+    RLDBText24: TRLDBText;
+    RLLabel13: TRLLabel;
+    RLImage2: TRLImage;
+    RLDraw8: TRLDraw;
+    RLLabel20: TRLLabel;
+    RLLabel21: TRLLabel;
+    RLLabel22: TRLLabel;
+    RLDBText12: TRLDBText;
+    RLLabel23: TRLLabel;
+    RLDBText15: TRLDBText;
+    RLLabel24: TRLLabel;
+    RLLabel25: TRLLabel;
+    RLDBText16: TRLDBText;
+    RLDBText17: TRLDBText;
+    RLDBText18: TRLDBText;
+    RLDraw9: TRLDraw;
+    RLLabel26: TRLLabel;
+    RLDBMemo4: TRLDBMemo;
+    RLDBText25: TRLDBText;
+    RLDBText26: TRLDBText;
+    RLLabel33: TRLLabel;
+    RLLabel34: TRLLabel;
+    RLLabel35: TRLLabel;
+    RLLabel36: TRLLabel;
+    RLLabel38: TRLLabel;
+    RLLabel37: TRLLabel;
+    RLLabel32: TRLLabel;
+    RLBand8: TRLBand;
+    RLLabel27: TRLLabel;
+    RLLabel28: TRLLabel;
+    RLLabel29: TRLLabel;
+    RLLabel30: TRLLabel;
+    RLDBText27: TRLDBText;
+    RLBand9: TRLBand;
+    RLDBText19: TRLDBText;
+    RLDBText20: TRLDBText;
+    RLDBText21: TRLDBText;
+    RLDBMemo3: TRLDBMemo;
+    RLBand10: TRLBand;
+    RLDBText22: TRLDBText;
+    RLLabel31: TRLLabel;
+    RLBand11: TRLBand;
+    RLMemo3: TRLMemo;
+    RLMemo4: TRLMemo;
+    RLAngleLabel2: TRLAngleLabel;
+    RLDBText23: TRLDBText;
+    RLDraw17: TRLDraw;
+    RLDraw10: TRLDraw;
+    RLDraw11: TRLDraw;
+    RLDraw12: TRLDraw;
+    RLDraw13: TRLDraw;
+    RLDraw14: TRLDraw;
+    RLDraw15: TRLDraw;
+    rpShippingLbl: TRLReport;
+    codval: TRLDBText;
+    RLDBMemo2: TRLDBMemo;
+    RLDBText11: TRLDBText;
+    RLDBText13: TRLDBText;
+    RLDBText14: TRLDBText;
+    RLLabel14: TRLLabel;
+    RLLabel15: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel19: TRLLabel;
+    RLDBText28: TRLDBText;
+    rlmg1: TRLImage;
+    RptPrintInv: TRLReport;
+    RLDraw4: TRLDraw;
+    RLDraw5: TRLDraw;
+    RLDraw3: TRLDraw;
+    RLDraw6: TRLDraw;
     RLBand1: TRLBand;
     RLLabel1: TRLLabel;
-    RLImage1: TRLImage;
+    rlmg2: TRLImage;
     RLDraw1: TRLDraw;
     RLLabel2: TRLLabel;
     RLLabel3: TRLLabel;
@@ -108,59 +147,68 @@ type
     RLDBText1: TRLDBText;
     RLDBText3: TRLDBText;
     RLDBText4: TRLDBText;
-    RLDBMemo1: TRLDBMemo;
+    RLDBMemo1: TRLDBText;
     RLBand5: TRLBand;
     RLDBText8: TRLDBText;
     RLLabel8: TRLLabel;
+    RLLabel39: TRLLabel;
+    RLDBText29: TRLDBText;
     RLBand4: TRLBand;
     RLMemo1: TRLMemo;
     RLMemo2: TRLMemo;
     RLAngleLabel1: TRLAngleLabel;
-    RLDraw4: TRLDraw;
-    RLDraw5: TRLDraw;
-    RLDraw6: TRLDraw;
-    RLDraw7: TRLDraw;
-    RLDraw3: TRLDraw;
-    qrMainstatus: TStringField;
-    qrMainwarrenty: TIntegerField;
-    qrMainguid: TStringField;
-    lbl1: TLabel;
-    dbedtpayment: TDBEdit;
-    lbl2: TLabel;
-    dbedtpayment1: TJvDBComboBox;
-    lbl3: TLabel;
-    dbedtpayment2: TDBEdit;
     RLDBText2: TRLDBText;
+    pnl1: TPanel;
+    cbb1: TComboBox;
+    btPrint1: TButton;
+    bt1: TButton;
     btPrint3: TButton;
-    btClone: TButton;
-    actClone: TAction;
-    spClone: TFDStoredProc;
-    qrMaintel: TStringField;
     btPrint4: TButton;
-    rpCombo: TRLReport;
-    RLBand11: TRLBand;
-    RLMemo3: TRLMemo;
-    RLMemo4: TRLMemo;
-    RLAngleLabel2: TRLAngleLabel;
-    RLDBText23: TRLDBText;
-    RLDraw15: TRLDraw;
-    RLPDFFilter2: TRLPDFFilter;
-    rpShippingLbl: TRLReport;
-    codval: TRLDBText;
-    RLDBText11: TRLDBText;
-    RLDBText13: TRLDBText;
-    RLDBText14: TRLDBText;
-    RLLabel14: TRLLabel;
-    RLLabel15: TRLLabel;
-    RLLabel16: TRLLabel;
-    RLLabel17: TRLLabel;
-    RLLabel18: TRLLabel;
-    RLLabel19: TRLLabel;
-    RLDBMemo2: TRLDBMemo;
+    alMain: TActionList;
+    actnewIn: TAction;
+    acteditInv: TAction;
+    actSave: TAction;
+    actPrint: TAction;
+    actClone: TAction;
+    dgInv: TJvDBGrid;
+    edItSearchinv: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button5: TButton;
+    pnl02: TPanel;
+    Panel1: TPanel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label3: TLabel;
+    Label8: TLabel;
+    Label1: TLabel;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    DBEdit7: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBEdit8: TDBEdit;
+    JvDBComboBox1: TJvDBComboBox;
+    DBEdit1: TDBEdit;
+    JvDBCheckBox1: TJvDBCheckBox;
+    dbedtpayment: TDBEdit;
+    dbedtpayment1: TJvDBComboBox;
+    dbedtpayment2: TDBEdit;
     dbmmoaddr1: TDBMemo;
-    RLDBText28: TRLDBText;
-    JvEnterAsTab1: TJvEnterAsTab;
-    rlmg1: TRLImage;
+    pnltop1: TPanel;
+    EdItemSearch: TEdit;
+    btQout: TButton;
+    btSave: TButton;
+    Button4: TButton;
+    btPrint2: TButton;
+    dgitems: TJvDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure EdItemSearchDblClick(Sender: TObject);
@@ -192,6 +240,7 @@ type
     procedure dgitemsExit(Sender: TObject);
     procedure SelectOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure qrMainBeforePost(DataSet: TDataSet);
+    procedure RLDBText13BeforePrint(Sender: TObject; var AText: string; var PrintIt: Boolean);
   private
     var
       spis: TSQLSPanel;
@@ -210,7 +259,7 @@ var
 implementation
 
 uses
-  Vcl.Printers, JclStrings, SettingsU,DelphiZXIngQRCode;
+  Vcl.Printers, JclStrings, SettingsU;
 {$R *.dfm}
 
 procedure TPOSF.actCloneExecute(Sender: TObject);
@@ -230,7 +279,9 @@ end;
 procedure TPOSF.acteditInvExecute(Sender: TObject);
 begin
   inherited;
-  SlideMe(pnlBill, 3);
+//  SlideMe(pnlBill, 3);
+  pgc1.ActivePage := tsInvoice;
+
   qrItem.Active := false;
   qrItem.ParamByName('id').Value := qrMainid.Value;
   qrItem.Open();
@@ -239,8 +290,9 @@ end;
 procedure TPOSF.actnewInExecute(Sender: TObject);
 begin
   inherited;
-  SlideMe(pnlBill, 3);
-  pnlBill.show;
+  pgc1.ActivePage := tsInvoice;
+//  SlideMe(pnlBill, 3);
+//  pnlBill.show;
   qrMain.Append;
   qrItem.Active := false;
   qrItem.ParamByName('id').Value := -1;
@@ -259,11 +311,12 @@ begin
     rlTitle.Caption := 'QUOTATION'
   else
     rlTitle.Caption := 'INVOICE';
-  rpPrintInv.NextReport := rpShippingLbl;
-codval.Visible:= SameText(qrMainpaytype.Value,'0');
-  rpPrintInv.Preview(RLPreview1);
+  RptPrintInv.NextReport := rpShippingLbl;
+  codval.Visible := SameText(qrMainpaytype.Value, '0');
+  RptPrintInv.Preview(RLPreview1);
   RLPreview1.ZoomMultiplePages;
-  SlideMe(pnlPrint, 2);
+  pgc1.ActivePage := tsPrint;
+//  SlideMe(pnlPrint, 2);
 
 end;
 
@@ -306,7 +359,8 @@ end;
 procedure TPOSF.bt1Click(Sender: TObject);
 begin
   inherited;
-  slideme(pnlPrint, 0, true)
+  pgc1.ActivePage := tsInvoice;
+//  slideme(pnlPrint, 0, true)
 end;
 
 procedure TPOSF.btcancelClick(Sender: TObject);
@@ -320,7 +374,8 @@ end;
 procedure TPOSF.Button2Click(Sender: TObject);
 begin
   inherited;
-  SlideMe(pnlPrint, 2)
+  pgc1.ActivePage := tsPrint;
+  //SlideMe(pnlPrint, 2)
 end;
 
 procedure TPOSF.Button3Click(Sender: TObject);
@@ -358,7 +413,8 @@ begin
       qrItem.Next
     end;
     qrMain.Edit;
-    qrMaintotal.Value := qrItem.Aggregates.AggregateByName('billtotal').Value;
+
+    qrMaintotal.Value := qrItem.Aggregates.AggregateByName('billtotal').Value - qrMainpayment.Value;
     qrMain.Post;
     qrMain.ApplyUpdates();
     qrItem.ApplyUpdates();
@@ -377,6 +433,8 @@ end;
 procedure TPOSF.SelectOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   inherited;
+//  if focus then
+
   TDBEdit(Sender).SelectAll;
 end;
 
@@ -389,7 +447,8 @@ end;
 procedure TPOSF.btCloseInvoiceClick(Sender: TObject);
 begin
   inherited;
-  SlideMe(pnlBill, 1, true);
+  pgc1.ActivePage := tsMain;
+// SlideMe(pnlBill, 1, true);
 //  pnlBill.Visible := false;
   qrMain.Cancel;
   qrItem.cancel;
@@ -403,7 +462,7 @@ begin
   inherited;
   i := printer.PrinterIndex;
   Printer.PrinterIndex := TSettings.GetValue(skPOSPrinter, '0').AsInteger;
-  rpPrintInv.NextReport := nil;
+  rptPrintInv.NextReport := nil;
   rpShippingLbl.Prepare;
   Application.ProcessMessages;
   rpShippingLbl.PrintDialog := False;
@@ -425,9 +484,9 @@ end;
 procedure TPOSF.btPrintInvClick(Sender: TObject);
 begin
   inherited;
-  rpPrintInv.NextReport := nil;
-  rpPrintInv.Prepare;
-  rpPrintInv.Print;
+  rptPrintInv.NextReport := nil;
+  rptPrintInv.Prepare;
+  rptPrintInv.Print;
 //  rpPrintInv.NextReport := rpShippingLbl;
 end;
 
@@ -470,18 +529,9 @@ end;
 procedure TPOSF.FormCreate(Sender: TObject);
 begin
   inherited;
+  pgc1.ActivePage := tsMain;
   filler := TRLSpoolFilter.Create(nil);
   rpShippingLbl.DefaultFilter := filler;
-//  pnlPrint.Left := 0;
-  pnlBill.Left := 0;
-  pnlBill.BringToFront;
-  pnlPrint.BringToFront;
-
-
-    // pnlBill.Align:=alClient;
-  pnlBill.Top := 0;
-  pnlBill.Visible := false;
-  pnlPrint.Visible := false;
   qrMain.Open();
   spis := TSQLSPanel.Create(self);
   spis.Setup([0, 80], 'SELECT ii.name,ii.price from invitems ii where ii.name like :empno group by ii.name,ii.price', Point(600, 400), datam.Con1);
@@ -530,7 +580,7 @@ procedure TPOSF.qrItemAfterPost(DataSet: TDataSet);
 begin
   inherited;
   qrMain.Edit;
-  qrMaintotal.Value := qrItem.Aggregates.AggregateByName('billtotal').Value;
+  qrMaintotal.Value := qrItem.Aggregates.AggregateByName('billtotal').Value - qrMainpayment.Value;
   qrmain.Post
 end;
 
@@ -553,6 +603,7 @@ begin
   inherited;
   if qrMainguid.Value = '' then
     qrMainguid.Value := GUIDToString(TGUID.NewGuid);
+
 end;
 
 procedure TPOSF.qrMaincnameSetText(Sender: TField; const Text: string);
@@ -565,6 +616,13 @@ begin
 //  s := f.AsString;
   Sender.Value := StrSmartCase(Trim(Text), nil);
 //  f.Value := s;
+end;
+
+procedure TPOSF.RLDBText13BeforePrint(Sender: TObject; var AText: string; var PrintIt: Boolean);
+begin
+  inherited;
+  if (Length(AText) > 18) then
+    RLDBText13.Font.Size := 14;
 end;
 
 function TPOSF.SearchItem(): Boolean;

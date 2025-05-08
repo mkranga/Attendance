@@ -2,12 +2,10 @@
 program LionERP;
 
 
-
 {$R *.dres}
 
 uses
   {$IFDEF Debug}
-  FastMM4,
   {$IFEND }
   Vcl.Forms,
   System.DateUtils,
@@ -33,37 +31,43 @@ uses
   ReportsU in 'Src\ReportsU.pas' {ReportsF},
   PaymentU in 'Src\PaymentU.pas' {PaymentF},
   DownloadU in 'Src\DownloadU.pas' {DownloadF},
-  ShiftU in 'Src\ShiftU.pas' {ShiftF},
   POSU in 'Src\POSU.pas' {POSF},
   StockInU in 'Src\StockInU.pas' {StockInF},
   DelphiZXIngQRCode in 'Src\DelphiZXIngQRCode.pas',
   ChequeU in 'Src\ChequeU.pas' {ChequeF},
-  NumberToWordsU in 'Src\NumberToWordsU.pas';
+  ShiftAndRosterU in 'Src\ShiftAndRosterU.pas' {ShiftAndRosterF},
+  TestU in 'Src\TestU.pas' {TestF},
+  UsersU in 'Src\UsersU.pas' {UsersF},
+  PasswordEncryptorU in 'Src\PasswordEncryptorU.pas',
+  BrakeU in 'Src\BrakeU.pas' {BrakeF};
 
 {$R *.res}
+procedure Init();
+begin
+  FormatSettings.ShortDateFormat := 'YY-MM-DD';
+  FormatSettings.ShortTimeFormat := 'HH:nn';
+  FormatSettings.CurrencyDecimals := 2;
+end;
 
 begin
   Application.Initialize;
+  init;
   ReportMemoryLeaksOnShutdown := false;
   if DebugHook < 1 then
     Application.OnException := TLog.onException;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Lion ERP';
   Application.CreateForm(TDataM, DataM);
-  Application.CreateForm(TChequeF, ChequeF);
   try
-    if TStyleManager.TrySetStyle(TSettings.GetString(skTheme, 'Ruby Graphite'), False) = False then
-    begin
-      TStyleManager.TrySetStyle('windows');
-      TSettings.SetValue(skTheme, 'Ruby Graphite');
-    end;
+    TStyleManager.TrySetStyle(TSettings.GetString(skTheme, 'windows'), False);
   except
  //silance or log to file
   end;
   Application.CreateForm(TLoginF, LoginF);
-  var x: real;
-  if (DebugHook > 0) or (Trunc(SecondOf(now) - Sqrt(StrToIntDef(ParamStr(1), 9999))) in [0, 1, 2]) or (LoginF.ShowModal = 1) { mrok } then
+//  var x: real;
+  if (DebugHook > 0) or (Trunc(SecondOf(now) - Sqrt(StrToIntDef(ParamStr(1), 9999))) in [0, 1, 2]) or (LoginF.ShowModal in [1, 14]) { mrok } then
   begin
+    TSettings.IsSuperUser := ((LoginF.ModalResult = 14) or (DebugHook > 0));
     LoginF.Free;
     Application.CreateForm(Tmainf, mainf);
     Application.CreateForm(TInputMemoF, InputMemoF);
@@ -73,6 +77,4 @@ begin
   end;
 
 end.
-
-Application.CreateForm(TDataM, DataM);
 

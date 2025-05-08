@@ -6,7 +6,11 @@ uses
   System.Classes, db, FireDAC.Comp.Client;
 
 type
-  TSettingKey = (skTheme, skConfirmMsgPath,skPOSPrinter);
+  TSettingKey = (skTheme, skConfirmMsgPath, skPOSPrinter, skLastCHQNo, skCHQPrinter, skCompName, skCompAddress, skSalaryStartDate);
+
+const
+  _KeyNames: array[TSettingKey] of string = ('Theme', 'ConfirmMsgPath', 'POSPrinter', 'LastChequeNo', 'ChequePrinter', 'CompanyName', 'CompanyAddress',
+    'SalaryStartDate');
 
 type
   TSettings = class(Tobject)
@@ -18,6 +22,8 @@ type
   protected
   { protected declarations }
   public
+    class var
+      IsSuperUser: Boolean;
   { public declarations }
     class function GetString(key: TSettingKey; def: string = ''): string;
     class function GetValue(key: TSettingKey; def: string = ''): TField;
@@ -26,6 +32,7 @@ type
 
     constructor Create(dbCon: tfdconnection);
     destructor Destroy; override;
+
   published
   { published declarations }
   end;
@@ -35,8 +42,6 @@ var
 
 implementation
 
-const
-  _KeyNames: array[TSettingKey] of string = ('Theme', 'ConfirmMsgPath','POSPrinter');
 { TSettings }
 
 constructor TSettings.Create(dbCon: tfdconnection);

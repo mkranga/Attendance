@@ -23,22 +23,17 @@ unit AttendanceU;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  DataFormTPLU, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Grids,
-  Vcl.DBGrids, sqlspanelu, Vcl.DBCtrls, Vcl.Mask, JvExMask, JvToolEdit,
-  Vcl.Menus, JvgExportComponents, JvDBGridExport, JvComponentBase, JvExDBGrids,
-  JvDBGrid;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DataFormTPLU,
+  FireDAC.Stan.Param, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, sqlspanelu, Vcl.DBCtrls, JvExMask,
+  JvToolEdit, Vcl.Menus, JvgExportComponents, JvDBGridExport, JvComponentBase, JvExDBGrids, JvDBGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
+  JvExControls, JvArrowButton, FireDAC.UI.Intf, FireDAC.VCLUI.Async, FireDAC.Comp.UI;
 
 type
   TAttendanceF = class(TDataFormTPL)
     pnl1: TPanel;
     dgatt: TJvDBGrid;
     ds3: TDataSource;
-    btn4: TBitBtn;
     btn5: TBitBtn;
     btdownload: TBitBtn;
     dped: TJvDateEdit;
@@ -46,9 +41,7 @@ type
     pnllog: TPanel;
     dgLog: TJvDBGrid;
     qrLog: TFDQuery;
-    spProc: TFDStoredProc;
-    qrMainID: TFDAutoIncField;
-    qrMainMachineNo: TStringField;
+    spProcAttDtl: TFDStoredProc;
     qrMainEMPNo: TStringField;
     qrMainWorkingDate: TDateField;
     qrMainWrdIn: TDateTimeField;
@@ -78,6 +71,21 @@ type
     btLog1: TBitBtn;
     btn6: TBitBtn;
     btEditCancel: TBitBtn;
+    popAdv: TPopupMenu;
+    mniRoster1: TMenuItem;
+    mniShift1: TMenuItem;
+    btAdvance: TJvArrowButton;
+    ds2: TDataSource;
+    pnlAttProcReport: TPanel;
+    dgAttProcReport: TJvDBGrid;
+    excDlg1: TFDGUIxAsyncExecuteDialog;
+    Button1: TButton;
+    BitBtn1: TBitBtn;
+    Holidays1: TMenuItem;
+    BitBtn2: TBitBtn;
+    qrMainID: TFDAutoIncField;
+    qrMainMachineNo: TLongWordField;
+    BitBtn3: TBitBtn;
     procedure cbb1Change(Sender: TObject);
     procedure btLogClick(Sender: TObject);
     procedure btLog1Click(Sender: TObject);
@@ -86,15 +94,23 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btdownloadClick(Sender: TObject);
     procedure btn5Click(Sender: TObject);
-    procedure btn4Click(Sender: TObject);
-    procedure btn6Click(Sender: TObject);
+    procedure btnOkClick(Sender: TObject);
     procedure btEditCancelClick(Sender: TObject);
+    procedure mniShift1Click(Sender: TObject);
+    procedure mniRoster1Click(Sender: TObject);
+    procedure btCloseProcREportClick(Sender: TObject);
+    procedure spProcAttDtlAfterOpen(DataSet: TDataSet);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Holidays1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
   private
     cbb1Vals: TStrings;
     cbb2Vals: tstrings;
     cbb3Vals: tstrings;
     sp1: TSQLSPanel;
     { Private declarations }
+    procedure ShowAttProcReport(Hide: Boolean = False);
   public
     { Public declarations }
   end;
@@ -105,9 +121,38 @@ var
 implementation
 
 uses
-  DataU, InputMemoU, downloadU, shiftu;
+  downloadU, ShiftAndRosterU, System.Math, System.DateUtils, datau, BrakeU,
+  ReportsU;
 
 {$R *.dfm}
+
+procedure TAttendanceF.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  close;
+end;
+
+procedure TAttendanceF.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  if Assigned(Brakef) = false then
+    BrakeF := TBrakeF.Create(self);
+  brakef.ShowModal;
+end;
+
+procedure TAttendanceF.BitBtn3Click(Sender: TObject);
+begin
+  inherited;
+  if Assigned(ReportsF) = False then
+    ReportsF := TReportsF.Create(Application.MainForm);
+  ReportsF.ShowModal;
+end;
+
+procedure TAttendanceF.btCloseProcREportClick(Sender: TObject);
+begin
+  inherited;
+  ShowAttProcReport(true);
+end;
 
 procedure TAttendanceF.btdownloadClick(Sender: TObject);
 begin
@@ -127,13 +172,26 @@ procedure TAttendanceF.btEditSaveClick(Sender: TObject);
 begin
   inherited;
   if qrMain.State = dsEdit then
-    qrMain.Post
+  begin
+    qrMainLate.Value := ifthen(qrMainWrdIn.Value > qrMainShiftIn.Value, qrMainWrdIn.Value - qrMainShiftIn.Value, 0);
+    qrMainOT.Value := ifthen(qrMainWrdOut.Value > qrMainShiftOut.Value, qrMainWrdOut.Value - qrMainShiftOut.Value, 0);
+    qrMainOTR.Value := ifthen(MinuteOf(qrMainOT.Value) > 25, 30, 0);
+    qrMainEarlyOT.Value := ifthen(qrMainWrdIn.Value < qrMainShiftIn.Value, qrMainShiftIn.Value - qrMainWrdIn.Value, 0);
+    qrMainShortLV.Value := ifthen(qrMainWrdOut.Value < qrMainShiftOut.Value, qrMainShiftOut.Value - qrMainWrdout.Value, 0);
+    qrMainTotalHrs.Value := ifthen((qrMainWrdIn.IsNull = false) and (qrMainWrdOut.IsNull = false), qrMainWrdOut.Value - qrMainWrdin.Value, 0);
+    qrMainTOL.Value := ifthen(qrMainTotalHrs.Value < (qrMainShiftOut.Value - qrMainShiftIn.Value), (qrMainShiftOut.Value - qrMainShiftIn.Value) -
+      qrMainTotalHrs.Value, 0);
+
+    qrMain.Post;
+  end
   else
   begin
     qrMain.edit;
     qrMainWorkingDate.Value := qrMainShiftDate.Value;
-    qrMainWrdIn.Value := qrMainShiftIn.Value;
-    qrMainWrdOut.Value := qrMainShiftOut.Value;
+    if qrMainWrdIn.Value < 1 then
+      qrMainWrdIn.Value := qrMainShiftIn.Value;
+    if qrMainWrdOut.Value < 1 then
+      qrMainWrdOut.Value := qrMainShiftOut.Value;
   end;
 end;
 
@@ -154,30 +212,36 @@ begin
   if pnllog.Visible = false then
     pnllog.show;
 
-  qrLog.Close;
-  qrLog.ParamByName('st').Value := dpst.Date;
-  qrLog.ParamByName('ed').Value := dped.Date;
-  qrlog.open;
-
-end;
-
-procedure TAttendanceF.btn4Click(Sender: TObject);
-begin
-  inherited;
-  if Assigned(shiftF) = false then
-    ShiftF := TShiftF.Create(self);
-  ShiftF.ShowModal;
+  if qrLog.Active and (qrLog.ParamByName('st').AsDate = dpst.Date) and (qrLog.ParamByName('ed').AsDate = dped.Date) then
+  begin
+    //
+  end
+  else
+  begin
+    qrLog.Close;
+    qrLog.ParamByName('st').AsDate := dpst.Date;
+    qrLog.ParamByName('ed').AsDate := dped.Date;
+    qrlog.open;
+  end;
+  if qrMain.Active = false then
+    exit;
+  qrlog.Filtered := false;
+  qrlog.Filter := 'did' + '=' + qrMainMachineNo.AsString;
+  qrlog.Filtered := True;
 end;
 
 procedure TAttendanceF.btn5Click(Sender: TObject);
 begin
   inherited;
-  spProc.ParamByName('st').Value := dpSt.Date;
-  spProc.ParamByName('ed').Value := dped.Date;
-  spProc.ExecProc;
+  if spProcAttDtl.active then
+    spProcAttDtl.Close;
+
+  spProcAttDtl.ParamByName('st').Value := dpSt.Date;
+  spProcAttDtl.ParamByName('ed').Value := dped.Date;
+  spProcAttDtl.open;
 end;
 
-procedure TAttendanceF.btn6Click(Sender: TObject);
+procedure TAttendanceF.btnOkClick(Sender: TObject);
 begin
   inherited;
   if qrMain.Active then
@@ -211,8 +275,57 @@ end;
 procedure TAttendanceF.FormCreate(Sender: TObject);
 begin
   inherited;
-  dpSt.Date := Now - 7;
-  dped.Date := now;
+  dpSt.Date := IncDay(date - 3);
+  dped.Date := date;
+end;
+
+procedure TAttendanceF.Holidays1Click(Sender: TObject);
+begin
+  inherited;
+  if Assigned(ShiftAndRosterF) = false then
+    ShiftAndRosterF := tShiftAndRosterF.Create(self);
+  ShiftAndRosterF.ShowA(2, true);
+
+end;
+
+procedure TAttendanceF.mniRoster1Click(Sender: TObject);
+begin
+  inherited;
+  if Assigned(ShiftAndRosterF) = false then
+    ShiftAndRosterF := tShiftAndRosterF.Create(self);
+  ShiftAndRosterF.ShowA(1, true);
+end;
+
+procedure TAttendanceF.mniShift1Click(Sender: TObject);
+begin
+  inherited;
+  if Assigned(ShiftAndRosterF) = false then
+    ShiftAndRosterF := tShiftAndRosterF.Create(self);
+  ShiftAndRosterF.ShowA(0, true);
+end;
+
+procedure TAttendanceF.ShowAttProcReport(Hide: Boolean);
+begin
+  if Hide then
+  begin
+    spProcAttDtl.Close;
+    pnlAttProcReport.Visible := false;
+  end
+  else
+  begin
+    if spProcAttDtl.RecordCount < 1 then
+      exit;
+    pnlAttProcReport.Visible := True;
+  end;
+end;
+
+procedure TAttendanceF.spProcAttDtlAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+//showIssues List
+  if spProcAttDtl.RecordCount > 0 then
+    ShowAttProcReport();
+
 end;
 
 end.

@@ -1,13 +1,12 @@
 inherited PaymentF: TPaymentF
   ActiveControl = ed1
   Caption = 'Payments'
-  ClientHeight = 552
-  ClientWidth = 772
+  ClientHeight = 540
+  ClientWidth = 764
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ExplicitWidth = 788
-  ExplicitHeight = 591
-  PixelsPerInch = 96
+  ExplicitWidth = 790
+  ExplicitHeight = 589
   TextHeight = 16
   object lbl1: TLabel [0]
     Left = 8
@@ -215,6 +214,7 @@ inherited PaymentF: TPaymentF
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object mtrdMainpdate: TDateField
       FieldName = 'pdate'
