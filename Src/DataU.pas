@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, Data.DB, FireDAC.Phys, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.pngimage, CommonU, Vcl.DBGrids,
   JvDBGridExport, JvComponentBase, Vcl.Menus, System.ImageList, Vcl.ImgList, JvImageList, vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys.MySQL,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys.MySQL, Vcl.Graphics,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.VCLUI.Async, FireDAC.Comp.UI;
 
 type
@@ -39,7 +39,7 @@ type
   private
     { Private declarations }
   public
-    img_logo: TPngImage;
+    img_logo: TWICImage;
     { Public declarations }
     procedure TypedefFillCB(code, dis: TStrings; TypeA: string = '');
     function GetTypedef(st: TStrings = nil; TypeA: string = ''): TStrings;
@@ -52,6 +52,7 @@ type
     function ImportTabDelimitedToDBGrid(const TabDelimitedString: string; DataSet: TDataSet; KeyFld: string; delimiterA: Char = #9): Integer;
     function ApplyUpdate(qr: TFDQuery): Boolean;
     function OpenDialog(filter: string = '*.*'; filename: string = ''; title: string = 'Open File'): string;
+    function FormPermition(FormAL: Integer): Boolean;
   end;
 
 var
@@ -200,11 +201,20 @@ begin
 end;
 
 procedure TDataM.Con1BeforeConnect(Sender: TObject);
+var
+  s: string;
+  I: Integer;
 begin
 //load settings
   if SettingsU.stt = nil then
     tsettings.create(Con1);
-  Con1.connectionstring := StringReplace(stt.GetLocal.CommaText, ',', ';', [rfReplaceAll]);
+
+  for I := stt.GetLocal.Count - 1 downto stt.GetLocal.IndexOf('[Devices]') do
+  begin
+    stt.GetLocal.Delete(I);
+  end;
+  s := StringReplace(StringReplace(stt.GetLocal.CommaText, ',', ';', [rfReplaceAll]), '{pwd}', 'systemr', []);
+  Con1.connectionstring := s
 end;
 
 procedure TDataM.CopyAll1Click(Sender: TObject);
@@ -230,7 +240,7 @@ begin
 
   JclShell.ShellExec(0, '', 'D:\MYDOC\doc\Data\Server\start.exe', '', ExtractFilePath(s), 1);
 
-  img_logo := TPngImage.Create;
+  img_logo := TWICImage.Create;
   img_logo.LoadFromResourceName(HInstance, 'logo');
 //  try
   Con1.Open;
@@ -278,6 +288,13 @@ begin
   CSVExport1.FileName := dlgSave1.FileName;
   CSVExport1.ExportGrid;
 
+end;
+
+function TDataM.FormPermition(FormAL: Integer): Boolean;
+begin
+  if TSettings.IsSuperUser then
+    exit(True);
+  Result := (TSettings.UserLevel < FormAL);
 end;
 
 procedure TDataM.Refresh(q: TFDQuery);

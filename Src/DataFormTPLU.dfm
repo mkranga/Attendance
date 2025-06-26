@@ -13,6 +13,7 @@ object DataFormTPL: TDataFormTPL
   Font.Style = []
   Position = poMainFormCenter
   OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   TextHeight = 16
   object btClose: TBitBtn
     Left = -10

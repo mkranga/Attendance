@@ -25,8 +25,7 @@ inherited BrakeF: TBrakeF
       Align = alLeft
       ShowNullDate = False
       TabOrder = 0
-      ExplicitLeft = -50
-      ExplicitTop = 2
+      ExplicitHeight = 24
     end
     object dped: TJvDateEdit
       AlignWithMargins = True
@@ -39,6 +38,7 @@ inherited BrakeF: TBrakeF
       Align = alLeft
       ShowNullDate = False
       TabOrder = 1
+      ExplicitHeight = 24
     end
     object btOk: TBitBtn
       AlignWithMargins = True

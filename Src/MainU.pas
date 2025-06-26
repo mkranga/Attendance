@@ -373,11 +373,11 @@ end;
 
 procedure TMainF.btPaymentClick(Sender: TObject);
 begin
-  if TSettings.IsSuperUser = false then
-    exit;
-  if Assigned(PaymentF) = false then
-    PaymentF := tpaymentf.create(Self);
-  PaymentF.ShowModal()
+//  if TSettings.IsSuperUser = false then
+//    exit;
+//  if Assigned(PaymentF) = false then
+//    PaymentF := tpaymentf.create(Self);
+//  PaymentF.ShowModal()
 end;
 
 procedure TMainF.btPosClick(Sender: TObject);
@@ -391,6 +391,8 @@ end;
 
 procedure TMainF.btProfClick(Sender: TObject);
 begin
+  if datam.FormPermition(10) = false then
+    exit;
   if pnlProfile.Visible then
     exit;
   SlideMe(pnlProfile, 0);
@@ -399,8 +401,6 @@ end;
 
 procedure TMainF.btSettingsClick(Sender: TObject);
 begin
-  if TSettings.IsSuperUser = false then
-    exit;
   if SettingsF = nil then
     SettingsF := TSettingsF.Create(self);
   SettingsF.ShowModal;
@@ -415,8 +415,6 @@ end;
 
 procedure TMainF.btTypeDefClick(Sender: TObject);
 begin
-  if TSettings.IsSuperUser = false then
-    exit;
   TypeDefF.reset;
   TypeDefF.ShowModal;
   if TypeDefF.Tag = 0 then

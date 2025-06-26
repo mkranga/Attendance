@@ -135,8 +135,6 @@ inherited AttendanceF: TAttendanceF
       Caption = 'Reports'
       TabOrder = 7
       OnClick = BitBtn3Click
-      ExplicitLeft = 6
-      ExplicitTop = 303
     end
   end
   object dgatt: TJvDBGrid [2]
@@ -500,6 +498,17 @@ inherited AttendanceF: TAttendanceF
         ParamType = ptInput
         Value = 45750d
       end>
+    object qrMainID: TFDAutoIncField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object qrMainMachineNo: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'MachineNo'
+      Origin = 'MachineNo'
+    end
     object qrMainEMPNo: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EMPNo'
@@ -513,18 +522,16 @@ inherited AttendanceF: TAttendanceF
       DisplayFormat = 'yyyy-mm-dd'
     end
     object qrMainWrdIn: TDateTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'WrdIn'
       Origin = 'WrdIn'
-      DisplayFormat = 'HH:nn'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainWrdOut: TDateTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'WrdOut'
       Origin = 'WrdOut'
-      DisplayFormat = 'HH:nn'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainShiftDate: TDateField
       AutoGenerateValue = arDefault
@@ -533,85 +540,64 @@ inherited AttendanceF: TAttendanceF
       DisplayFormat = 'yyyy-mm-dd'
     end
     object qrMainShiftIn: TDateTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShiftIn'
       Origin = 'ShiftIn'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainShiftOut: TDateTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShiftOut'
       Origin = 'ShiftOut'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainLate: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'Late'
       Origin = 'Late'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainOT: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'OT'
       Origin = 'OT'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainOTR: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'OTR'
       Origin = 'OTR'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainEarlyOT: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'EarlyOT'
       Origin = 'EarlyOT'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainShortLV: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'ShortLV'
       Origin = 'ShortLV'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainTotalHrs: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'TotalHrs'
       Origin = 'TotalHrs'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainTOL: TTimeField
-      Alignment = taRightJustify
       AutoGenerateValue = arDefault
       FieldName = 'TOL'
       Origin = 'TOL'
-      DisplayFormat = 'HH:MM'
+      DisplayFormat = 'hh:nn'
     end
     object qrMainHType: TStringField
-      Alignment = taCenter
       AutoGenerateValue = arDefault
       FieldName = 'HType'
       Origin = 'HType'
       Size = 5
-    end
-    object qrMainID: TFDAutoIncField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = False
-    end
-    object qrMainMachineNo: TLongWordField
-      AutoGenerateValue = arDefault
-      FieldName = 'MachineNo'
-      Origin = 'MachineNo'
     end
   end
   inherited ds1: TDataSource

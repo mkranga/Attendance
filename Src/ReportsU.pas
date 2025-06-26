@@ -125,6 +125,20 @@ type
     dpEd: TJvDateEdit;
     qrAttDtlMachineNo: TIntegerField;
     qrMainMachineNo: TIntegerField;
+    spAttSumMachineNo: TIntegerField;
+    spAttSumEMPNo: TStringField;
+    spAttSumwrKD: TLargeintField;
+    spAttSumsftD: TLargeintField;
+    spAttSumEarlyOT: TStringField;
+    spAttSumLate: TStringField;
+    spAttSumShortLV: TStringField;
+    spAttSumot: TStringField;
+    spAttSumTotalHrs: TStringField;
+    spAttSumTOL: TStringField;
+    spAttSumName_with_Initial: TStringField;
+    spAttSumCatagary: TStringField;
+    spAttSumEmGroup: TStringField;
+    spAttSumabsn: TIntegerField;
     procedure mniExportClipbordClick(Sender: TObject);
     procedure mniExportCSVClick(Sender: TObject);
     procedure mniExportXMLClick(Sender: TObject);
@@ -387,6 +401,7 @@ end;
 
 procedure TReportsF.FormCreate(Sender: TObject);
 begin
+ AccessLevel := 200;
   inherited;
   spnl1 := TSQLSPanel.Create(Self);
   clbCatVals := TStringList.Create;

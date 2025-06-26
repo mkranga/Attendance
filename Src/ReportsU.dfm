@@ -654,7 +654,7 @@ inherited ReportsF: TReportsF
               end
               item
                 Expanded = False
-                FieldName = 'EmpName'
+                FieldName = 'Name_with_Initial'
                 Title.Alignment = taCenter
                 Title.Caption = 'Name'
                 Width = 206
@@ -678,7 +678,7 @@ inherited ReportsF: TReportsF
               end
               item
                 Expanded = False
-                FieldName = 'abcnt'
+                FieldName = 'absn'
                 Title.Alignment = taCenter
                 Title.Caption = 'Absent'
                 Width = 55
@@ -1426,5 +1426,91 @@ inherited ReportsF: TReportsF
         ParamType = ptInput
         Value = 45757d
       end>
+    object spAttSumMachineNo: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'MachineNo'
+      Origin = 'MachineNo'
+    end
+    object spAttSumEMPNo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPNo'
+      Origin = 'EMPNo'
+      Size = 50
+    end
+    object spAttSumwrKD: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'wrKD'
+      Origin = 'wrKD'
+    end
+    object spAttSumsftD: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'sftD'
+      Origin = 'sftD'
+    end
+    object spAttSumEarlyOT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EarlyOT'
+      Origin = 'EarlyOT'
+      Size = 255
+    end
+    object spAttSumLate: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Late'
+      Origin = 'Late'
+      Size = 255
+    end
+    object spAttSumShortLV: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ShortLV'
+      Origin = 'ShortLV'
+      Size = 255
+    end
+    object spAttSumot: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ot'
+      Origin = 'ot'
+      Size = 255
+    end
+    object spAttSumTotalHrs: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TotalHrs'
+      Origin = 'TotalHrs'
+      Size = 255
+    end
+    object spAttSumTOL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOL'
+      Origin = 'TOL'
+      Size = 255
+    end
+    object spAttSumName_with_Initial: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Name_with_Initial'
+      Origin = 'Name_with_Initial'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+    object spAttSumCatagary: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Catagary'
+      Origin = 'Catagary'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object spAttSumEmGroup: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EmGroup'
+      Origin = 'EmGroup'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object spAttSumabsn: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'absn'
+      Calculated = True
+    end
   end
 end

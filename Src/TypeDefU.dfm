@@ -1,21 +1,21 @@
 inherited TypeDefF: TTypeDefF
   ActiveControl = edCode
-  AutoSize = True
   Caption = 'Type Define'
-  ClientHeight = 431
-  ClientWidth = 262
+  ClientHeight = 614
+  ClientWidth = 347
+  StyleElements = [seFont, seClient, seBorder]
   OnCreate = FormCreate
-  ExplicitWidth = 288
-  ExplicitHeight = 480
+  ExplicitWidth = 373
+  ExplicitHeight = 663
   TextHeight = 16
   object dg1: TDBGrid [0]
     Left = 0
-    Top = 97
-    Width = 262
-    Height = 334
+    Top = 89
+    Width = 347
+    Height = 525
     Align = alClient
     DataSource = DataM.dsTypeDef
-    TabOrder = 0
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -13
@@ -26,19 +26,19 @@ inherited TypeDefF: TTypeDefF
         Expanded = False
         FieldName = 'Code'
         Title.Alignment = taCenter
-        Width = 38
+        Width = 58
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'Des'
+        FieldName = 'Description'
         Title.Alignment = taCenter
-        Width = 148
+        Width = 182
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'TypeA'
+        FieldName = 'Type'
         Title.Alignment = taCenter
         Width = 45
         Visible = True
@@ -47,11 +47,12 @@ inherited TypeDefF: TTypeDefF
   object pnl1: TPanel [1]
     Left = 0
     Top = 0
-    Width = 262
-    Height = 97
+    Width = 347
+    Height = 89
     Align = alTop
     TabOrder = 1
     OnClick = pnl1Click
+    ExplicitWidth = 385
     object lbl: TLabel
       Left = 16
       Top = 8
@@ -61,7 +62,7 @@ inherited TypeDefF: TTypeDefF
       FocusControl = edCode
     end
     object lbl1: TLabel
-      Left = 65
+      Left = 77
       Top = 8
       Width = 25
       Height = 16
@@ -69,11 +70,11 @@ inherited TypeDefF: TTypeDefF
       FocusControl = edDes
     end
     object lbl2: TLabel
-      Left = 194
+      Left = 225
       Top = 8
-      Width = 36
+      Width = 28
       Height = 16
-      Caption = 'TypeA'
+      Caption = 'Type'
       FocusControl = edTypeA
     end
     object btSave: TBitBtn
@@ -82,49 +83,49 @@ inherited TypeDefF: TTypeDefF
       Width = 94
       Height = 25
       Caption = '&Save'
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btSaveClick
     end
     object btCancel: TBitBtn
-      Left = 115
+      Left = 128
       Top = 54
       Width = 93
       Height = 25
       Caption = '&Cancel'
-      TabOrder = 1
+      TabOrder = 4
       OnClick = btCancelClick
     end
     object edCode: TDBEdit
-      Left = 16
-      Top = 27
-      Width = 45
+      Left = 14
+      Top = 24
+      Width = 59
       Height = 24
       CharCase = ecUpperCase
       DataField = 'Code'
       DataSource = DataM.dsTypeDef
-      TabOrder = 2
+      TabOrder = 0
     end
     object edDes: TDBEdit
-      Left = 64
-      Top = 27
+      Left = 77
+      Top = 24
       Width = 144
       Height = 24
       DataField = 'Des'
       DataSource = DataM.dsTypeDef
-      TabOrder = 3
+      TabOrder = 1
     end
     object edTypeA: TDBEdit
-      Left = 214
-      Top = 27
+      Left = 225
+      Top = 24
       Width = 43
       Height = 24
       CharCase = ecUpperCase
       DataField = 'TypeA'
       DataSource = DataM.dsTypeDef
-      TabOrder = 4
+      TabOrder = 2
     end
     object btNew: TBitBtn
-      Left = 213
+      Left = 224
       Top = 54
       Width = 44
       Height = 25
@@ -135,7 +136,6 @@ inherited TypeDefF: TTypeDefF
   end
   inherited btClose: TBitBtn
     Left = 0
-    TabOrder = 2
     ExplicitLeft = 0
   end
   inherited qrMain: TFDQuery

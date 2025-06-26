@@ -11,9 +11,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DataFormTPLU,
   FireDAC.Stan.Param, Data.DB, Vcl.Grids, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, CommonU, JvExDBGrids,
   JvDBGrid, Vcl.DBCtrls, JvDBCheckBox, JvComponentBase, JvPrint, JvExControls, JvPrvwDoc, JvgReport, SQLSPanelU, datau, JvExStdCtrls, JvCombobox,
-  JvDBCombobox, RLFilters, RLPDFFilter, RLPreview, RLReport, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, JvEnterTab, RLSpoolFilter,
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Vcl.Mask, Vcl.DBGrids, Vcl.ComCtrls;
+  JvDBCombobox, RLFilters, RLPDFFilter, RLPreview, RLReport, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, RLSpoolFilter, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Mask, Vcl.DBGrids,
+  Vcl.ComCtrls, JvEnterTab, Vcl.Imaging.jpeg;
 
 type
   TPOSF = class(TDataFormTPL)
@@ -41,7 +41,6 @@ type
     spClone: TFDStoredProc;
     qrMaintel: TStringField;
     RLPDFFilter2: TRLPDFFilter;
-    JvEnterAsTab1: TJvEnterAsTab;
     pgc1: TPageControl;
     tsMain: TTabSheet;
     tsInvoice: TTabSheet;
@@ -51,7 +50,7 @@ type
     RLBand7: TRLBand;
     RLDBText24: TRLDBText;
     RLLabel13: TRLLabel;
-    RLImage2: TRLImage;
+    rlmgLogo3: TRLImage;
     RLDraw8: TRLDraw;
     RLLabel20: TRLLabel;
     RLLabel21: TRLLabel;
@@ -115,7 +114,7 @@ type
     RLLabel18: TRLLabel;
     RLLabel19: TRLLabel;
     RLDBText28: TRLDBText;
-    rlmg1: TRLImage;
+    rlmgLogo1: TRLImage;
     RptPrintInv: TRLReport;
     RLDraw4: TRLDraw;
     RLDraw5: TRLDraw;
@@ -123,7 +122,7 @@ type
     RLDraw6: TRLDraw;
     RLBand1: TRLBand;
     RLLabel1: TRLLabel;
-    rlmg2: TRLImage;
+    rlmgLogo2: TRLImage;
     RLDraw1: TRLDraw;
     RLLabel2: TRLLabel;
     RLLabel3: TRLLabel;
@@ -209,8 +208,9 @@ type
     Button4: TButton;
     btPrint2: TButton;
     dgitems: TJvDBGrid;
+    JvEnterAsTab1: TJvEnterAsTab;
+    rlmgLogo4: TRLImage;
     procedure FormCreate(Sender: TObject);
-    procedure EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure EdItemSearchDblClick(Sender: TObject);
     procedure btCloseInvoiceClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -241,6 +241,7 @@ type
     procedure SelectOnMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure qrMainBeforePost(DataSet: TDataSet);
     procedure RLDBText13BeforePrint(Sender: TObject; var AText: string; var PrintIt: Boolean);
+    procedure EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     var
       spis: TSQLSPanel;
@@ -506,7 +507,8 @@ end;
 procedure TPOSF.EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;
-  SearchItem;
+  searchitem;
+ // Key := 0;
 end;
 
 procedure TPOSF.edItSearchinvChange(Sender: TObject);
@@ -537,6 +539,10 @@ begin
   spis.Setup([0, 80], 'SELECT ii.name,ii.price from invitems ii where ii.name like :empno group by ii.name,ii.price', Point(600, 400), datam.Con1);
   cbb1.Items := Printer.Printers;
   cbb1.ItemIndex := Printer.PrinterIndex;
+  rlmgLogo1.Picture.Assign(datam.img_logo);
+  rlmgLogo2.Picture.Assign(datam.img_logo);
+  rlmgLogo3.Picture.Assign(datam.img_logo);
+  rlmgLogo4.Picture.Assign(datam.img_logo);
 end;
 
 procedure TPOSF.FormDestroy(Sender: TObject);
@@ -549,8 +555,8 @@ end;
 procedure TPOSF.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  if Key = chr(13) then
-    SelectNext(ActiveControl, true, true);
+//  if Key = chr(13) then
+//    SelectNext(ActiveControl, true, true);
 end;
 
 procedure TPOSF.dgitemsDblClick(Sender: TObject);
@@ -627,6 +633,7 @@ end;
 
 function TPOSF.SearchItem(): Boolean;
 begin
+  JvEnterAsTab1.EnterAsTab := false;
   Result := (spis.Exec(EdItemSearch) = mrok);
   if Result = false then
     exit;
@@ -637,6 +644,7 @@ begin
   qrItemqty.Value := 1;
 //  dgitems.SetFocus;
   dgitems.Col := 2;
+  JvEnterAsTab1.EnterAsTab := true;
 end;
 
 end.

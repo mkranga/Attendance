@@ -24,6 +24,7 @@ type
   public
     class var
       IsSuperUser: Boolean;
+      UserID, UserLevel: Integer;
   { public declarations }
     class function GetString(key: TSettingKey; def: string = ''): string;
     class function GetValue(key: TSettingKey; def: string = ''): TField;

@@ -14,9 +14,9 @@ object DataM: TDataM
       'Database=sserp'
       'Password=systemr'
       'Server=localhost'
+      'Port=3308'
       'DriverID=MySQL')
     ConnectedStoredUsage = [auDesignTime]
-    Connected = True
     LoginPrompt = False
     AfterConnect = Con1AfterConnect
     BeforeConnect = Con1BeforeConnect

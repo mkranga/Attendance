@@ -46,7 +46,7 @@ inherited UsersF: TUsersF
     Width = 91
     Height = 40
     Caption = 'Close'
-    TabOrder = 6
+    TabOrder = 5
     ExplicitLeft = 413
     ExplicitTop = 47
     ExplicitWidth = 91
@@ -69,7 +69,7 @@ inherited UsersF: TUsersF
     Height = 24
     DataField = 'EMPNo'
     DataSource = ds1
-    TabOrder = 3
+    TabOrder = 1
   end
   object DBEdit5: TDBEdit [7]
     Left = 341
@@ -136,7 +136,7 @@ inherited UsersF: TUsersF
     Width = 91
     Height = 37
     Caption = 'Save'
-    TabOrder = 5
+    TabOrder = 2
     OnClick = btSaveClick
   end
   object edPwd: TEdit [10]
@@ -145,7 +145,7 @@ inherited UsersF: TUsersF
     Width = 185
     Height = 24
     PasswordChar = '*'
-    TabOrder = 1
+    TabOrder = 3
     TextHint = 'Password'
   end
   object edPwd2: TEdit [11]
@@ -154,7 +154,7 @@ inherited UsersF: TUsersF
     Width = 185
     Height = 24
     PasswordChar = '*'
-    TabOrder = 2
+    TabOrder = 6
     TextHint = 'Confirm Password'
   end
   inherited qrMain: TFDQuery

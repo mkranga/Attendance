@@ -16,7 +16,7 @@ inherited SettingsF: TSettingsF
     Height = 429
     Align = alClient
     DataSource = ds1
-    TabOrder = 0
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -13
@@ -84,9 +84,6 @@ inherited SettingsF: TSettingsF
       TabOrder = 1
       OnClick = bt1Click
     end
-  end
-  inherited btClose: TBitBtn
-    TabOrder = 2
   end
   object Panel1: TPanel [3]
     Left = 0

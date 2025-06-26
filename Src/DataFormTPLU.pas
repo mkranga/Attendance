@@ -14,10 +14,14 @@ type
     btClose: TBitBtn;
     procedure btCloseClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+  protected
+    AccessLevel: Integer;
+
   public
-    { Public declarations }
+     { Public declarations }
   end;
 
 var
@@ -37,6 +41,16 @@ begin
   if qrMain.Active and (qrmain.UpdatesPending) then
     CanClose := (Application.MessageBox('Unsaved Changes will be lost. ' + #13#10 + 'Are You Sure?', 'Unsaved Changes', MB_OKCANCEL + MB_ICONWARNING) = IDOK);
 
+end;
+
+procedure TDataFormTPL.FormShow(Sender: TObject);
+begin
+  if datam.FormPermition(AccessLevel) = false then
+  begin
+    ShowMessage('Access Denied');// Show a message instead
+    self.Enabled := false;
+
+  end;
 end;
 
 end.

@@ -35,8 +35,7 @@ unit SQLSPanelU;
 interface
 
 uses
-  ComCtrls, DB, Classes, Controls, ExtCtrls, StdCtrls, Dialogs, DBGrids, Windows,
-  System.SysUtils, Forms, Buttons, Math, Messages, FireDAC.Comp.Client;
+  ComCtrls, db, Classes, Controls, ExtCtrls, StdCtrls, Dialogs, DBGrids, Windows, System.SysUtils, Forms, Buttons, FireDAC.Comp.Client;
 
 //{$ObjExportAll On}
 
@@ -44,6 +43,10 @@ type
   TSPType = (SPTSearchPanel, SPTDuplicate);
 
   TSQLSPanel = class(TCustomPanel)
+    bt_ok: TButton;
+    bt_exit: TSpeedButton;
+    ed_search: TEdit;
+    dbgrid: TDBGrid;
   public
     qy: TFDQuery;
     L_Result: integer;
@@ -52,7 +55,8 @@ type
     destructor Destroy; override;
     //    procedure Setup(ColWArr: array of integer; SqlTxt: string; _Topleft: TPoint; _WH: TPoint; Con: TADOConnection = nil; def_val: string = ''); overload;
     procedure Setup(ColWArr: array of integer; SqlTxt: string; _WH: TPoint; Con: TFDConnection = nil; def_val: string = '');
-    procedure P_Setup(SqlTxt: string; _Topleft: TPoint; _WH: TPoint; Con: TFDConnection = nil; def_val: string = ''; SPType: TSPType = SPTSearchPanel; obj: TWinControl = nil);
+    procedure P_Setup(SqlTxt: string; _Topleft: TPoint; _WH: TPoint; Con: TFDConnection = nil; def_val: string = ''; SPType: TSPType = SPTSearchPanel;
+      obj: TWinControl = nil);
     procedure P_SetColumnWidth(arg: array of integer; BestFit: boolean = True); //arg="100,20,0,..,0,100" //0 will be ignored // -1 will hide coloumn
     procedure P_SetupDuplicateSearch(obj: TWinControl; _WH: TPoint; tbl_name, Fld_name: string; con: TFDConnection);
     procedure P_ShowDuplicateSearch();
@@ -64,19 +68,13 @@ type
     l_SPType: TSPType;
     l_editBox: TWinControl;
     ds: TDataSource;
-    bt_exit: TSpeedButton;
-    ed_search: TEdit;
-    dbgrid: TDBGrid;
     function P_SQLGen(tbl_name, fld_name, Fld_caption: string): string;
     procedure SPExit(Sender: TObject);
     procedure P_KeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ed_searchChange(Sender: TObject);
     procedure bt_okClick(Sender: TObject);
-    procedure WMDestroy(var Message: TWMDestroy); message WM_DESTROY;
-    procedure WMClose(var Message: TWMClose); message WM_CLOSE;
-    procedure FocusIn(Sender: TObject);
   protected
-    procedure WndProc(var Msg: TMessage); override;
+//    procedure WndProc(var Msg: TMessage); override;
   end;
 
 var
@@ -87,27 +85,9 @@ procedure Register;
 {---------------------------------------------------------------------------}
 implementation
 
-
-
-procedure TSQLSPanel.WndProc(var Msg: TMessage);
-begin
-  inherited;
-  case Msg.Msg of
-    WM_DESTROY, WM_CLOSE, WM_KILLFOCUS:
-      l_exit := True;
-    WM_SETFOCUS:
-      l_focused := True;
-  end;
-end;
-
 function TSQLSPanel.FieldByName(FN: string): TField;
 begin
   result := qy.FieldByName(FN);
-end;
-
-procedure TSQLSPanel.FocusIn(Sender: TObject);
-begin
-  l_focused := True;
 end;
 
 constructor TSQLSPanel.Create(AOwner: TComponent);
@@ -118,6 +98,17 @@ begin
   Self.OnExit := SPExit;
   bt_exit := TSpeedButton.Create(Self);
   Parent := TWinControl(AOwner);
+  bt_ok := TButton.Create(Self);
+  with bt_ok do
+  begin
+    Parent := Self;
+    SetBounds(1, 1, 1, 1);
+    Caption := '/';
+    Visible := True;
+    Enabled := True;
+    bt_ok.OnClick := bt_okClick;
+    Default := true;
+  end;
   with bt_exit do
   begin
     SetBounds(Self.Width - 18, 0, 18, 21);
@@ -127,7 +118,7 @@ begin
     Layout := blGlyphRight;
     ParentFont := False;
     Font.Name := 'Arial Black';
-    OnClick := SPExit;
+//    OnClick := SPExit;
     Parent := Self;
     Anchors := [akTop, akRight];
   end;
@@ -159,17 +150,18 @@ begin
   dbgrid := TDBGrid.Create(Self);
   with dbgrid do
   begin
-    SetBounds(1, 22, Self.Width - 2, Self.Height - 24);
     Parent := Self;
+    SetBounds(1, 22, Self.Width - 2, Self.Height - 24);
     DataSource := ds;
     BorderStyle := bsNone;
     Options := [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit, dgRowSelect];
     ReadOnly := True;
     FixedColor := $00FAFAFA;
     Anchors := [akLeft, akTop, akRight, akBottom];
-    OnKeyUp := P_KeyUp;
+    OnKeyDown := P_KeyUp;
     OnDblClick := bt_okClick;
-    OnEnter := FocusIn;
+    Self.OnExit := SPExit;
+
   end;
 end;
 
@@ -181,24 +173,6 @@ begin
   FreeAndNil(dbgrid);
 
   inherited Destroy;
-end;
-
-procedure TSQLSPanel.WMClose(var Message: TWMClose);
-begin
-  if L_result = 0 then
-    L_result := mrCancel;
-end;
-
-procedure TSQLSPanel.WMDestroy(var Message: TWMDestroy);
-begin
-  if L_result = 0 then
-    L_result := mrCancel;
-end;
-
-procedure TSQLSPanel.SPExit(Sender: TObject);
-begin
-  if L_result = 0 then
-    L_result := mrCancel;
 end;
 
 function TSQLSPanel.Exec(Sender: TObject = nil): integer;
@@ -227,9 +201,14 @@ begin
     ed_search.SetFocus;
     repeat
       begin
+        bt_ok.BringToFront;
+        bt_ok.Default := true;
+        Application.ProcessMessages;
         Application.HandleMessage;
         if TForm(Owner).Visible = False then
           L_result := mrAbort;
+        if (self.Visible = False) and (L_result = 0) then
+          L_result := mrok;
       end
     until (L_result <> 0);
     if L_result = mrAbort then
@@ -259,6 +238,7 @@ begin
   begin
     if qy.RecordCount > 0 then
       dbgrid.SetFocus;
+    bt_ok.Default := True;
   end
   else if (Key = vK_up) then
   begin
@@ -275,11 +255,10 @@ end;
 
 procedure TSQLSPanel.bt_okClick(Sender: TObject);
 begin
-  l_result := mrOk;
-  if qy.RecordCount < 1 then
-  begin
-    l_result := mrCancel;
-  end;
+  if self.Visible = false then
+    exit;
+  if qy.RecordCount > 0 then
+    l_result := mrOk;
 end;
 
 procedure TSQLSPanel.ed_searchChange(Sender: TObject);
@@ -310,7 +289,15 @@ begin
     P_SetColumnWidth(ColWArr);
 end;
 
-procedure TSQLSPanel.P_Setup(SqlTxt: string; _Topleft: TPoint; _WH: TPoint; Con: TfdConnection = nil; def_val: string = ''; SPType: TSPType = SPTSearchPanel; obj: TWinControl = nil);
+procedure TSQLSPanel.SPExit(Sender: TObject);
+begin
+  if L_Result = 0 then
+    L_Result := mrCancel;
+  self.Visible := false;
+end;
+
+procedure TSQLSPanel.P_Setup(SqlTxt: string; _Topleft: TPoint; _WH: TPoint; Con: TfdConnection = nil; def_val: string = ''; SPType: TSPType =
+  SPTSearchPanel; obj: TWinControl = nil);
 var
   i: integer;
 begin

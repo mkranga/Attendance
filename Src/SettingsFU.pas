@@ -105,6 +105,7 @@ end;
 
 procedure TSettingsF.FormCreate(Sender: TObject);
 begin
+  AccessLevel := 2;
   inherited;
   FillStyles;
   if qrMain.Active = false then

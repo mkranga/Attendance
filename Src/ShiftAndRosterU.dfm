@@ -28,11 +28,12 @@ inherited ShiftAndRosterF: TShiftAndRosterF
           Left = 9
           Top = 4
           Width = 26
-          Height = 16
+          Height = 33
           Margins.Left = 8
           Align = alLeft
           Caption = 'Shift'
           Layout = tlCenter
+          ExplicitHeight = 16
         end
         object bt1: TButton
           AlignWithMargins = True
@@ -130,11 +131,12 @@ inherited ShiftAndRosterF: TShiftAndRosterF
           Left = 7
           Top = 4
           Width = 35
-          Height = 16
+          Height = 33
           Margins.Left = 6
           Align = alLeft
           Caption = 'Month'
           Layout = tlCenter
+          ExplicitHeight = 16
         end
         object dpRMonth: TDateTimePicker
           AlignWithMargins = True
@@ -498,27 +500,27 @@ inherited ShiftAndRosterF: TShiftAndRosterF
           AlignWithMargins = True
           Left = 199
           Top = 9
-          Width = 36
+          Width = 28
           Height = 23
           Margins.Left = 15
           Margins.Top = 8
           Margins.Bottom = 8
           Align = alLeft
-          Caption = 'TypeA'
+          Caption = 'Type'
           Layout = tlCenter
           ExplicitHeight = 16
         end
         object Label5: TLabel
           AlignWithMargins = True
-          Left = 334
+          Left = 365
           Top = 9
-          Width = 21
+          Width = 63
           Height = 23
           Margins.Left = 15
           Margins.Top = 8
           Margins.Bottom = 8
           Align = alLeft
-          Caption = 'Des'
+          Caption = 'Description'
           FocusControl = DBEdit4
           Layout = tlCenter
           ExplicitHeight = 16
@@ -547,7 +549,7 @@ inherited ShiftAndRosterF: TShiftAndRosterF
         end
         object DBEdit4: TDBEdit
           AlignWithMargins = True
-          Left = 373
+          Left = 446
           Top = 9
           Width = 348
           Height = 23
@@ -558,6 +560,7 @@ inherited ShiftAndRosterF: TShiftAndRosterF
           DataField = 'Des'
           DataSource = ds4
           TabOrder = 4
+          ExplicitLeft = 373
           ExplicitHeight = 24
         end
         object dpHd: TJvDBDateEdit
@@ -578,9 +581,9 @@ inherited ShiftAndRosterF: TShiftAndRosterF
         end
         object cbHType: TJvDBComboBox
           AlignWithMargins = True
-          Left = 253
+          Left = 245
           Top = 9
-          Width = 63
+          Width = 102
           Height = 24
           Margins.Left = 15
           Margins.Top = 8
@@ -604,6 +607,7 @@ inherited ShiftAndRosterF: TShiftAndRosterF
           ListSettings.OutfilteredValueFont.Height = -12
           ListSettings.OutfilteredValueFont.Name = 'Segoe UI'
           ListSettings.OutfilteredValueFont.Style = []
+          ExplicitLeft = 253
         end
       end
       object dgHolidays: TDBGrid

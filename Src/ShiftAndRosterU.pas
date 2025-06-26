@@ -321,7 +321,8 @@ procedure TShiftAndRosterF.FormCreate(Sender: TObject);
 var
   y, m, d: Word;
 begin
-  inherited;
+  AccessLevel := 100;
+ inherited;
   v_SalaryStartDate := TSettings.GetValue(skSalaryStartDate, '1').AsInteger;
   DecodeDate(Date, y, m, d);
   dpRMonth.Date := EncodeDate(y, m, 1);

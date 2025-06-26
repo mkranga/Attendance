@@ -27,7 +27,7 @@ uses
   FireDAC.Stan.Param, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, sqlspanelu, Vcl.DBCtrls, JvExMask,
   JvToolEdit, Vcl.Menus, JvgExportComponents, JvDBGridExport, JvComponentBase, JvExDBGrids, JvDBGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
-  JvExControls, JvArrowButton, FireDAC.UI.Intf, FireDAC.VCLUI.Async, FireDAC.Comp.UI;
+  JvExControls, JvArrowButton, FireDAC.UI.Intf, FireDAC.VCLUI.Async, FireDAC.Comp.UI, System.NetEncoding,JclShell;
 
 type
   TAttendanceF = class(TDataFormTPL)
@@ -42,21 +42,6 @@ type
     dgLog: TJvDBGrid;
     qrLog: TFDQuery;
     spProcAttDtl: TFDStoredProc;
-    qrMainEMPNo: TStringField;
-    qrMainWorkingDate: TDateField;
-    qrMainWrdIn: TDateTimeField;
-    qrMainWrdOut: TDateTimeField;
-    qrMainShiftDate: TDateField;
-    qrMainShiftIn: TDateTimeField;
-    qrMainShiftOut: TDateTimeField;
-    qrMainLate: TTimeField;
-    qrMainOT: TTimeField;
-    qrMainOTR: TTimeField;
-    qrMainEarlyOT: TTimeField;
-    qrMainShortLV: TTimeField;
-    qrMainTotalHrs: TTimeField;
-    qrMainTOL: TTimeField;
-    qrMainHType: TStringField;
     pnl2: TPanel;
     btEditSave: TBitBtn;
     btLog3: TBitBtn;
@@ -83,9 +68,24 @@ type
     BitBtn1: TBitBtn;
     Holidays1: TMenuItem;
     BitBtn2: TBitBtn;
-    qrMainID: TFDAutoIncField;
-    qrMainMachineNo: TLongWordField;
     BitBtn3: TBitBtn;
+    qrMainID: TFDAutoIncField;
+    qrMainMachineNo: TIntegerField;
+    qrMainEMPNo: TStringField;
+    qrMainWorkingDate: TDateField;
+    qrMainWrdIn: TDateTimeField;
+    qrMainWrdOut: TDateTimeField;
+    qrMainShiftDate: TDateField;
+    qrMainShiftIn: TDateTimeField;
+    qrMainShiftOut: TDateTimeField;
+    qrMainLate: TTimeField;
+    qrMainOT: TTimeField;
+    qrMainOTR: TTimeField;
+    qrMainEarlyOT: TTimeField;
+    qrMainShortLV: TTimeField;
+    qrMainTotalHrs: TTimeField;
+    qrMainTOL: TTimeField;
+    qrMainHType: TStringField;
     procedure cbb1Change(Sender: TObject);
     procedure btLogClick(Sender: TObject);
     procedure btLog1Click(Sender: TObject);
@@ -121,8 +121,7 @@ var
 implementation
 
 uses
-  downloadU, ShiftAndRosterU, System.Math, System.DateUtils, datau, BrakeU,
-  ReportsU;
+  downloadU, ShiftAndRosterU, System.Math, System.DateUtils, datau, BrakeU, ReportsU,CommonU;
 
 {$R *.dfm}
 
@@ -155,8 +154,16 @@ begin
 end;
 
 procedure TAttendanceF.btdownloadClick(Sender: TObject);
+var
+  s: string;
 begin
   inherited;
+  s := datam.Con1.ConnectionString;
+  s := TNetEncoding.Base64String.encode(s);
+  //calland wait for downloader (param=dl full file path+name  ,config file path base64
+  JclShell.ShellExecAndWait(APPPath + 'FPDataDownloader.exe', '/c ' + s);
+  exit;
+
   if Assigned(DownloadF) = False then
     DownloadF := tDownloadF.Create(nil);
   DownloadF.ShowModal
@@ -274,6 +281,7 @@ end;
 
 procedure TAttendanceF.FormCreate(Sender: TObject);
 begin
+  AccessLevel := 100;
   inherited;
   dpSt.Date := IncDay(date - 3);
   dped.Date := date;

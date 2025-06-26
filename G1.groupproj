@@ -3,10 +3,10 @@
         <ProjectGuid>{B3EC3C9D-6152-44EF-AC22-B98738EDAE73}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="SSERP.dproj">
+        <Projects Include="Downloader\FPDL.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Downloader\FPDataDownloader.dproj">
+        <Projects Include="LionERP.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,32 +17,32 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="SSERP">
-        <MSBuild Projects="SSERP.dproj"/>
+    <Target Name="FPDL">
+        <MSBuild Projects="Downloader\FPDL.dproj"/>
     </Target>
-    <Target Name="SSERP:Clean">
-        <MSBuild Projects="SSERP.dproj" Targets="Clean"/>
+    <Target Name="FPDL:Clean">
+        <MSBuild Projects="Downloader\FPDL.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="SSERP:Make">
-        <MSBuild Projects="SSERP.dproj" Targets="Make"/>
+    <Target Name="FPDL:Make">
+        <MSBuild Projects="Downloader\FPDL.dproj" Targets="Make"/>
     </Target>
-    <Target Name="FPDataDownloader">
-        <MSBuild Projects="Downloader\FPDataDownloader.dproj"/>
+    <Target Name="LionERP">
+        <MSBuild Projects="LionERP.dproj"/>
     </Target>
-    <Target Name="FPDataDownloader:Clean">
-        <MSBuild Projects="Downloader\FPDataDownloader.dproj" Targets="Clean"/>
+    <Target Name="LionERP:Clean">
+        <MSBuild Projects="LionERP.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="FPDataDownloader:Make">
-        <MSBuild Projects="Downloader\FPDataDownloader.dproj" Targets="Make"/>
+    <Target Name="LionERP:Make">
+        <MSBuild Projects="LionERP.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="SSERP;FPDataDownloader"/>
+        <CallTarget Targets="FPDL;LionERP"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="SSERP:Clean;FPDataDownloader:Clean"/>
+        <CallTarget Targets="FPDL:Clean;LionERP:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="SSERP:Make;FPDataDownloader:Make"/>
+        <CallTarget Targets="FPDL:Make;LionERP:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

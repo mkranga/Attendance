@@ -441,7 +441,7 @@ object MainF: TMainF
       Top = 16
       Width = 207
       Height = 26
-      TabOrder = 4
+      TabOrder = 5
       Text = #55357#56590#65038' Search (F3)'
       OnDblClick = edSearchProfDblClick
       OnKeyDown = edSearchProfKeyDown
@@ -454,7 +454,7 @@ object MainF: TMainF
       CharCase = ecUpperCase
       DataField = 'EMPNo'
       DataSource = ds1
-      TabOrder = 5
+      TabOrder = 6
       OnExit = DuplicateCheckOnExit
     end
     object dbedtfull_name: TDBEdit
@@ -464,7 +464,7 @@ object MainF: TMainF
       Height = 26
       DataField = 'full_name'
       DataSource = ds1
-      TabOrder = 7
+      TabOrder = 8
     end
     object dbedtName_with_Initial: TDBEdit
       Left = 128
@@ -474,7 +474,7 @@ object MainF: TMainF
       CharCase = ecUpperCase
       DataField = 'Name_with_Initial'
       DataSource = ds1
-      TabOrder = 8
+      TabOrder = 9
     end
     object dbedtJoin_Date: TDBEdit
       Left = 469
@@ -485,7 +485,7 @@ object MainF: TMainF
       DataSource = ds1
       Enabled = False
       ReadOnly = True
-      TabOrder = 24
+      TabOrder = 25
     end
     object dbedtAddressId: TDBEdit
       Left = 128
@@ -494,7 +494,7 @@ object MainF: TMainF
       Height = 26
       DataField = 'AddressId'
       DataSource = ds1
-      TabOrder = 22
+      TabOrder = 23
     end
     object DBEdit1: TDBEdit
       Left = 128
@@ -505,7 +505,7 @@ object MainF: TMainF
       DataSource = ds1
       Enabled = False
       ReadOnly = True
-      TabOrder = 23
+      TabOrder = 24
     end
     object dbedtnic_no: TDBEdit
       Left = 469
@@ -515,7 +515,7 @@ object MainF: TMainF
       CharCase = ecUpperCase
       DataField = 'nic_no'
       DataSource = ds1
-      TabOrder = 6
+      TabOrder = 7
       OnExit = DuplicateCheckOnExit
     end
     object btnew: TBitBtn
@@ -562,7 +562,7 @@ object MainF: TMainF
       CharCase = ecUpperCase
       DataField = 'contact'
       DataSource = ds1
-      TabOrder = 9
+      TabOrder = 10
       OnExit = DuplicateCheckOnExit
     end
     object dbedtmail: TDBEdit
@@ -572,7 +572,7 @@ object MainF: TMainF
       Height = 26
       DataField = 'mail'
       DataSource = ds1
-      TabOrder = 10
+      TabOrder = 11
       OnExit = DuplicateCheckOnExit
     end
     object dbedtForm_A_Number: TDBEdit
@@ -582,7 +582,7 @@ object MainF: TMainF
       Height = 26
       DataField = 'Form_A_Number'
       DataSource = ds1
-      TabOrder = 17
+      TabOrder = 18
     end
     object dbedtMachineNo: TDBEdit
       Left = 469
@@ -591,7 +591,7 @@ object MainF: TMainF
       Height = 26
       DataField = 'MachineNo'
       DataSource = ds1
-      TabOrder = 18
+      TabOrder = 19
     end
     object JvDBDateEdit1: TJvDBDateEdit
       Left = 469
@@ -601,7 +601,7 @@ object MainF: TMainF
       DataField = 'birth_date'
       DataSource = ds1
       ShowNullDate = False
-      TabOrder = 13
+      TabOrder = 14
     end
     object cbstatus: TJvDBComboBox
       Left = 128
@@ -614,7 +614,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 12
+      TabOrder = 13
       Values.Strings = (
         '0'
         '1'
@@ -636,7 +636,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 14
+      TabOrder = 15
       Values.Strings = (
         '0'
         '1'
@@ -658,7 +658,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 15
+      TabOrder = 16
       Values.Strings = (
         '0'
         '1'
@@ -676,7 +676,7 @@ object MainF: TMainF
       Height = 105
       TabStop = False
       DataSource = dsfiledb
-      TabOrder = 11
+      TabOrder = 12
       TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -16
@@ -710,7 +710,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 16
+      TabOrder = 17
       TabStop = False
       Values.Strings = (
         '0'
@@ -733,7 +733,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 20
+      TabOrder = 21
       Values.Strings = (
         '0'
         '1'
@@ -755,7 +755,7 @@ object MainF: TMainF
         'Inactive'
         'Active'
         'Suspend')
-      TabOrder = 21
+      TabOrder = 22
       Values.Strings = (
         '0'
         '1'
@@ -775,7 +775,7 @@ object MainF: TMainF
       DataSource = ds1
       Items.Strings = (
         'ROSTER')
-      TabOrder = 19
+      TabOrder = 20
       Values.Strings = (
         '0'
         '1'
@@ -792,7 +792,7 @@ object MainF: TMainF
       Width = 31
       Height = 28
       Caption = 'X'
-      TabOrder = 25
+      TabOrder = 4
       OnClick = BitBtn1Click
     end
   end

@@ -5,7 +5,7 @@ object LoginF: TLoginF
   BorderStyle = bsNone
   BorderWidth = 10
   Caption = 'Login'
-  ClientHeight = 145
+  ClientHeight = 155
   ClientWidth = 362
   Color = clBtnFace
   CustomTitleBar.Height = 2
@@ -23,21 +23,24 @@ object LoginF: TLoginF
   OnCreate = FormCreate
   TextHeight = 18
   object Image1: TImage
-    Left = 0
-    Top = 22
-    Width = 125
-    Height = 123
+    AlignWithMargins = True
+    Left = 10
+    Top = 3
+    Width = 113
+    Height = 149
+    Margins.Left = 10
     Align = alLeft
     Center = True
     Proportional = True
     Stretch = True
     Transparent = True
-    ExplicitTop = 0
-    ExplicitHeight = 125
+    ExplicitLeft = 0
+    ExplicitTop = 22
+    ExplicitHeight = 132
   end
   object Label1: TLabel
     Left = 133
-    Top = 66
+    Top = 74
     Width = 61
     Height = 18
     Caption = 'Password'
@@ -50,11 +53,10 @@ object LoginF: TLoginF
     Caption = 'Name'
   end
   object lbCompanyN: TLabel
-    Left = 0
-    Top = 0
-    Width = 362
+    Left = 144
+    Top = -2
+    Width = 146
     Height = 22
-    Align = alTop
     Alignment = taCenter
     Caption = 'Company Name'
     Font.Charset = ANSI_CHARSET
@@ -63,11 +65,10 @@ object LoginF: TLoginF
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentFont = False
-    ExplicitWidth = 146
   end
   object edPassword: TEdit
     Left = 206
-    Top = 62
+    Top = 70
     Width = 148
     Height = 26
     PasswordChar = '*'
@@ -76,23 +77,23 @@ object LoginF: TLoginF
   end
   object OKBtn: TButton
     Left = 243
-    Top = 102
+    Top = 112
     Width = 111
     Height = 33
     Caption = 'OK'
     Default = True
-    TabOrder = 2
+    TabOrder = 3
     OnClick = OKBtnClick
   end
   object CancelBtn: TButton
     Left = 133
-    Top = 102
+    Top = 112
     Width = 104
     Height = 33
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 3
+    TabOrder = 2
     OnClick = CancelBtnClick
   end
   object EdUsername: TEdit
@@ -102,7 +103,7 @@ object LoginF: TLoginF
     Height = 26
     CharCase = ecUpperCase
     TabOrder = 0
-    TextHint = 'UserName'
+    TextHint = 'User Name'
   end
   object qrMain: TFDQuery
     CachedUpdates = True

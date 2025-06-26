@@ -116,7 +116,8 @@ end;
 
 procedure TBrakeF.FormCreate(Sender: TObject);
 begin
-  inherited;
+  AccessLevel := 1;
+ inherited;
   pnllog.Visible := false;
   btsave.Enabled:=false;
   end;

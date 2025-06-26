@@ -38,7 +38,7 @@ var
 implementation
 
 uses
-  datau, PasswordEncryptorU;
+  datau, PasswordEncryptorU, SettingsU;
 {$R *.dfm}
 
 procedure TLoginF.CancelBtnClick(Sender: TObject);
@@ -48,8 +48,8 @@ end;
 
 procedure TLoginF.FormCreate(Sender: TObject);
 begin
-  Image1.Picture.Graphic := datam.img_logo;
-  lbCompanyN.Caption:='';
+Image1.Picture.Graphic := datam.img_logo;
+  lbCompanyN.Caption := '';
 //  Image1.Picture.LoadFromFile(IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'res\logo.png');
 end;
 
@@ -68,6 +68,8 @@ begin
       if (qrmain.RecordCount > 0) and pe.VerifyPassword(edPassword.Text, copy(qrMainuser_password.AsString, 1, 16), copy(qrMainuser_password.AsString,
         17, 255)) then
       begin
+        TSettings.UserID := qrmain.FieldByName('id').AsInteger;
+        TSettings.UserLevel := qrmain.FieldByName('ulvl').AsInteger;
         ModalResult := mrOk;
         exit;
       end;

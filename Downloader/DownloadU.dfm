@@ -2,96 +2,121 @@ object DownloadF: TDownloadF
   Left = 0
   Top = 0
   BorderStyle = bsSizeToolWin
+  BorderWidth = 10
   Caption = 'Download'
-  ClientHeight = 600
-  ClientWidth = 466
+  ClientHeight = 580
+  ClientWidth = 473
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsStayOnTop
+  Position = poScreenCenter
+  ShowInTaskBar = True
+  OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 19
-  object bt1: TButton
+  object mmolog: TMemo
     Left = 0
-    Top = 8
-    Width = 214
-    Height = 50
-    Caption = 'Download'
-    TabOrder = 0
-    OnClick = bt1Click
-  end
-  object bt2: TButton
-    Left = 232
-    Top = 8
-    Width = 234
-    Height = 50
-    Caption = 'Close'
-    TabOrder = 1
-    OnClick = bt2Click
-  end
-  object mmo2: TMemo
-    Left = 0
-    Top = 306
-    Width = 466
-    Height = 294
-    Align = alBottom
-    TabOrder = 4
-    ExplicitTop = 294
-    ExplicitWidth = 458
+    Top = 324
+    Width = 473
+    Height = 256
+    Align = alClient
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 5
+    WordWrap = False
+    ExplicitLeft = -8
+    ExplicitTop = 222
+    ExplicitHeight = 254
   end
   object dbnvgr1: TDBNavigator
-    Left = 0
-    Top = 83
-    Width = 466
+    AlignWithMargins = True
+    Left = 50
+    Top = 61
+    Width = 420
     Height = 25
+    Margins.Left = 50
     DataSource = ds1
-    Align = alBottom
-    TabOrder = 2
-    OnClick = dbnvgr1Click
-    ExplicitTop = 71
-    ExplicitWidth = 458
-  end
-  object dbmmoConfig: TDBMemo
-    Left = 0
-    Top = 108
-    Width = 466
-    Height = 198
-    Align = alBottom
-    DataField = 'Config'
-    DataSource = ds1
+    Align = alTop
     TabOrder = 3
-    ExplicitTop = 96
-    ExplicitWidth = 458
+    OnClick = dbnvgr1Click
+    ExplicitTop = 80
   end
   object pb1: TProgressBar
-    AlignWithMargins = True
     Left = 0
-    Top = 61
-    Width = 466
+    Top = 41
+    Width = 473
     Height = 17
     Margins.Left = 0
     Margins.Top = 5
     Margins.Right = 0
     Margins.Bottom = 5
-    Align = alBottom
+    Align = alTop
     Style = pbstMarquee
     MarqueeInterval = 50
-    TabOrder = 5
+    TabOrder = 1
     Visible = False
-    ExplicitTop = 49
-    ExplicitWidth = 458
+    ExplicitTop = 60
   end
   object dbedtConfig: TDBEdit
-    Left = 416
-    Top = 104
+    Left = 0
+    Top = 59
     Width = 41
     Height = 27
     DataField = 'ID'
     DataSource = ds1
     ReadOnly = True
-    TabOrder = 6
+    TabOrder = 2
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 473
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    object bt1: TButton
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 214
+      Height = 35
+      Align = alLeft
+      Caption = 'Download'
+      TabOrder = 0
+      OnClick = bt1Click
+      ExplicitHeight = 54
+    end
+    object bt2: TButton
+      AlignWithMargins = True
+      Left = 236
+      Top = 3
+      Width = 234
+      Height = 35
+      Align = alRight
+      Caption = 'Close'
+      TabOrder = 1
+      OnClick = bt2Click
+      ExplicitHeight = 54
+    end
+  end
+  object mmoDC: TDBMemo
+    AlignWithMargins = True
+    Left = 0
+    Top = 92
+    Width = 473
+    Height = 229
+    Margins.Left = 0
+    Margins.Right = 0
+    Align = alTop
+    DataField = 'Config'
+    DataSource = ds1
+    TabOrder = 4
   end
   object con1: TFDConnection
     Params.Strings = (
@@ -99,13 +124,12 @@ object DownloadF: TDownloadF
       'Database=sserp'
       'Password=systemr'
       'User_Name=root')
-    Connected = True
     LoginPrompt = False
+    BeforeConnect = con1BeforeConnect
     Left = 192
     Top = 136
   end
   object qrDevices: TFDQuery
-    Active = True
     AfterInsert = qrDevicesAfterInsert
     Connection = con1
     SQL.Strings = (

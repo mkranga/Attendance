@@ -94,6 +94,7 @@ end;
 
 procedure TUsersF.FormCreate(Sender: TObject);
 begin
+AccessLevel:=2;
   inherited;
   if qrmain.Active = false then
     qrMain.Open();

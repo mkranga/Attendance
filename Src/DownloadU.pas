@@ -4,8 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ComCtrls, Data.DB, Vcl.DBCtrls, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Buttons;
+  Vcl.ComCtrls, Data.DB, Vcl.DBCtrls, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option, JclShell,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Buttons,
+  System.NetEncoding;
 
 type
   TFPType = (ftNone, ftEasy);
@@ -52,16 +53,21 @@ var
 implementation
 
 uses
-  datau;
+  datau, CommonU;
 {$R *.dfm}
 
 procedure TDownloadF.bt1Click(Sender: TObject);
 var
   i: Integer;
+  s: string;
 begin
 //load config from devises
   pnl1.Visible := false;
+  s := datam.Con1.ConnectionString;
+  s := TNetEncoding.Base64String.encode(s);
   //calland wait for downloader (param=dl full file path+name  ,config file path base64
+  JclShell.ShellExecAndWait(APPPath + 'FPDataDownloader.exe', '/c ' + s);
+  exit;
   if qrDevices.Active = false then
     qrDevices.Open();
   qrDevices.First;
