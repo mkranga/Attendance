@@ -342,13 +342,13 @@ begin
           _more := sb.GetGeneralLogData(ci.MachineNo, _mn, _did, _mn2, iom, y, m, d, h, n, s);
         if _more = false then
           Break;
-        inc(i);
         lr := @LogBuffer[i];
         lr.MNO := _did;
         lr.dt := EncodeDateTime(y, m, d, h, n, s, 0);
         lr.IO := GetIOMode(iom);
         if i = High(LogBuffer) then
-          FlushBuffer(i)
+          FlushBuffer(i);
+       inc(i);
       end;
       FlushBuffer(i);
       if _ClearAfterDL then

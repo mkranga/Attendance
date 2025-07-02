@@ -279,3 +279,8 @@ SSERP.jdbg
 SSERP.res
 LionERP_MemoryManager_EventLog.txt
 Res/log.csv
+*.csv
+Data/Server/data/data.zip
+*.DAT
+*.msi
+*.zip

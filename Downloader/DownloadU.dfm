@@ -29,9 +29,6 @@ object DownloadF: TDownloadF
     ScrollBars = ssBoth
     TabOrder = 5
     WordWrap = False
-    ExplicitLeft = -8
-    ExplicitTop = 222
-    ExplicitHeight = 254
   end
   object dbnvgr1: TDBNavigator
     AlignWithMargins = True
@@ -44,7 +41,6 @@ object DownloadF: TDownloadF
     Align = alTop
     TabOrder = 3
     OnClick = dbnvgr1Click
-    ExplicitTop = 80
   end
   object pb1: TProgressBar
     Left = 0
@@ -60,7 +56,6 @@ object DownloadF: TDownloadF
     MarqueeInterval = 50
     TabOrder = 1
     Visible = False
-    ExplicitTop = 60
   end
   object dbedtConfig: TDBEdit
     Left = 0
@@ -90,7 +85,6 @@ object DownloadF: TDownloadF
       Caption = 'Download'
       TabOrder = 0
       OnClick = bt1Click
-      ExplicitHeight = 54
     end
     object bt2: TButton
       AlignWithMargins = True
@@ -102,7 +96,6 @@ object DownloadF: TDownloadF
       Caption = 'Close'
       TabOrder = 1
       OnClick = bt2Click
-      ExplicitHeight = 54
     end
   end
   object mmoDC: TDBMemo

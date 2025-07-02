@@ -180,7 +180,7 @@ procedure TDownloadF.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if _log <> nil then
   begin
-    _log.SaveToFile(apppath + FormatDateTime('yyyymmdd_hhnn', now()) + '.log');
+    _log.SaveToFile(apppath + 'log\FPDLLog.log');
     _log.Clear;
   end;
   if Assigned(zip) then
@@ -194,7 +194,13 @@ procedure TDownloadF.FormCreate(Sender: TObject);
 var
   s: string;
 begin
-  _ZipName := AppPath + 'Data.dat';
+  _ZipName := AppPath + 'Data\Data.dat';
+  if DirectoryExists(AppPath + 'Data') = false then
+    ForceDirectories(AppPath + 'Data');
+
+  if DirectoryExists(AppPath + 'log') = false then
+    ForceDirectories(AppPath + 'log');
+
   if Settings.Values['CLS'] = '1' then
     self.Caption := self.Caption + ' - [ERASE MODE]';
   mmolog.Lines.text := _log.Text;
@@ -294,7 +300,7 @@ begin
       res := id.Post(url, ss);
       Result := (res.StatusCode = 200);
       if Result = false then
-        lm(res.StatusText);
+        lm(res.StatusText + sLineBreak + res.ContentAsString());
     except
       on E: Exception do
       begin
