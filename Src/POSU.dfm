@@ -23,7 +23,7 @@ inherited POSF: TPOSF
     Top = 0
     Width = 1366
     Height = 848
-    ActivePage = tsPrint
+    ActivePage = tsInvoice
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
@@ -155,12 +155,13 @@ inherited POSF: TPOSF
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitTop = 390
         object edItSearchinv: TEdit
           Left = 16
           Top = 13
           Width = 361
           Height = 32
-          TabOrder = 4
+          TabOrder = 5
           TextHint = 'Search Invoice No or Name or Tel'
           OnChange = edItSearchinvChange
         end
@@ -172,7 +173,7 @@ inherited POSF: TPOSF
           Height = 51
           Align = alRight
           Caption = 'NEW (F1)'
-          TabOrder = 1
+          TabOrder = 2
           OnClick = actnewInExecute
         end
         object Button2: TButton
@@ -183,7 +184,7 @@ inherited POSF: TPOSF
           Height = 51
           Align = alRight
           Caption = 'Edit(F2)'
-          TabOrder = 2
+          TabOrder = 3
           OnClick = acteditInvExecute
         end
         object Button3: TButton
@@ -194,7 +195,7 @@ inherited POSF: TPOSF
           Height = 51
           Align = alRight
           Caption = 'Close (Esc)'
-          TabOrder = 3
+          TabOrder = 4
           OnClick = btCloseClick
         end
         object Button5: TButton
@@ -205,8 +206,18 @@ inherited POSF: TPOSF
           Height = 51
           Align = alRight
           Caption = 'Clone'
-          TabOrder = 0
+          TabOrder = 1
           OnClick = actCloneExecute
+        end
+        object btOk: TButton
+          AlignWithMargins = True
+          Left = 383
+          Top = 3
+          Width = 66
+          Height = 51
+          Caption = 'OK'
+          TabOrder = 0
+          OnClick = edItSearchinvChange
         end
       end
     end

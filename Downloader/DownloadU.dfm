@@ -7,18 +7,18 @@ object DownloadF: TDownloadF
   ClientHeight = 580
   ClientWidth = 473
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -16
-  Font.Name = 'Tahoma'
-  Font.Style = []
+  Font.Name = 'System'
+  Font.Style = [fsBold]
   FormStyle = fsStayOnTop
   Position = poScreenCenter
   ShowInTaskBar = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  TextHeight = 19
+  TextHeight = 16
   object mmolog: TMemo
     Left = 0
     Top = 324
@@ -28,7 +28,6 @@ object DownloadF: TDownloadF
     ReadOnly = True
     ScrollBars = ssBoth
     TabOrder = 5
-    WordWrap = False
   end
   object dbnvgr1: TDBNavigator
     AlignWithMargins = True
@@ -61,7 +60,7 @@ object DownloadF: TDownloadF
     Left = 0
     Top = 59
     Width = 41
-    Height = 27
+    Height = 24
     DataField = 'ID'
     DataSource = ds1
     ReadOnly = True

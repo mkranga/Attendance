@@ -210,6 +210,7 @@ type
     dgitems: TJvDBGrid;
     JvEnterAsTab1: TJvEnterAsTab;
     rlmgLogo4: TRLImage;
+    btOk: TButton;
     procedure FormCreate(Sender: TObject);
     procedure EdItemSearchDblClick(Sender: TObject);
     procedure btCloseInvoiceClick(Sender: TObject);
@@ -283,7 +284,7 @@ begin
 //  SlideMe(pnlBill, 3);
   pgc1.ActivePage := tsInvoice;
 
-  qrItem.Active := false;
+  qrItem.Active := False;
   qrItem.ParamByName('id').Value := qrMainid.Value;
   qrItem.Open();
 end;
@@ -295,7 +296,7 @@ begin
 //  SlideMe(pnlBill, 3);
 //  pnlBill.show;
   qrMain.Append;
-  qrItem.Active := false;
+  qrItem.Active := False;
   qrItem.ParamByName('id').Value := -1;
   qrItem.Open();
   EdItemSearch.SetFocus;
@@ -330,7 +331,7 @@ begin
   qrItem.DisableControls;
   try
 //validate
-    if qritem.RecordCount < 1 then
+    if qrItem.RecordCount < 1 then
       s := s + 'No Items' + sLineBreak;
   //prepair +save
     if qrItem.State in [dsInsert, dsEdit] then
@@ -354,6 +355,7 @@ begin
   finally
     qrItem.EnableControls;
   end;
+  edItSearchinvChange(nil);
   btCloseInvoiceClick(nil);
 end;
 
@@ -367,7 +369,7 @@ end;
 procedure TPOSF.btcancelClick(Sender: TObject);
 begin
   inherited;
-  qrmain.Edit;
+  qrMain.Edit;
   qrMaincancel.Value := True;
   qrMain.Post;
 end;
@@ -401,7 +403,7 @@ begin
   if s <> '' then
   begin
     ShowMessage('Validation Failed' + sLineBreak + s);
-    exit;
+    Exit;
   end;
   qrItem.DisableControls;
   try
@@ -461,9 +463,9 @@ var
   i: Integer;
 begin
   inherited;
-  i := printer.PrinterIndex;
+  i := Printer.PrinterIndex;
   Printer.PrinterIndex := TSettings.GetValue(skPOSPrinter, '0').AsInteger;
-  rptPrintInv.NextReport := nil;
+  RptPrintInv.NextReport := nil;
   rpShippingLbl.Prepare;
   Application.ProcessMessages;
   rpShippingLbl.PrintDialog := False;
@@ -485,9 +487,9 @@ end;
 procedure TPOSF.btPrintInvClick(Sender: TObject);
 begin
   inherited;
-  rptPrintInv.NextReport := nil;
-  rptPrintInv.Prepare;
-  rptPrintInv.Print;
+  RptPrintInv.NextReport := nil;
+  RptPrintInv.Prepare;
+  RptPrintInv.Print;
 //  rpPrintInv.NextReport := rpShippingLbl;
 end;
 
@@ -507,7 +509,7 @@ end;
 procedure TPOSF.EdItemSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;
-  searchitem;
+  SearchItem;
  // Key := 0;
 end;
 
@@ -518,11 +520,11 @@ begin
   inherited;
   Application.ProcessMessages;
   s := edItSearchinv.Text;
-  qrMain.Active := false;
+  qrMain.Active := False;
   qrMain.SQL.Text := 'select * from invoice';
-  if true then
+  if True then
   begin
-    qrMain.SQL.add(' i where i.id like :p or i.cname  like :p');
+    qrMain.SQL.add(' i where i.id like :p or i.cname  like :p order by id desc');
     qrMain.ParamByName('p').Value := '%' + s + '%';
   end;
   qrMain.Open();
@@ -535,14 +537,14 @@ begin
   filler := TRLSpoolFilter.Create(nil);
   rpShippingLbl.DefaultFilter := filler;
   qrMain.Open();
-  spis := TSQLSPanel.Create(self);
-  spis.Setup([0, 80], 'SELECT ii.name,ii.price from invitems ii where ii.name like :empno group by ii.name,ii.price', Point(600, 400), datam.Con1);
+  spis := TSQLSPanel.Create(Self);
+  spis.Setup([0, 80], 'SELECT ii.name,ii.price from invitems ii where ii.name like :empno group by ii.name,ii.price', Point(600, 400), DataM.Con1);
   cbb1.Items := Printer.Printers;
   cbb1.ItemIndex := Printer.PrinterIndex;
-  rlmgLogo1.Picture.Assign(datam.img_logo);
-  rlmgLogo2.Picture.Assign(datam.img_logo);
-  rlmgLogo3.Picture.Assign(datam.img_logo);
-  rlmgLogo4.Picture.Assign(datam.img_logo);
+  rlmgLogo1.Picture.Assign(DataM.img_logo);
+  rlmgLogo2.Picture.Assign(DataM.img_logo);
+  rlmgLogo3.Picture.Assign(DataM.img_logo);
+  rlmgLogo4.Picture.Assign(DataM.img_logo);
 end;
 
 procedure TPOSF.FormDestroy(Sender: TObject);
@@ -587,7 +589,7 @@ begin
   inherited;
   qrMain.Edit;
   qrMaintotal.Value := qrItem.Aggregates.AggregateByName('billtotal').Value - qrMainpayment.Value;
-  qrmain.Post
+  qrMain.Post
 end;
 
 procedure TPOSF.qrItemBeforePost(DataSet: TDataSet);
@@ -600,7 +602,7 @@ procedure TPOSF.qrMainAfterInsert(DataSet: TDataSet);
 begin
   inherited;
   qrMaincname.Value := 'CASH';
-  qrMaindate.Value := now;
+  qrMaindate.Value := Now;
 
 end;
 
@@ -633,18 +635,18 @@ end;
 
 function TPOSF.SearchItem(): Boolean;
 begin
-  JvEnterAsTab1.EnterAsTab := false;
-  Result := (spis.Exec(EdItemSearch) = mrok);
-  if Result = false then
-    exit;
-  if not (qrItem.State in [dsedit, dsInsert]) then
+  JvEnterAsTab1.EnterAsTab := False;
+  Result := (spis.Exec(EdItemSearch) = mrOk);
+  if Result = False then
+    Exit;
+  if not (qrItem.State in [dsEdit, dsInsert]) then
     qrItem.Append;
   qrItemname.Value := spis.FieldByName('name').AsString;
   qrItemprice.Value := spis.FieldByName('price').AsInteger;
   qrItemqty.Value := 1;
 //  dgitems.SetFocus;
   dgitems.Col := 2;
-  JvEnterAsTab1.EnterAsTab := true;
+  JvEnterAsTab1.EnterAsTab := True;
 end;
 
 end.
